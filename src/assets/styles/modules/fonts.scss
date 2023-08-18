@@ -1,0 +1,7 @@
+@import '../global/mixins.scss';
+// GillSans
+@include font-face('GillSans', '@/assets/fonts/GillSans/GillSansC');
+@include font-face('GillSans Light', '@/assets/fonts/GillSans/GillSansLightC', '300');
+@include font-face('GillSans SemiBold', '@/assets/fonts/GillSans/Gill Sans SemiBold', '600');
+@include font-face('GillSans Bold', '@/assets/fonts/GillSans/GillSansC-Bold', '700');
+@include font-face('GillSans ExtraBold', '@/assets/fonts/GillSans/GillSansExtraBoldC', '800');
