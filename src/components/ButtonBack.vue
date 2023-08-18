@@ -14,8 +14,6 @@ defineProps({
     default: 'Назад'
   }
 })
-
-// defineEmits(['click'])
 </script>
 
 <style scoped lang="scss">

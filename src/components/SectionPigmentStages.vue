@@ -1,145 +1,50 @@
 <template>
   <section class="stages-section">
-    <div v-if="stepNum === 4" class="stages-content">
-      <button-default class="stages-card__info-button" text="ЧТО ЭТО?" @click="popupLentigoIsOpen = true" />
+    <div v-if="currentCard" class="stages-content">
+      <button-default class="stages-card__info-button" text="ЧТО ЭТО?" @click="togglePopup" />
       <div class="stages-card">
-        <div class="stages-card-preview stages-card-preview-1">
-          <div class="stages-card-preview__text">
-            <p>
-              АКТИНИЧЕСКОЕ
-              <br />
-              ЛЕНТИГО
-            </p>
-          </div>
+        <div class="stages-card-preview" :class="`${currentCard.previewClass}`">
+          <div class="stages-card-preview__text" v-html="currentCard.cardTitle" />
         </div>
         <div class="stages-card-description">
-          <span class="stages-card-description__title">АКТИНИЧЕСКОЕ ЛЕНТИГО</span>
-          <ul class="stages-card-description-list">
-            <li class="stages-card-description__item">
-              <img src="@/assets/icons/pigment-stages/arrows.svg" alt="arrows" />
-              <span class="stages-card-description__text-main"
-                >ЛОКАЛЬНАЯ АКТИВНОСТЬ <br />МЕЛАНОЦИТОВ И СКОПЛЕНИЕ<br />
-                ПИГМЕНТА</span
-              >
-            </li>
-            <li class="stages-card-description__item">
-              <img src="@/assets/icons/pigment-stages/hand-waving.svg" alt="hand-waving" />
-              <span class="stages-card-description__text-main">ОТКРЫТЫЕ УЧАСТКИ КОЖИ</span>
-            </li>
-            <li class="stages-card-description__item">
-              <img src="@/assets/icons/pigment-stages/age.svg" alt="40+" />
-              <span class="stages-card-description__text-main">ЛЮДИ СТАРШЕ 40 ЛЕТ</span>
+          <span class="stages-card-description__title" v-html="currentCard.title" />
+
+          <ul class="stages-card-description-list" :class="`${currentCard.listClass}`">
+            <li
+              v-for="(item, index) in currentCard.items"
+              :key="`${currentCard.title}-${index}`"
+              class="stages-card-description__item"
+              :class="`${currentCard.itemClass}`"
+            >
+              <div v-if="item.iconName" :class="`stages-card-icon stages-card-icon_${item.iconName}`" />
+              <div v-if="item.numText" class="stages-card-description-icon" v-html="item.numText" />
+              <div v-if="item.mainText" v-html="item.mainText" class="stages-card-description__text-main" :class="`${item.class}`" />
             </li>
           </ul>
+
+          <div v-if="currentCard.description" class="stages-card-description-addition" v-html="currentCard.description" />
         </div>
       </div>
     </div>
 
-    <div v-if="stepNum === 5" class="stages-content">
-      <button-default class="stages-card__info-button" text="ЧТО ЭТО?" @click="popupMelasmaIsOpen = true" />
-      <div class="stages-card">
-        <div class="stages-card-preview stages-card-preview-2">
-          <div class="stages-card-preview__text">
-            <p>МЕЛАЗМА/ХЛОАЗМА</p>
-          </div>
-        </div>
-        <div class="stages-card-description">
-          <span class="stages-card-description__title">МЕЛАЗМА/ХЛОАЗМА</span>
-          <ul class="stages-card-description-list stages-card-description-list--big-margin">
-            <li class="stages-card-description__item stages-card-description__item_with-num">
-              <div class="stages-card-description-icon">
-                <span>30</span>
-                <span class="small">%</span>
-              </div>
-              <span class="stages-card-description__text-main"
-                >ЖЕНЩИН СКЛОННЫ<br />
-                К ПОЯВЛЕНИЮ МЕЛАЗМЫ</span
-              >
-            </li>
-            <li class="stages-card-description__item stages-card-description__item_with-num">
-              <div class="stages-card-description-icon">
-                <span class="small">X</span>
-                <span>9</span>
-              </div>
-              <span class="stages-card-description__text-main"
-                >риск у женщин<br />
-                с фототипом III и выше</span
-              >
-            </li>
-          </ul>
-          <div class="stages-card-description-addition">
-            <span>ПРИЧИНЫ</span>
-            <p>
-              УФ, генетика, беременность, гормональный дисбаланс,<br />
-              препараты
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div v-if="stepNum === 6" class="stages-content">
-      <button-default class="stages-card__info-button" text="ЧТО ЭТО?" @click="popupPigmentationIsOpen = true" />
-      <div class="stages-card">
-        <div class="stages-card-preview stages-card-preview-3">
-          <div class="stages-card-preview__text">
-            <p>
-              ПОСТВОСПАЛИТЕЛЬНАЯ<br />
-              ГИПЕРПИГМЕНТАЦИЯ
-            </p>
-          </div>
-        </div>
-        <div class="stages-card-description">
-          <span class="stages-card-description__title"
-            >ПОСТВОСПАЛИТЕЛЬНАЯ<br />
-            ГИПЕРПИГМЕНТАЦИЯ</span
-          >
-          <ul class="stages-card-description-list">
-            <li class="stages-card-description__item">
-              <img src="@/assets/icons/pigment-stages/bandage.svg" alt="bandage" />
-              <div class="stages-card-description__text-main stages-card-description__text-main-small">
-                <p>НА МЕСТЕ <span>ТРАВМЫ КОЖИ</span></p>
-                <p class="description">акне, инфекции, укусы насекомых, ожоги, процедуры, воспаление</p>
-              </div>
-            </li>
-            <li class="stages-card-description__item">
-              <img src="@/assets/icons/pigment-stages/hourglass.svg" alt="hourglass" />
-              <span class="stages-card-description__text-main stages-card-description__text-main-small"
-                >СТОЙКАЯ ПИГМЕНТАЦИЯ<br />
-                СОХРАНЯЕТСЯ <br />
-                <span>ДО НЕСКОЛЬКИХ ЛЕТ</span></span
-              >
-            </li>
-            <li class="stages-card-description__item">
-              <img src="@/assets/icons/pigment-stages/human.svg" alt="human" />
-              <span class="stages-card-description__text-main stages-card-description__text-main-small"
-                >ПОЯВЛЯЕТСЯ<br />
-                <span>В ЛЮБОМ ВОЗРАСТЕ</span></span
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <popup-lentigo v-if="stepNum === 4" :is-open="popupLentigoIsOpen" @close="popupLentigoIsOpen = false" />
-    <popup-melasma v-if="stepNum === 5" :is-open="popupMelasmaIsOpen" @close="popupMelasmaIsOpen = false" />
+    <popup-lentigo v-if="stepNum === 4" :is-open="popupLentigoIsOpen" @close="togglePopup" />
+    <popup-melasma v-if="stepNum === 5" :is-open="popupMelasmaIsOpen" @close="togglePopup" />
     <popup-hyperpigmentation
       v-if="stepNum === 6"
       :is-open="popupPigmentationIsOpen"
-      @close="popupPigmentationIsOpen = false"
+      @close="togglePopup"
     />
   </section>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue';
 import ButtonDefault from '@/components/ButtonDefault.vue'
 import PopupHyperpigmentation from '@/components/popups/PopupHyperpigmentation.vue'
 import PopupLentigo from '@/components/popups/PopupLentigo.vue'
 import PopupMelasma from '@/components/popups/PopupMelasma.vue'
 
-defineProps({
+const props = defineProps({
   stepNum: {
     type: Number,
     default: 4
@@ -149,6 +54,92 @@ defineProps({
 const popupPigmentationIsOpen = ref(false)
 const popupLentigoIsOpen = ref(false)
 const popupMelasmaIsOpen = ref(false)
+
+function togglePopup() {
+  switch (+props.stepNum) {
+    case 4: popupLentigoIsOpen.value = !popupLentigoIsOpen.value
+      break
+    case 5: popupMelasmaIsOpen.value = !popupMelasmaIsOpen.value
+      break
+    case 6: popupPigmentationIsOpen.value = !popupPigmentationIsOpen.value
+  }
+}
+
+const cards = ref([
+  {
+    step: 4,
+    cardTitle: '<p>АКТИНИЧЕСКОЕ<br />ЛЕНТИГО</p>',
+    title: 'АКТИНИЧЕСКОЕ ЛЕНТИГО',
+    listClass: '',
+    itemClass: '',
+    previewClass: 'stages-card-preview-1',
+    items: [
+      {
+        iconName: 'arrows',
+        class: '',
+        mainText: 'ЛОКАЛЬНАЯ АКТИВНОСТЬ <br />МЕЛАНОЦИТОВ И СКОПЛЕНИЕ<br />ПИГМЕНТА',
+      },
+      {
+        iconName: 'hand-waving',
+        class: '',
+        mainText: 'ОТКРЫТЫЕ УЧАСТКИ КОЖИ',
+      },
+      {
+        iconName: 'age',
+        class: '',
+        mainText: 'ЛЮДИ СТАРШЕ 40 ЛЕТ',
+      }
+    ]
+  },
+  {
+    step: 5,
+    cardTitle: '<p>МЕЛАЗМА/ХЛОАЗМА</p>',
+    title: 'МЕЛАЗМА/ХЛОАЗМА',
+    previewClass: 'stages-card-preview-2',
+    listClass: 'stages-card-description-list--big-margin',
+    itemClass: 'stages-card-description__item_with-num',
+    description: '<span>ПРИЧИНЫ</span><p>УФ, генетика, беременность, гормональный дисбаланс, препараты</p>',
+    items: [
+      {
+        iconName: '',
+        class: '',
+        numText: '<span>30</span><span class="small">%</span>',
+        mainText: 'ЖЕНЩИН СКЛОННЫ<br />К ПОЯВЛЕНИЮ МЕЛАЗМЫ',
+      },
+      {
+        iconName: '',
+        class: '',
+        numText: '<span class="small">X</span><span>9</span>',
+        mainText: 'риск у женщин<br />с фототипом III и выше',
+      }
+    ]
+  },
+  {
+    step: 6,
+    cardTitle: '<p>ПОСТВОСПАЛИТЕЛЬНАЯ<br />ГИПЕРПИГМЕНТАЦИЯ</p>',
+    title: 'ПОСТВОСПАЛИТЕЛЬНАЯ<br />ГИПЕРПИГМЕНТАЦИЯ',
+    previewClass: 'stages-card-preview-3',
+    items: [
+      {
+        iconName: 'bandage',
+        class: 'stages-card-description__text-main-small',
+        mainText: '<p>НА МЕСТЕ <span>ТРАВМЫ КОЖИ</span></p><p class="description">акне, инфекции, укусы насекомых, ожоги, процедуры, воспаление</p>',
+      },
+      {
+        iconName: 'hourglass',
+        class: 'stages-card-description__text-main-small',
+        mainText: 'СТОЙКАЯ ПИГМЕНТАЦИЯ<br />СОХРАНЯЕТСЯ <br /><span>ДО НЕСКОЛЬКИХ ЛЕТ</span>',
+      },
+      {
+        iconName: 'human',
+        class: 'stages-card-description__text-main-small',
+        mainText: 'ПОЯВЛЯЕТСЯ<br /><span>В ЛЮБОМ ВОЗРАСТЕ</span>',
+      }
+    ]
+  }
+])
+
+const currentCard = computed(() => cards.value.find((card) => +card.step === +props.stepNum) || null)
 </script>
 
 <style lang="scss" scoped>
@@ -253,6 +244,7 @@ $blue: $BLUE;
       background-size: cover;
       box-shadow: -0.5rem 2rem 3rem 0 rgba(0, 0, 0, 60%);
       transform: translateY(-50%);
+      transition: 0.3s ease;
 
       @media (min-width: 1440px) {
         padding-bottom: 8.5rem;
@@ -308,6 +300,44 @@ $blue: $BLUE;
         line-height: 100%;
         text-align: center;
         text-transform: uppercase;
+      }
+    }
+
+    &-icon {
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      @media (min-width: 1440px) {
+        width: 10rem;
+        min-width: 10rem;
+        height: 10rem;
+      }
+
+      @media (max-width: 1439px) {
+        width: 8rem;
+        min-width: 8rem;
+        height: 8rem;
+      }
+
+      &_arrows {
+        background-image: url('@/assets/icons/pigment-stages/arrows.svg');
+      }
+      &_hand-waving {
+        background-image: url('@/assets/icons/pigment-stages/hand-waving.svg');
+      }
+      &_age {
+        background-image: url('@/assets/icons/pigment-stages/age.svg');
+      }
+      &_bandage {
+        background-image: url('@/assets/icons/pigment-stages/bandage.svg');
+      }
+      &_hourglass {
+        background-image: url('@/assets/icons/pigment-stages/hourglass.svg');
+      }
+      &_human {
+        background-image: url('@/assets/icons/pigment-stages/human.svg');
       }
     }
 
@@ -409,11 +439,11 @@ $blue: $BLUE;
             }
           }
 
-          span {
+          :deep(span) {
             font-family: 'GillSans Bold';
           }
 
-          p.description {
+          :deep(p.description) {
             line-height: 100%;
             text-transform: lowercase;
           }
@@ -436,7 +466,7 @@ $blue: $BLUE;
           font-size: 5rem;
         }
 
-        span.small {
+        :deep(span.small) {
           font-family: 'GillSans Bold';
           @include adaptive-font(4, 2.5);
           line-height: 130%;
@@ -451,7 +481,7 @@ $blue: $BLUE;
         @include adaptive-font(3, 1.9);
         line-height: 130%;
 
-        span {
+        :deep(span) {
           font-family: 'GillSans Bold';
           @include adaptive-font(4, 2.5);
           text-transform: uppercase;

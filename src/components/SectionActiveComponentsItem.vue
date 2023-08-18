@@ -175,19 +175,6 @@ const cards = ref([
 ])
 
 const currentCard = computed(() => cards.value.find((card) => +card.step === +props.stepNum) || null)
-
-const cardTitle = computed(() => {
-  switch (+props.stepNum) {
-    case 13:
-      return 'НИАЦИНАМИД 10%'
-    case 14:
-      return 'ФЕ-РЕЗОРЦИНОЛ 0,5%'
-    case 15:
-      return '5% ХЕПЕС'
-    case 16:
-      return 'ГИАЛУРОНОВАЯ КИСЛОТА'
-  }
-})
 </script>
 
 <style scoped lang="scss">

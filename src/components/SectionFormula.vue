@@ -67,62 +67,10 @@ $blue: $BLUE;
 $black: $BLACK;
 $gray: $GRAY;
 
-.button {
-  &-navigation {
-    position: absolute;
-    border: none;
-    border-radius: 3rem;
-    background-color: $blue;
-    color: $white;
-    cursor: pointer;
-    font-family: GillSans;
-    @include adaptive-font(5.2, 3.25);
-    line-height: 100%;
-    text-transform: uppercase;
-    transition: all 0.2s ease;
-
-    @media (min-width: 1440px) {
-      bottom: 10rem;
-      padding: 1.9rem 3.2rem;
-    }
-
-    @media (max-width: 1439px) {
-      bottom: 6rem;
-      padding: 1.5rem 2.5rem;
-    }
-
-    &:hover {
-      @include desktop {
-        background: rgba(0, 159, 227, 50%);
-      }
-    }
-  }
-
-  &-next {
-    @media (min-width: 1440px) {
-      right: 10rem;
-    }
-
-    @media (max-width: 1439px) {
-      right: 6rem;
-    }
-  }
-
-  &-back {
-    @media (min-width: 1440px) {
-      left: 10rem;
-    }
-
-    @media (max-width: 1439px) {
-      left: 6rem;
-    }
-  }
-}
-
 .formula {
   &-section {
     position: relative;
-    min-height: 100%;
+    flex-grow: 1;
   }
 
   &-pagination {

@@ -17,10 +17,11 @@
       'bcg-finish': step === 25
     }"
   >
+    <button-back v-if="backText" :text="backText" @click="toggleStep(prevBlockStep)" />
+    <button-map v-if="step !== 0 && step !== 1 && step <=26" @click="toggleStep(1)" />
+
     <transition-group name="fade">
-      <button-back v-if="backText" :text="backText" @click="toggleStep(-1)" />
-      <button-map v-if="step !== 0 && step !== 1" @click="toggleStep(1)" />
-      <block-navigation v-if="step > 11 && step < 25" :step-num="step" @toggle-step="toggleStep" />
+      <block-navigation v-if="step >= 12 && step <= 24" :step-num="step" key="navigation" @toggle-step="toggleStep" />
 
       <section-start v-if="step === 0" key="step-0" @next="toggleStep" />
       <section-map v-if="step === 1" key="step-1" @toggle-step="toggleStep" />
@@ -31,10 +32,10 @@
         @toggleStep="toggleStep"
       />
       <section-hyper-pigmentation v-if="step === 3" key="step-3" @toggleStep="toggleStep" />
-      <section-pigment-stages v-if="step > 3 && step < 7" key="step-4-6" :step-num="step" @toggleStep="toggleStep" />
+      <section-pigment-stages v-if="step >= 4 && step <= 6" key="step-4-6" :step-num="step" @toggleStep="toggleStep" />
       <section-inside v-if="step === 7" key="step-7" @toggleStep="toggleStep" />
-      <section-inflammation v-if="step === 9" key="step-8" @toggleStep="toggleStep" />
-      <section-protection v-if="step === 10" key="step-9" />
+      <section-inflammation v-if="step === 9" key="step-9" @toggleStep="toggleStep" />
+      <section-protection v-if="step === 10" key="step-10" />
       <section-active-components v-if="step === 12" :step-num="step" key="step-12" @toggleStep="toggleStep" />
       <section-active-components-item
         v-if="step > 12 && step < 17"
@@ -53,8 +54,9 @@
       <section-finish v-if="step === 25" />
 
       <block-pagination
-        v-if="(step > 3 && step < 7) || step === 10 || step > 17"
+        v-if="(step >= 4 && step <= 6) || step === 10 || (step >= 18 && step <= 25)"
         :step-num="step"
+        key="pagination"
         @toggle-step="toggleStep"
       />
     </transition-group>
@@ -62,7 +64,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue';
 import ButtonMap from '@/components/ButtonMap.vue'
 import ButtonBack from '@/components/ButtonBack.vue'
 import BlockNavigation from '@/components/BlockNavigation.vue'
@@ -88,60 +90,79 @@ import SectionPigmentation from '@/components/SectionPigmentation.vue'
 import SectionFinish from '@/components/SectionFinish.vue'
 
 const step = ref(0)
+const lastStep = ref(0)
 
 const backText = computed(() => {
-  switch (+step.value) {
-    case 3:
-      return 'Назад <span>к разделам</span>'
-    case 4:
-      return 'Пигмент <span>и кожа</span>'
-    case 5:
-      return 'Пигмент <span>и кожа</span>'
-    case 6:
-      return 'Пигмент <span>и кожа</span>'
-    case 7:
-      return 'Пигмент <span>и кожа</span>'
-    case 9:
-      return 'Назад <span>к разделам</span>'
-    case 10:
-      return 'Назад <span>к разделам</span>'
-    case 12:
-      return 'Назад <span>к разделам</span>'
-    case 13:
-      return 'ИННОВАЦИЯ NIACINAMIDE 10'
-    case 14:
-      return 'ИННОВАЦИЯ NIACINAMIDE 10'
-    case 15:
-      return 'ИННОВАЦИЯ NIACINAMIDE 10'
-    case 16:
-      return 'ИННОВАЦИЯ NIACINAMIDE 10'
-    case 17:
-      return 'Назад <span>к разделам</span>'
-    case 18:
-      return 'Назад <span>к разделам</span>'
-    case 19:
-      return 'Назад <span>к разделам</span>'
-    case 20:
-      return 'Назад <span>к разделам</span>'
-    case 21:
-      return 'Назад <span>к разделам</span>'
-    case 22:
-      return 'Назад <span>к разделам</span>'
-    case 23:
-      return 'Назад <span>к разделам</span>'
-    case 24:
-      return 'Назад <span>к разделам</span>'
-    case 25:
-      return 'Назад <span>к разделам</span>'
-    default:
-      return ''
+  const stepValue = +step.value
+
+  if (stepValue === 3 || stepValue === 9 || stepValue === 10 || stepValue === 12 || (stepValue >= 17 && stepValue <= 26)) {
+    return 'Назад <span>к разделам</span>'
   }
+
+  if (stepValue >= 4 && stepValue <= 7) {
+    return 'Пигмент <span>и кожа</span>'
+  }
+
+  if (stepValue >= 13 && stepValue <= 16) {
+    return 'ИННОВАЦИЯ NIACINAMIDE I0'
+  }
+
+  return ''
+})
+
+const prevBlockStep = computed(() => {
+  const stepValue = +step.value
+
+  if (stepValue >= 4 && stepValue <= 7) {
+    return 3
+  }
+
+  if (stepValue === 9 || stepValue === 10) {
+    return 8
+  }
+
+  if (stepValue >= 13 && stepValue <= 16) {
+    return 12
+  }
+
+  if (stepValue >= 17 && stepValue <= 26) {
+    return 11
+  }
+
+  return '-1'
 })
 
 function toggleStep(stepNum = null) {
-  console.log(stepNum)
+  if (+stepNum > lastStep.value + 1) return
+
   step.value = +stepNum === -1 ? step.value - 1 : stepNum || step.value + 1
+  window.localStorage.setItem('currentStepPigmentation', step.value.toString())
+
+  if (step.value > lastStep.value) {
+    lastStep.value = step.value
+    window.localStorage.setItem('lastStepPigmentation', lastStep.value.toString())
+  }
 }
+
+function clearState() {
+  step.value = 0
+  lastStep.value = 0
+  window.localStorage.setItem('currentStepPigmentation', '0')
+  window.localStorage.setItem('lastStepPigmentation', '0')
+}
+
+onMounted(() => {
+  const currentStepInStorage = window.localStorage.getItem('currentStepPigmentation')
+  const lastStepInStorage = window.localStorage.getItem('lastStepPigmentation')
+
+  if (!currentStepInStorage) {
+    window.localStorage.setItem('currentStepPigmentation', '0')
+    window.localStorage.setItem('lastStepPigmentation', '0')
+  }
+
+  step.value = +currentStepInStorage || 0
+  lastStep.value = +lastStepInStorage || 0
+})
 </script>
 
 <style lang="scss">

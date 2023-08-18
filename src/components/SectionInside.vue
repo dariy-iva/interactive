@@ -184,13 +184,17 @@ $blue: $BLUE;
     display: flex;
     width: 20.64%;
     flex-direction: column;
-    row-gap: 8rem;
+    gap: 8rem;
 
-    @media (max-width: 850px) {
+    @media (min-width: 768px) and (max-width: 850px) {
       display: grid;
       min-width: 100%;
       grid-template-columns: repeat(3, 1fr);
       gap: 3rem;
+    }
+
+    @include mobile {
+      gap: 2rem;
     }
 
     &-paragraph {

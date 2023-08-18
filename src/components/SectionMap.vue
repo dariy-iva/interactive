@@ -163,6 +163,8 @@ $blue: $BLUE;
 
 .map {
   &-section {
+    display: flex;
+    align-items: center;
     width: 100%;
     min-width: 700px;
     min-height: 100vh;
