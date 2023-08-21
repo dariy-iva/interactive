@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import BasePopup from '@/components/BasePopup.vue'
+import BasePopup from '@/components/UI/BasePopup.vue'
 
 defineProps({
   isOpen: {

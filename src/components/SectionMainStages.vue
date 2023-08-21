@@ -40,8 +40,8 @@
 </template>
 
 <script setup>
-import ButtonMap from '@/components/ButtonMap.vue'
-import CardImage from '@/components/CardImage.vue'
+import ButtonMap from '@/components/UI/ButtonMap.vue'
+import CardImage from '@/components/UI/CardImage.vue'
 
 defineProps({
   cardNum: {

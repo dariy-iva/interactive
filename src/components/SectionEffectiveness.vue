@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import CardImage from '@/components/CardImage.vue'
+import CardImage from '@/components/UI/CardImage.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -53,6 +53,15 @@ $white: $WHITE;
 $blue: $BLUE;
 $black: $BLACK;
 $gray: $GRAY;
+
+@keyframes translateCard {
+  from {
+    translate: 212%;
+  }
+  to {
+    translate: 0;
+  }
+}
 
 .effect {
   &-section {
@@ -114,6 +123,7 @@ $gray: $GRAY;
 
     &-picture-product {
       aspect-ratio: 10 / 19.08;
+      animation: translateCard 0.4s 1;
 
       @media (min-width: 1440px) {
         width: 45.9rem;

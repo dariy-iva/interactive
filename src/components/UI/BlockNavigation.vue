@@ -116,6 +116,10 @@ const steps = ref([
 ])
 
 const currentStep = computed(() => steps.value.find((step) => step.steps.includes(+props.stepNum)) || {})
+
+function toggleStep() {
+  
+}
 </script>
 
 <style scoped lang="scss">

@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-import ButtonDefault from '@/components/ButtonDefault.vue'
+import ButtonDefault from '@/components/UI/ButtonDefault.vue'
 
 defineEmits(['toggleStep'])
 </script>
@@ -56,6 +56,26 @@ defineEmits(['toggleStep'])
 <style lang="scss" scoped>
 $white: $WHITE;
 $blue: $BLUE;
+
+@keyframes translateCard {
+  from {
+    max-height: 50%;
+  }
+  to {
+    max-height: 100%;
+  }
+}
+
+@keyframes translateText {
+  from {
+    opacity: 0;
+    translate: -100%;
+  }
+  to {
+    opacity: 1;
+    translate: 0;
+  }
+}
 
 .button {
   &-next {
@@ -121,6 +141,7 @@ $blue: $BLUE;
     display: flex;
     max-width: 126.5rem;
     justify-content: space-between;
+    align-items: end;
     gap: 3rem;
 
     @include mobile {
@@ -133,6 +154,7 @@ $blue: $BLUE;
     max-width: 35.5rem;
     aspect-ratio: 10 / 21.1;
     background-size: cover;
+    animation: translateCard 0.5s 1;
 
     @media (min-width: 1440px) {
       padding: 5rem 0 0 5rem;
@@ -185,6 +207,7 @@ $blue: $BLUE;
     width: 20.64%;
     flex-direction: column;
     gap: 8rem;
+    animation: translateText 0.5s 1;
 
     @media (min-width: 768px) and (max-width: 850px) {
       display: grid;

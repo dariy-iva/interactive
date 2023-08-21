@@ -24,7 +24,7 @@
     <block-pagination class="pagination-block" @toggle-step="(value) => $emit('toggleStep', value)">
       <div class="pagination-block__list">
         <span class="component-navigation__line"></span>
-        <span
+        <div
           class="component-navigation__button"
           :class="{
             'component-navigation__button--active': stepNum === 13,
@@ -32,10 +32,10 @@
           }"
           @click="$emit('toggleStep', 13)"
         >
-          I
-        </span>
+          <span>I</span>
+        </div>
         <span class="component-navigation__line"></span>
-        <span
+        <div
           class="component-navigation__button"
           :class="{
             'component-navigation__button--active': stepNum === 14,
@@ -43,10 +43,10 @@
           }"
           @click="$emit('toggleStep', 14)"
         >
-          2
-        </span>
+          <span>2</span>
+        </div>
         <span class="component-navigation__line"></span>
-        <span
+        <div
           class="component-navigation__button"
           :class="{
             'component-navigation__button--active': stepNum === 15,
@@ -54,10 +54,10 @@
           }"
           @click="$emit('toggleStep', 15)"
         >
-          3
-        </span>
+          <span>3</span>
+        </div>
         <span class="component-navigation__line"></span>
-        <span
+        <div
           class="component-navigation__button"
           :class="{
             'component-navigation__button--active': stepNum === 16,
@@ -65,8 +65,8 @@
           }"
           @click="$emit('toggleStep', 16)"
         >
-          4
-        </span>
+          <span>4</span>
+        </div>
         <span class="component-navigation__line"></span>
       </div>
     </block-pagination>
@@ -75,7 +75,7 @@
 
 <script setup>
 import { computed, ref } from 'vue'
-import BlockPagination from '@/components/BlockPagination.vue'
+import BlockPagination from '@/components/UI/BlockPagination.vue'
 
 const props = defineProps({
   stepNum: {
@@ -183,6 +183,26 @@ $blue: $BLUE;
 $black: $BLACK;
 $gray: $GRAY;
 
+@keyframes translateCard {
+  from {
+    translate: -100%;
+    opacity: 0;
+  }
+  to {
+    translate: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes translatePreview {
+  from {
+    background-size: 120%;
+  }
+  to {
+    background-size: 100%;
+  }
+}
+
 .button {
   &-navigation {
     border: none;
@@ -237,7 +257,7 @@ $gray: $GRAY;
   margin-left: auto;
 
   @include desktop {
-    margin-top: initial;
+    //margin-top: initial;
     gap: 3rem;
   }
 
@@ -336,6 +356,12 @@ $gray: $GRAY;
           background: rgba(0, 159, 227, 50%);
         }
       }
+
+      & > span {
+        @include desktop {
+          margin-bottom: -1rem;
+        }
+      }
     }
   }
 
@@ -347,6 +373,7 @@ $gray: $GRAY;
     border-radius: 0 5rem 5rem 0;
     background-color: $white;
     box-shadow: -0.5rem 2rem 5rem 0 rgba(0, 0, 0, 15%);
+    animation: translateCard 0.6s 1;
 
     @media (min-width: 1440px) {
       min-height: 60.8rem;
@@ -371,10 +398,11 @@ $gray: $GRAY;
       top: 50%;
       display: flex;
       width: 100%;
-      background-size: cover;
+      //background-size: cover;
       box-shadow: -0.5rem 2rem 3rem 0 rgba(0, 0, 0, 60%);
       transform: translateY(-50%);
       transition: 0.3s ease;
+      animation: translatePreview 0.5s 0.4s 1;
 
       &-1 {
         background-image: url('@/assets/images/active-components/niacinamide-card.jpg');
@@ -472,6 +500,7 @@ $gray: $GRAY;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      transition: 0.3s ease;
 
       @media (min-width: 1440px) {
         width: 10.7rem;
@@ -517,6 +546,7 @@ $gray: $GRAY;
       width: 100%;
       flex-direction: column;
       justify-content: center;
+      //visibility: hidden;
 
       &__title {
         color: $blue;

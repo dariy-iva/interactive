@@ -47,7 +47,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import BlockPagination from '@/components/BlockPagination.vue'
+import BlockPagination from '@/components/UI/BlockPagination.vue'
 
 const emits = defineEmits(['toggleStep'])
 const descriptionIsOpen = ref(false)

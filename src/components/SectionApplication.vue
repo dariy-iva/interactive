@@ -60,7 +60,7 @@
 </template>
 
 <script setup>
-import CardImage from '@/components/CardImage.vue'
+import CardImage from '@/components/UI/CardImage.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -68,6 +68,15 @@ $white: $WHITE;
 $blue: $BLUE;
 $black: $BLACK;
 $gray: $GRAY;
+
+@keyframes translateCard {
+  from {
+    transform: translateX(30%) scaleY(1.2);
+  }
+  to {
+    transform: translateX(0) scaleY(1);
+  }
+}
 
 .application {
   &-section {
@@ -102,9 +111,11 @@ $gray: $GRAY;
   }
 
   &-picture-product {
+    z-index: 2;
     width: 100%;
     aspect-ratio: 10 / 14.34;
     border-radius: 7.5rem;
+    animation: translateCard 0.4s 1;
 
     @include tablet {
       margin: auto;

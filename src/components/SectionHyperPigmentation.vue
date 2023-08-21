@@ -21,7 +21,7 @@
             <button-default text="ЧТО ВНУТРИ?" @click="$emit('toggleStep', 7)" />
           </div>
           <div class="pigmentation-main-cards">
-            <a href="#" class="pigmentation-main-card pigmentation-main-card-1">
+            <article class="pigmentation-main-card pigmentation-main-card-1" @click="$emit('toggleStep', 4)">
               <div class="pigmentation-main-card__text">
                 <p>
                   АКТИНИЧЕСКОЕ
@@ -29,20 +29,20 @@
                   ЛЕНТИГО
                 </p>
               </div>
-            </a>
-            <a href="#" class="pigmentation-main-card pigmentation-main-card-2">
+            </article>
+            <article class="pigmentation-main-card pigmentation-main-card-2" @click="$emit('toggleStep', 5)">
               <div class="pigmentation-main-card__text">
                 <p>МЕЛАЗМА/ХЛОАЗМА</p>
               </div>
-            </a>
-            <a href="#" class="pigmentation-main-card pigmentation-main-card-3">
+            </article>
+            <article class="pigmentation-main-card pigmentation-main-card-3" @click="$emit('toggleStep', 6)">
               <div class="pigmentation-main-card__text">
                 <p>
                   ПОСТВОСПАЛИТЕЛЬНАЯ<br />
                   ГИПЕРПИГМЕНТАЦИЯ
                 </p>
               </div>
-            </a>
+            </article>
           </div>
         </div>
         <div class="pigmentation-addition">
@@ -59,7 +59,7 @@
 </template>
 
 <script setup>
-import ButtonDefault from '@/components/ButtonDefault.vue'
+import ButtonDefault from '@/components/UI/ButtonDefault.vue'
 
 defineEmits(['toggleStep'])
 </script>
@@ -311,6 +311,7 @@ $blue: $BLUE;
       border-radius: 5rem;
       background-size: cover;
       box-shadow: -0.5rem 2rem 3rem 0 rgba(0, 0, 0, 60%);
+      cursor: pointer;
 
       @media (min-width: 1440px) {
         max-width: 35.5rem;

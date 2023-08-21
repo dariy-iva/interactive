@@ -2,12 +2,15 @@
   <div class="navigation">
     <button-default v-if="stepNum !== 25" text="Назад" class="button-next" @click="$emit('toggleStep', '-1')" />
     <slot />
-    <button-default :text="stepNum === 25 ? 'Пройти тест' : 'Далее'" class="button-next" @click="$emit('toggleStep')" />
+    <button-default
+      :text="stepNum === 25 ? 'Пройти тест' : stepNum === 27 ? 'Завершить' : 'Далее'"
+      class="button-next" @click="$emit('toggleStep')"
+    />
   </div>
 </template>
 
 <script setup>
-import ButtonDefault from '@/components/ButtonDefault.vue'
+import ButtonDefault from '@/components/UI/ButtonDefault.vue'
 
 defineProps({
   stepNum: {

@@ -59,7 +59,7 @@
 </template>
 
 <script setup>
-import ButtonDefault from '@/components/ButtonDefault.vue'
+import ButtonDefault from '@/components/UI/ButtonDefault.vue'
 
 defineEmits(['toggleStep'])
 </script>

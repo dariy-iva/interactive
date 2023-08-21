@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import CardImage from '@/components/CardImage.vue'
+import CardImage from '@/components/UI/CardImage.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -51,6 +51,25 @@ $white: $WHITE;
 $blue: $BLUE;
 $black: $BLACK;
 $gray: $GRAY;
+
+@keyframes translateCard {
+  from {
+    opacity: 0;
+    translate: 0 100%;
+  }
+  to {
+    opacity: 1;
+    translate: 0;
+  }
+}
+@keyframes overflowCard {
+  from {
+    overflow: hidden;
+  }
+  to {
+    overflow: visible;
+  }
+}
 
 .action {
   &-section {
@@ -74,6 +93,7 @@ $gray: $GRAY;
 
   &-product {
     margin: auto;
+    animation: overflowCard 0.4s 1;
 
     @media (min-width: 1800px) {
       bottom: -7.8rem;
@@ -108,6 +128,7 @@ $gray: $GRAY;
       height: 100%;
       aspect-ratio: initial;
       border-radius: 7.5rem;
+      animation: translateCard 0.6s 1;
     }
 
     &:deep(.card-image__product) {

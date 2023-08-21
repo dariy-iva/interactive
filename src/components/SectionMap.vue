@@ -149,9 +149,13 @@
 </template>
 
 <script setup>
+const props = defineProps(['lastStep'])
+
 const emits = defineEmits(['toggleStep'])
 
 function onStepClick(step) {
+  if (+step > props.lastStep + 1) return
+
   emits('toggleStep', step)
 }
 </script>
@@ -325,6 +329,7 @@ $blue: $BLUE;
         top: -1.8vw;
         left: 5.73vw;
         width: 4vw;
+        min-width: 3rem;
         aspect-ratio: 10 / 13.25;
         background-image: url('@/assets/images/map/crystal.png');
         background-repeat: no-repeat;

@@ -39,7 +39,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import ButtonDefault from '@/components/ButtonDefault.vue'
+import ButtonDefault from '@/components/UI/ButtonDefault.vue'
 import PopupHyperpigmentation from '@/components/popups/PopupHyperpigmentation.vue'
 import PopupLentigo from '@/components/popups/PopupLentigo.vue'
 import PopupMelasma from '@/components/popups/PopupMelasma.vue'
@@ -146,6 +146,17 @@ const currentCard = computed(() => cards.value.find((card) => +card.step === +pr
 $white: $WHITE;
 $blue: $BLUE;
 
+@keyframes translate {
+  from {
+    scale: 0.2;
+    translate: -39vw 32rem;
+  }
+  to {
+    scale: 1;
+    translate: 0;
+  }
+}
+
 .stages {
   &-section {
     flex-grow: 1;
@@ -177,6 +188,7 @@ $blue: $BLUE;
     align-items: center;
     border-radius: 0 8rem 8rem 0;
     background-color: $white;
+    animation: translate 0.5s 1;
 
     @media (min-width: 1730px) {
       min-height: 69rem;

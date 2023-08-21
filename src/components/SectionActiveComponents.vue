@@ -77,13 +77,13 @@
     <block-pagination class="components-navigation" @toggle-step="toggleStep">
       <div class="components-navigation__list">
         <span class="components-navigation__line"></span>
-        <button type="button" class="components-navigation__button" @click="toggleStep(13)">I</button>
+        <button type="button" class="components-navigation__button" @click="toggleStep(13)"><span>I</span></button>
         <span class="components-navigation__line"></span>
-        <button type="button" class="components-navigation__button" @click="toggleStep(14)">2</button>
+        <button type="button" class="components-navigation__button" @click="toggleStep(14)"><span>2</span></button>
         <span class="components-navigation__line"></span>
-        <button type="button" class="components-navigation__button" @click="toggleStep(15)">3</button>
+        <button type="button" class="components-navigation__button" @click="toggleStep(15)"><span>3</span></button>
         <span class="components-navigation__line"></span>
-        <button type="button" class="components-navigation__button" @click="toggleStep(16)">4</button>
+        <button type="button" class="components-navigation__button" @click="toggleStep(16)"><span>4</span></button>
         <span class="components-navigation__line"></span>
       </div>
     </block-pagination>
@@ -91,7 +91,7 @@
 </template>
 
 <script setup>
-import BlockPagination from '@/components/BlockPagination.vue'
+import BlockPagination from '@/components/UI/BlockPagination.vue'
 
 defineProps({
   stepNum: {
@@ -400,29 +400,19 @@ $gray: $GRAY;
         &-left {
           left: 1rem;
         }
+
+        & > span {
+          @include desktop {
+            margin-bottom: -1rem;
+          }
+        }
       }
     }
   }
 
   &-navigation {
-    //position: absolute;
-    //left: 50%;
-    //display: flex;
-    //width: 100%;
-    //align-items: center;
-    //justify-content: space-between;
     z-index: 1;
     gap: 3rem;
-    //transform: translateX(-50%);
-
-    //@media (min-width: 1440px) {
-    //  bottom: 10rem;
-    //  padding: 0 10rem;
-    //}
-    //@media (max-width: 1439px) {
-    //  bottom: 6rem;
-    //  padding: 0 6rem;
-    //}
 
     &__list {
       flex-grow: 1;
@@ -481,6 +471,12 @@ $gray: $GRAY;
       &:hover {
         @include desktop {
           background: rgba(0, 159, 227, 50%);
+        }
+      }
+
+      & > span {
+        @include desktop {
+          margin-bottom: -1rem;
         }
       }
     }

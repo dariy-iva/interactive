@@ -18,57 +18,56 @@
     }"
   >
     <button-back v-if="backText" :text="backText" @click="toggleStep(prevBlockStep)" />
-    <button-map v-if="step !== 0 && step !== 1 && step <=26" @click="toggleStep(1)" />
+    <button-map v-if="step !== 0 && step !== 1 && step <=27" @click="toggleStep(1)" />
 
-    <transition-group name="fade">
-      <block-navigation v-if="step >= 12 && step <= 24" :step-num="step" key="navigation" @toggle-step="toggleStep" />
+    <block-navigation v-if="step >= 12 && step <= 24" :step-num="step" key="navigation" @toggle-step="toggleStep" />
 
-      <section-start v-if="step === 0" key="step-0" @next="toggleStep" />
-      <section-map v-if="step === 1" key="step-1" @toggle-step="toggleStep" />
-      <section-main-stages
-        v-if="step === 2 || step === 8 || step === 11"
-        key="step-2-8-11"
-        :card-num="step === 2 ? 1 : step === 8 ? 2 : 3"
-        @toggleStep="toggleStep"
-      />
-      <section-hyper-pigmentation v-if="step === 3" key="step-3" @toggleStep="toggleStep" />
-      <section-pigment-stages v-if="step >= 4 && step <= 6" key="step-4-6" :step-num="step" @toggleStep="toggleStep" />
-      <section-inside v-if="step === 7" key="step-7" @toggleStep="toggleStep" />
-      <section-inflammation v-if="step === 9" key="step-9" @toggleStep="toggleStep" />
-      <section-protection v-if="step === 10" key="step-10" />
-      <section-active-components v-if="step === 12" :step-num="step" key="step-12" @toggleStep="toggleStep" />
-      <section-active-components-item
-        v-if="step > 12 && step < 17"
-        :step-num="step"
-        key="step-13-16"
-        @toggleStep="toggleStep"
-      />
-      <section-formula v-if="step === 17" key="step-17" @toggleStep="toggleStep" />
-      <section-product-action v-if="step === 18" key="step-18" />
-      <section-results v-if="step === 19" key="step-19" />
-      <section-effectiveness v-if="step === 20" key="step-20" />
-      <section-application v-if="step === 21" key="step-21" />
-      <section-complex v-if="step === 22" key="step-22" />
-      <section-uv-rays v-if="step === 23" key="step-23" />
-      <section-pigmentation v-if="step === 24" key="step-24" />
-      <section-finish v-if="step === 25" />
+    <section-start v-if="step === 0" key="step-0" @next="toggleStep" />
+    <section-map v-if="step === 1" :last-step="lastStep" key="step-1" @toggle-step="toggleStep" />
+    <section-main-stages
+      v-if="step === 2 || step === 8 || step === 11"
+      key="step-2-8-11"
+      :card-num="step === 2 ? 1 : step === 8 ? 2 : 3"
+      @toggleStep="toggleStep"
+    />
+    <section-hyper-pigmentation v-if="step === 3" key="step-3" @toggleStep="toggleStep" />
+    <section-pigment-stages v-if="step >= 4 && step <= 6" key="step-4-6" :step-num="step" @toggleStep="toggleStep" />
+    <section-inside v-if="step === 7" key="step-7" @toggleStep="toggleStep" />
+    <section-inflammation v-if="step === 9" key="step-9" @toggleStep="toggleStep" />
+    <section-protection v-if="step === 10" key="step-10" />
+    <section-active-components v-if="step === 12" :step-num="step" key="step-12" @toggleStep="toggleStep" />
+    <section-active-components-item
+      v-if="step > 12 && step < 17"
+      :step-num="step"
+      key="step-13-16"
+      @toggleStep="toggleStep"
+    />
+    <section-formula v-if="step === 17" key="step-17" @toggleStep="toggleStep" />
+    <section-product-action v-if="step === 18" key="step-18" />
+    <section-results v-if="step === 19" key="step-19" />
+    <section-effectiveness v-if="step === 20" key="step-20" />
+    <section-application v-if="step === 21" key="step-21" />
+    <section-complex v-if="step === 22" key="step-22" />
+    <section-uv-rays v-if="step === 23" key="step-23" />
+    <section-pigmentation v-if="step === 24" key="step-24" />
+    <section-finish v-if="step === 25" />
+    <section-test v-if="step === 26 || step === 27" :step-num="step" @toggleStep="toggleStep" />
 
-      <block-pagination
-        v-if="(step >= 4 && step <= 6) || step === 10 || (step >= 18 && step <= 25)"
-        :step-num="step"
-        key="pagination"
-        @toggle-step="toggleStep"
-      />
-    </transition-group>
+    <block-pagination
+      v-if="(step >= 4 && step <= 6) || step === 10 || (step >= 18 && step <= 25)"
+      :step-num="step"
+      key="pagination"
+      @toggle-step="toggleStep"
+    />
   </main>
 </template>
 
 <script setup>
 import { computed, onMounted, ref } from 'vue';
-import ButtonMap from '@/components/ButtonMap.vue'
-import ButtonBack from '@/components/ButtonBack.vue'
-import BlockNavigation from '@/components/BlockNavigation.vue'
-import BlockPagination from '@/components/BlockPagination.vue'
+import ButtonMap from '@/components/UI/ButtonMap.vue'
+import ButtonBack from '@/components/UI/ButtonBack.vue'
+import BlockNavigation from '@/components/UI/BlockNavigation.vue'
+import BlockPagination from '@/components/UI/BlockPagination.vue'
 import SectionStart from '@/components/SectionStart.vue'
 import SectionMap from '@/components/SectionMap.vue'
 import SectionMainStages from '@/components/SectionMainStages.vue'
@@ -88,6 +87,7 @@ import SectionComplex from '@/components/SectionComplex.vue'
 import SectionUvRays from '@/components/SectionUvRays.vue'
 import SectionPigmentation from '@/components/SectionPigmentation.vue'
 import SectionFinish from '@/components/SectionFinish.vue'
+import SectionTest from '@/components/SectionTest.vue';
 
 const step = ref(0)
 const lastStep = ref(0)
@@ -95,7 +95,7 @@ const lastStep = ref(0)
 const backText = computed(() => {
   const stepValue = +step.value
 
-  if (stepValue === 3 || stepValue === 9 || stepValue === 10 || stepValue === 12 || (stepValue >= 17 && stepValue <= 26)) {
+  if (stepValue === 3 || stepValue === 9 || stepValue === 10 || stepValue === 12 || (stepValue >= 17 && stepValue <= 27)) {
     return 'Назад <span>к разделам</span>'
   }
 
@@ -125,7 +125,7 @@ const prevBlockStep = computed(() => {
     return 12
   }
 
-  if (stepValue >= 17 && stepValue <= 26) {
+  if (stepValue >= 17 && stepValue <= 27) {
     return 11
   }
 
@@ -133,8 +133,6 @@ const prevBlockStep = computed(() => {
 })
 
 function toggleStep(stepNum = null) {
-  if (+stepNum > lastStep.value + 1) return
-
   step.value = +stepNum === -1 ? step.value - 1 : stepNum || step.value + 1
   window.localStorage.setItem('currentStepPigmentation', step.value.toString())
 
@@ -152,16 +150,16 @@ function clearState() {
 }
 
 onMounted(() => {
-  const currentStepInStorage = window.localStorage.getItem('currentStepPigmentation')
-  const lastStepInStorage = window.localStorage.getItem('lastStepPigmentation')
-
-  if (!currentStepInStorage) {
-    window.localStorage.setItem('currentStepPigmentation', '0')
-    window.localStorage.setItem('lastStepPigmentation', '0')
-  }
-
-  step.value = +currentStepInStorage || 0
-  lastStep.value = +lastStepInStorage || 0
+  // const currentStepInStorage = window.localStorage.getItem('currentStepPigmentation')
+  // const lastStepInStorage = window.localStorage.getItem('lastStepPigmentation')
+  //
+  // if (!currentStepInStorage) {
+  //   window.localStorage.setItem('currentStepPigmentation', '0')
+  //   window.localStorage.setItem('lastStepPigmentation', '0')
+  // }
+  //
+  // step.value = +currentStepInStorage || 0
+  // lastStep.value = +lastStepInStorage || 0
 })
 </script>
 

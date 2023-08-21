@@ -31,6 +31,15 @@ $blue: $BLUE;
 $black: $BLACK;
 $gray: $GRAY;
 
+@keyframes translateCard {
+  from {
+    translate: -50%;
+  }
+  to {
+    translate: 0;
+  }
+}
+
 .uv-rays {
   &-section {
     position: relative;
@@ -57,6 +66,7 @@ $gray: $GRAY;
     height: 72.7rem;
     border-radius: 8rem;
     box-shadow: -0.5rem 2rem 3rem 0 rgba(0, 0, 0, 60%);
+    animation: translateCard 0.4s 1;
 
     @include mobile-tablet {
       aspect-ratio: 10 / 14.34;

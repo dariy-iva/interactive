@@ -14,8 +14,8 @@
 </template>
 
 <script setup>
-import CardImage from '@/components/CardImage.vue'
-import ButtonDefault from '@/components/ButtonDefault.vue'
+import CardImage from '@/components/UI/CardImage.vue'
+import ButtonDefault from '@/components/UI/ButtonDefault.vue'
 
 defineEmits(['next'])
 </script>

@@ -1,8 +1,10 @@
 <template>
-  <button type="button" class="button-map" @click.prevent="$emit('click')">
-    <img src="@/assets/icons/map.svg" alt="" class="button-map__image" />
-    <img src="@/assets/icons/map-hover.svg" alt="" class="button-map__image-hover" />
-  </button>
+  <div class="map-container">
+    <button type="button" class="button-map" @click.prevent="$emit('click')">
+      <img src="@/assets/icons/map.svg" alt="" class="button-map__image" />
+      <img src="@/assets/icons/map-hover.svg" alt="" class="button-map__image-hover" />
+    </button>
+  </div>
 </template>
 
 <script setup>
@@ -10,17 +12,33 @@ defineEmits(['click'])
 </script>
 
 <style scoped lang="scss">
-.button-map {
+@keyframes translate {
+  from {
+    translate: 100%;
+  }
+  to {
+    translate: 0;
+  }
+}
+
+.map-container {
   position: absolute;
   z-index: 5;
   top: 0;
   right: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.button-map {
+  position: relative;
   display: inline-block;
   overflow: hidden;
   border: none;
   background: none;
   transition: all 0.5s ease;
   cursor: pointer;
+  animation: translate 0.5s 1;
 
   @include tablet-desktop {
     width: 10.1rem;
