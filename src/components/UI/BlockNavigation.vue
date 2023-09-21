@@ -1,6 +1,7 @@
 <template>
   <div class="navigation">
     <h2
+      ref="titleRef"
       class="other-page-title"
       :class="{ 'other-page-title_large': stepNum > 12 && stepNum < 17 }"
       v-html="currentStep.title"
@@ -13,7 +14,7 @@
         @click="$emit('toggleStep', currentStep.prevBlockNum)"
       >
         <img src="@/assets/icons/other-page-arrow.svg" alt="arrow" class="other-page__arrow other-page__arrow_prev" />
-        <p class="other-page__text" v-html="currentStep.prevBlockText" />
+        <p ref="prevRef" class="other-page__text" v-html="currentStep.prevBlockText" />
       </span>
 
       <span
@@ -21,7 +22,7 @@
         class="other-page other-page--next"
         @click="$emit('toggleStep', currentStep.nextBlockNum || 1)"
       >
-        <p class="other-page__text" v-html="currentStep.nextBlockText" />
+        <p ref="nextRef" class="other-page__text" v-html="currentStep.nextBlockText" />
         <img src="@/assets/icons/other-page-arrow.svg" alt="arrow" class="other-page__arrow other-page__arrow_next" />
       </span>
     </div>
@@ -29,7 +30,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { ref, watch } from 'vue';
 
 const props = defineProps({
   stepNum: {
@@ -115,32 +116,156 @@ const steps = ref([
   }
 ])
 
-const currentStep = computed(() => steps.value.find((step) => step.steps.includes(+props.stepNum)) || {})
+const currentStep = ref(steps.value.find((step) => step.steps.includes(+props.stepNum)) || {})
 
-function toggleStep() {
-  
-}
+const titleRef = ref(null)
+const prevRef = ref(null)
+const nextRef = ref(null)
+
+watch(() => props.stepNum, (newValue, oldValue) => {
+  console.log(prevRef.value);
+  const titleClass = newValue > oldValue ? 'title-translate' : 'title-translate-reverse'
+  const prevClass = newValue > oldValue ? 'prev-translate' : 'prev-translate-reverse'
+  const nextClass = newValue > oldValue ? 'next-translate' : 'next-translate-reverse'
+  titleRef.value.classList.add(titleClass)
+  prevRef.value?.classList?.add(prevClass)
+  nextRef.value?.classList?.add(nextClass)
+
+  setTimeout(() => {
+    titleRef.value.classList.remove(titleClass)
+    prevRef.value?.classList?.remove(prevClass)
+    nextRef.value?.classList?.remove(nextClass)
+    currentStep.value = steps.value.find((step) => step.steps.includes(+props.stepNum)) || {}
+  }, 500)
+})
 </script>
 
 <style scoped lang="scss">
 $gray: $GRAY;
 $white: $WHITE;
 
+@keyframes translateTitle {
+  from {
+    translate: 0;
+    scale: 1;
+    opacity: 1;
+  }
+  to {
+    translate: -140% 250%;
+    scale: 0.7;
+    opacity: 0;
+  }
+}
+
+@keyframes translateReverseTitle {
+  from {
+    translate: 0;
+    scale: 1;
+    opacity: 1;
+  }
+  to {
+    translate: 54% 250%;
+    scale: 0.7;
+    opacity: 0;
+  }
+}
+
+@keyframes translatePrev {
+  from {
+    translate: 0;
+    scale: 1;
+    opacity: 1;
+  }
+  to {
+    translate: -200%;
+    scale: 1.2;
+    opacity: 0;
+  }
+}
+
+@keyframes translateReversePrev{
+  from {
+    translate: 0;
+    scale: 1;
+    opacity: 1;
+  }
+  to {
+    translate: 450% -200%;
+    scale: 0.7;
+    opacity: 0;
+  }
+}
+
+@keyframes translateNext {
+  from {
+    translate: 0;
+    scale: 1;
+    opacity: 1;
+  }
+  to {
+    translate: -50% -200%;
+    scale: 1.2;
+    opacity: 0;
+  }
+}
+
+@keyframes translateReverseNext{
+  from {
+    translate: 0;
+    scale: 1;
+    opacity: 1;
+  }
+  to {
+    translate: 200%;
+    scale: 0.7;
+    opacity: 0;
+  }
+}
+
+.title-translate {
+  animation: translateTitle 1s 1;
+}
+
+.title-translate-reverse {
+  animation: translateReverseTitle 0.5s 1;
+}
+
+.prev-translate {
+  animation: translatePrev 0.5s 1;
+}
+
+.prev-translate-reverse {
+  animation: translateReversePrev 1s 1;
+}
+
+.next-translate {
+  animation: translateNext 0.5s 1;
+}
+
+.next-translate-reverse {
+  animation: translateReverseNext 0.5s 1;
+}
+
 .navigation {
   display: flex;
   flex-direction: column;
+  overflow-y: hidden;
 
   @include desktop {
     position: absolute;
     z-index: 1;
-    top: 6.8rem;
+    top: 0;
     left: 0;
     right: 0;
-    padding: 0 4.6rem;
+    padding: 6.8rem 4.6rem 5rem;
     gap: 4.2rem;
   }
   @include mobile-tablet {
     gap: 2.5rem;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 
   &__buttons {

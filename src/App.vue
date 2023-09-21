@@ -133,7 +133,7 @@ const prevBlockStep = computed(() => {
 })
 
 function toggleStep(stepNum = null) {
-  step.value = +stepNum === -1 ? step.value - 1 : stepNum || step.value + 1
+  step.value = +stepNum === -1 ? step.value - 1 : stepNum || stepNum === 0 ? stepNum : step.value + 1
   window.localStorage.setItem('currentStepPigmentation', step.value.toString())
 
   if (step.value > lastStep.value) {
@@ -150,16 +150,16 @@ function clearState() {
 }
 
 onMounted(() => {
-  // const currentStepInStorage = window.localStorage.getItem('currentStepPigmentation')
-  // const lastStepInStorage = window.localStorage.getItem('lastStepPigmentation')
-  //
-  // if (!currentStepInStorage) {
-  //   window.localStorage.setItem('currentStepPigmentation', '0')
-  //   window.localStorage.setItem('lastStepPigmentation', '0')
-  // }
-  //
-  // step.value = +currentStepInStorage || 0
-  // lastStep.value = +lastStepInStorage || 0
+  const currentStepInStorage = window.localStorage.getItem('currentStepPigmentation')
+  const lastStepInStorage = window.localStorage.getItem('lastStepPigmentation')
+
+  if (!currentStepInStorage) {
+    window.localStorage.setItem('currentStepPigmentation', '0')
+    window.localStorage.setItem('lastStepPigmentation', '0')
+  }
+
+  step.value = +currentStepInStorage || 0
+  lastStep.value = +lastStepInStorage || 0
 })
 </script>
 
