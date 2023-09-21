@@ -1,6 +1,7 @@
 <template>
   <section class="test-section">
     <img src="@/assets/icons/logo.svg" alt="Логотип LA ROCHE POSAY" class="test__logo" />
+    <div style="color: white">{{hasWrongAnswers}}</div>
     <div class="test-wrapper">
       <h1 class="test-top">
         <span class="test__title">Тест</span>
@@ -80,12 +81,20 @@
     </div>
 
     <block-pagination :step-num="stepNum" @toggle-step="toggleStep" />
+
+    <popup-finish
+      :is-open="popupIsOpen"
+      :text="hasWrongAnswers ? 'Тест не пройден!' : 'Тест пройден!'"
+      :button-text="hasWrongAnswers ? 'пройти еще раз' : 'далее'"
+      @close="onCloseModal"
+    />
   </section>
 </template>
 
 <script setup>
-import BlockPagination from '@/components/UI/BlockPagination.vue';
 import { computed, ref } from 'vue';
+import BlockPagination from '@/components/UI/BlockPagination.vue';
+import PopupFinish from '@/components/popups/PopupFinish.vue';
 
 const props = defineProps({
   stepNum: {
@@ -198,10 +207,24 @@ const activeBlocks = computed(() => {
     : { thirdBlock: questions.value.thirdBlock }
 })
 
+const hasWrongAnswers = computed(() => {
+  let hasWrongAnswers = false
+
+  Object.values(questions.value).forEach((question) => {
+    const items = Array.isArray(question) ? question : question.items
+    const hasError = items.some((item) => item.selectedAnswer && item.selectedAnswer !== item.rightAnswer)
+    if (hasError) hasWrongAnswers = true
+  })
+
+  return hasWrongAnswers
+})
+
+const popupIsOpen = ref(false)
+
 function toggleStep(value = null) {
-  if (value === '-1') {
+  if (value === '-1' || value === 0) {
     emits('toggleStep', value)
-    return;
+    return
   }
 
   if (props.stepNum === 26) {
@@ -213,12 +236,36 @@ function toggleStep(value = null) {
   }
 
   if (props.stepNum === 27) {
-    const hasNotAnswered = [...questions.value.firstBlock, ...questions.value.fourBlock.items].some(item => !item.selectedAnswer)
+    const hasNotAnswered = [...questions.value.thirdBlock, ...questions.value.fourBlock.items].some(item => !item.selectedAnswer)
     if (!hasNotAnswered) {
-      emits('toggleStep', 1)
+      if (!hasWrongAnswers.value && window?.parent?.handleScorm) {
+        console.log(window)
+        console.log(window.parent);
+        window.parent.handleScorm(20);
+        console.log('Interactive is finished');
+      }
+      popupIsOpen.value = true
     }
     return
   }
+}
+
+function onCloseModal() {
+  toggleStep(hasWrongAnswers.value ? '-1' : 0)
+
+  for (let question in questions.value) {
+    if (Array.isArray(questions.value[question])) {
+      questions.value[question].forEach((item, index) => {
+        questions.value[question][index].selectedAnswer = ''
+      })
+    } else {
+      questions.value[question].items.forEach((item, index) => {
+        questions.value[question].items[index].selectedAnswer = ''
+      })
+    }
+  }
+
+  popupIsOpen.value = false
 }
 </script>
 

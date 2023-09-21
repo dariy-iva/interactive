@@ -1,21 +1,25 @@
 <template>
-  <div class="popup-overlay" @click.self="$emit('close')">
+  <div class="popup-overlay" :class="{ opened: isOpen }" @click.self="$emit('close')">
     <div class="popup">
       <button class="close-button" @click="$emit('close')" />
 
       <div class="popup__content">
         <p v-text="text" class="popup__text" />
-        <button-default :text="buttonText" class="popup__submit" @click="onSubmit" />
+        <button-default :text="buttonText" class="popup__submit" @click="$emit('close')" />
       </div>
     </div>
   </div>
 </template>
 
 <script  setup>
-import { onMounted, onUnmounted } from 'vue';
+import { watch } from 'vue';
 import ButtonDefault from '@/components/UI/ButtonDefault.vue';
 
-defineProps({
+const props = defineProps({
+  isOpen: {
+    type: Boolean,
+    default: false
+  },
   text: {
     type: String,
     default: ''
@@ -26,20 +30,13 @@ defineProps({
   }
 })
 
-const emits = defineEmits(['close', 'submit'])
+const emits = defineEmits(['close'])
 
-function onSubmit() {
-  emits('submit')
-  emits('close')
-}
-
-onMounted(() => {
-  document.body.style.overflow = 'hidden'
-})
-
-onUnmounted(() => {
-  document.body.style.overflow = ''
-})
+watch(() => props.isOpen, (value) => {
+  document.body.style.overflow = value ? 'hidden' : ''
+},
+  { immediate: true }
+)
 </script>
 
 <style scoped lang="scss">
@@ -57,9 +54,17 @@ $white: $WHITE;
   justify-content: center;
   overflow-y: scroll;
   backdrop-filter: blur(5px);
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.4s;
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  &.opened {
+    visibility: visible;
+    opacity: 1;
   }
 
   @include mobile-tablet {
@@ -148,6 +153,7 @@ $white: $WHITE;
     font-weight: 700;
     line-height: 100%;
     transition: 0.3s;
+    text-align: center;
     @include adaptive-font(7, 4.5);
   }
 
