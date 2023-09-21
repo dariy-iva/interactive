@@ -247,7 +247,6 @@ $blue: $BLUE;
       display: flex;
       width: 100%;
       max-width: 48.3rem;
-      max-height: calc(100% + 4rem);
       aspect-ratio: 10 / 15.45;
       flex-direction: column;
       align-items: center;
@@ -268,6 +267,7 @@ $blue: $BLUE;
 
       @include tablet {
         width: 50%;
+        max-height: calc(100% + 4rem);
       }
 
       @include mobile {
