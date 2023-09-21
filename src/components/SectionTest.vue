@@ -1,7 +1,6 @@
 <template>
   <section class="test-section">
     <img src="@/assets/icons/logo.svg" alt="Логотип LA ROCHE POSAY" class="test__logo" />
-    <div style="color: white">{{hasWrongAnswers}}</div>
     <div class="test-wrapper">
       <h1 class="test-top">
         <span class="test__title">Тест</span>
