@@ -4,6 +4,7 @@
     :class="{
       'main-wrapper': step !== 1,
       'main-wrapper_large': step === 0 || step === 2 || step === 8 || step === 11,
+      'bcg-start': step === 0,
       'bcg-active-components': step === 12,
       'bcg-niacinamid': step === 13,
       'bcg-resorcinol': step === 14,
@@ -149,18 +150,18 @@ function clearState() {
   window.localStorage.setItem('lastStepPigmentation', '0')
 }
 
-onMounted(() => {
-  const currentStepInStorage = window.localStorage.getItem('currentStepPigmentation')
-  const lastStepInStorage = window.localStorage.getItem('lastStepPigmentation')
-
-  if (!currentStepInStorage) {
-    window.localStorage.setItem('currentStepPigmentation', '0')
-    window.localStorage.setItem('lastStepPigmentation', '0')
-  }
-
-  step.value = +currentStepInStorage || 0
-  lastStep.value = +lastStepInStorage || 0
-})
+// onMounted(() => {
+//   const currentStepInStorage = window.localStorage.getItem('currentStepPigmentation')
+//   const lastStepInStorage = window.localStorage.getItem('lastStepPigmentation')
+//
+//   if (!currentStepInStorage) {
+//     window.localStorage.setItem('currentStepPigmentation', '0')
+//     window.localStorage.setItem('lastStepPigmentation', '0')
+//   }
+//
+//   step.value = +currentStepInStorage || 0
+//   lastStep.value = +lastStepInStorage || 0
+// })
 </script>
 
 <style lang="scss">
@@ -208,6 +209,17 @@ onMounted(() => {
       @include mobile {
         padding: 7rem 5rem;
       }
+    }
+  }
+
+  &.bcg-start {
+    @include tablet-desktop {
+      background: url('@/assets/images/backgrounds/women_start.webp') left center / auto 100% no-repeat,
+      url('@/assets/images/backgrounds/filter_blue.webp') center bottom / 100% 52.5% no-repeat,
+      url('@/assets/images/backgrounds/purple.webp') center / cover no-repeat;
+    }
+    @include mobile {
+      background: url('@/assets/images/backgrounds/purple.webp') center / cover no-repeat;
     }
   }
 

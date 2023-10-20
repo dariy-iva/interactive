@@ -57,6 +57,7 @@ defineEmits(['toggleStep'])
 $white: $WHITE;
 $violet: $VIOLET;
 $blue: $BLUE;
+$fontDefaultLight: $FONT_DEFAULT_LIGHT;
 
 .main {
   &-cards {
@@ -126,7 +127,7 @@ $blue: $BLUE;
     &__number {
       margin-bottom: 4.8rem;
       color: $white;
-      font-family: 'GillSans Light';
+      font-family: $fontDefaultLight;
       font-size: 20rem;
       line-height: 90%;
       text-transform: uppercase;
@@ -174,7 +175,7 @@ $blue: $BLUE;
 
       span {
         color: $white;
-        font-family: 'GillSans Light';
+        font-family: $fontDefaultLight;
         font-size: 7.2rem;
         letter-spacing: 0.144rem;
         line-height: 90%;

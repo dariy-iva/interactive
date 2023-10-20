@@ -66,6 +66,10 @@ $white: $WHITE;
 $blue: $BLUE;
 $black: $BLACK;
 $gray: $GRAY;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultLight: $FONT_DEFAULT_LIGHT;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
+$fontDefaultSemiBold: $FONT_DEFAULT_SEMI_BOLD;
 
 .formula {
   &-section {
@@ -98,7 +102,7 @@ $gray: $GRAY;
   &__subtitle {
     margin-top: 10.4rem;
     color: $white;
-    font-family: 'GillSans Light';
+    font-family: $fontDefaultLight;
     @include adaptive-font(8, 4);
     line-height: 100%;
     text-transform: uppercase;
@@ -108,14 +112,14 @@ $gray: $GRAY;
     }
 
     span {
-      font-family: 'GillSans SemiBold';
+      font-family: $fontDefaultSemiBold;
     }
   }
 
   &__addition {
     margin-top: 4rem;
     color: $white;
-    font-family: GillSans;
+    font-family: $fontDefault;
     @include adaptive-font(4, 2);
     line-height: 130%;
     text-align: right;
@@ -194,12 +198,12 @@ $gray: $GRAY;
     }
 
     &__title {
-      font-family: 'GillSans Bold';
+      font-family: $fontDefaultBold;
       text-transform: uppercase;
     }
 
     &__text {
-      font-family: GillSans;
+      font-family: $fontDefault;
     }
   }
 
@@ -243,7 +247,7 @@ $gray: $GRAY;
         top: 0;
         left: 2rem;
         content: 'на';
-        font-family: 'GillSans Bold';
+        font-family: $fontDefaultBold;
         @include adaptive-font(5, 3.1);
         line-height: 130%;
 
@@ -253,27 +257,27 @@ $gray: $GRAY;
       }
 
       &__number {
-        font-family: GillSans;
+        font-family: $fontDefault;
         @include adaptive-font(37, 10);
         line-height: 70%;
       }
 
       &__symbol {
-        font-family: 'GillSans Bold';
+        font-family: $fontDefaultBold;
         @include adaptive-font(5, 3.1);
         line-height: 130%;
       }
     }
 
     p {
-      font-family: GillSans;
+      font-family: $fontDefault;
       @include adaptive-font(4, 1.5);
       line-height: 130%;
       text-transform: uppercase;
 
       &.bold {
         margin-top: -3rem;
-        font-family: 'GillSans Bold';
+        font-family: $fontDefaultBold;
       }
     }
   }

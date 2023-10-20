@@ -1,7 +1,7 @@
 @import '../global/mixins.scss';
-// GillSans
-@include font-face('GillSans', '@/assets/fonts/GillSans/GillSansC');
-@include font-face('GillSans Light', '@/assets/fonts/GillSans/GillSansLightC', '300');
-@include font-face('GillSans SemiBold', '@/assets/fonts/GillSans/Gill Sans SemiBold', '600');
-@include font-face('GillSans Bold', '@/assets/fonts/GillSans/GillSansC-Bold', '700');
-@include font-face('GillSans ExtraBold', '@/assets/fonts/GillSans/GillSansExtraBoldC', '800');
+// Montserrat
+@include font-face('Montserrat', '@/assets/fonts/Montserrat/Montserrat-Regular');
+@include font-face('Montserrat Light', '@/assets/fonts/Montserrat/Montserrat-Light', '300');
+@include font-face('Montserrat SemiBold', '@/assets/fonts/Montserrat/Montserrat-SemiBold', '600');
+@include font-face('Montserrat Bold', '@/assets/fonts/Montserrat/Montserrat-Bold', '700');
+@include font-face('Montserrat ExtraBold', '@/assets/fonts/Montserrat/Montserrat-ExtraBold', '800');

@@ -164,6 +164,9 @@ function onStepClick(step) {
 $white: $WHITE;
 $violet: $VIOLET;
 $blue: $BLUE;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultLight: $FONT_DEFAULT_LIGHT;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
 
 .map {
   &-section {
@@ -197,7 +200,7 @@ $blue: $BLUE;
     top: 6.5rem;
     right: 8.6rem;
     color: $white;
-    font-family: 'GillSans Light';
+    font-family: $fontDefaultLight;
     font-size: 7rem;
     line-height: 100%;
     text-transform: uppercase;
@@ -283,7 +286,7 @@ $blue: $BLUE;
     border: none;
     background: url('@/assets/icons/map/cloud-inverted.svg') center / contain no-repeat;
     color: $white;
-    font-family: GillSans;
+    font-family: $fontDefault;
     font-size: 5.2rem;
     line-height: 6rem;
     text-transform: uppercase;
@@ -360,7 +363,7 @@ $blue: $BLUE;
     aspect-ratio: 10 / 6.18;
     background: url('@/assets/icons/map/cloud.svg') transparent center / cover no-repeat;
     color: $white;
-    font-family: 'GillSans Light';
+    font-family: $fontDefaultLight;
     font-size: 7.2rem;
     line-height: 100%;
     text-transform: uppercase;
@@ -402,7 +405,7 @@ $blue: $BLUE;
     &__text {
       position: absolute;
       color: $white;
-      font-family: 'GillSans Bold';
+      font-family: $fontDefaultBold;
       font-size: 3.2rem;
       line-height: 3.7rem;
       text-align: center;
@@ -424,7 +427,7 @@ $blue: $BLUE;
       }
 
       span {
-        font-family: GillSans;
+        font-family: $fontDefault;
       }
 
       @media (min-width: 1550px) {
@@ -480,7 +483,7 @@ $blue: $BLUE;
     &__text {
       position: absolute;
       color: $white;
-      font-family: 'GillSans Bold';
+      font-family: $fontDefaultBold;
       font-size: 2.5rem;
       line-height: 100%;
       opacity: 0.7;
@@ -507,7 +510,7 @@ $blue: $BLUE;
       }
 
       span {
-        font-family: GillSans;
+        font-family: $fontDefault;
       }
 
       span.small {

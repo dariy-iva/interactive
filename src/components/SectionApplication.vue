@@ -68,6 +68,8 @@ $white: $WHITE;
 $blue: $BLUE;
 $black: $BLACK;
 $gray: $GRAY;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
 
 @keyframes translateCard {
   from {
@@ -159,7 +161,7 @@ $gray: $GRAY;
     }
 
     &__title {
-      font-family: 'GillSans ExtraBold';
+      font-family: $fontDefaultExtraBold;
       @include adaptive-font(4, 2.5);
       line-height: 100%;
     }
@@ -213,12 +215,12 @@ $gray: $GRAY;
     }
 
     &__text {
-      font-family: 'GillSans ExtraBold';
+      font-family: $fontDefaultExtraBold;
       @include adaptive-font(2, 1.25);
       line-height: 130%;
 
       span {
-        font-family: GillSans;
+        font-family: $fontDefault;
       }
     }
   }

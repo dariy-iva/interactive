@@ -31,6 +31,7 @@ $white: $WHITE;
 $blue: $BLUE;
 $black: $BLACK;
 $gray: $GRAY;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
 
 .complex {
   &-section {
@@ -116,7 +117,7 @@ $gray: $GRAY;
     &-text {
       width: 100%;
       background-color: $white;
-      font-family: 'GillSans Bold';
+      font-family: $fontDefaultBold;
       @include adaptive-font(3.5, 2.1);
       line-height: 100%;
       object-fit: cover;

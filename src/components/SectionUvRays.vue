@@ -30,6 +30,8 @@ $white: $WHITE;
 $blue: $BLUE;
 $black: $BLACK;
 $gray: $GRAY;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
 
 @keyframes translateCard {
   from {
@@ -82,7 +84,7 @@ $gray: $GRAY;
     flex-direction: column;
     margin-top: 3.1rem;
     color: $white;
-    font-family: GillSans;
+    font-family: $fontDefault;
     text-align: center;
     text-transform: uppercase;
 
@@ -129,7 +131,7 @@ $gray: $GRAY;
       }
 
       span {
-        font-family: 'GillSans Bold';
+        font-family: $fontDefaultBold;
       }
     }
 
@@ -139,7 +141,7 @@ $gray: $GRAY;
       line-height: 130%;
 
       span {
-        font-family: 'GillSans Bold';
+        font-family: $fontDefaultBold;
       }
     }
   }

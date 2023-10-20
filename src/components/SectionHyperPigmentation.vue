@@ -67,6 +67,9 @@ defineEmits(['toggleStep'])
 <style lang="scss" scoped>
 $white: $WHITE;
 $blue: $BLUE;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
+$fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
 
 .button {
   &-next {
@@ -102,7 +105,7 @@ $blue: $BLUE;
     display: flex;
     flex-direction: column;
     color: $white;
-    font-family: GillSans;
+    font-family: $fontDefault;
     row-gap: 11rem;
     text-transform: uppercase;
 
@@ -131,7 +134,7 @@ $blue: $BLUE;
       line-height: 110%;
 
       span {
-        font-family: 'GillSans ExtraBold';
+        font-family: $fontDefaultExtraBold;
         @include adaptive-font(6.8, 4.38);
         line-height: 100%;
       }
@@ -159,7 +162,7 @@ $blue: $BLUE;
         line-height: 130%;
 
         span {
-          font-family: 'GillSans Bold';
+          font-family: $fontDefaultBold;
         }
 
         &.big {
@@ -257,7 +260,7 @@ $blue: $BLUE;
         line-height: 100%;
 
         span {
-          font-family: 'GillSans ExtraBold';
+          font-family: $fontDefaultExtraBold;
         }
       }
 
@@ -266,7 +269,7 @@ $blue: $BLUE;
         border-radius: 3rem;
         background-color: $blue;
         color: $white;
-        font-family: GillSans;
+        font-family: $fontDefault;
         @include adaptive-font(5.2, 2.3);
         line-height: 100%;
         text-transform: uppercase;
@@ -362,14 +365,14 @@ $blue: $BLUE;
         justify-content: center;
         background-color: $blue;
         color: $white;
-        font-family: GillSans;
+        font-family: $fontDefault;
         @include adaptive-font(2, 1.25);
         line-height: 100%;
         text-align: center;
         text-transform: uppercase;
 
         span {
-          font-family: 'GillSans Bold';
+          font-family: $fontDefaultBold;
         }
       }
     }
@@ -419,7 +422,7 @@ $blue: $BLUE;
 
         &.small {
           margin-right: -2.4rem;
-          font-family: 'GillSans Bold';
+          font-family: $fontDefaultBold;
           @include adaptive-font(4, 2.5);
         }
 

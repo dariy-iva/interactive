@@ -35,15 +35,17 @@ defineEmits(['close'])
 
 <style lang="scss" scoped>
 $white: $WHITE;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
 
 .popup-text {
   color: $white;
-  font-family: GillSans;
+  font-family: $fontDefault;
   @include adaptive-font(3, 1.9);
   line-height: 130%;
 
   span {
-    font-family: 'GillSans ExtraBold';
+    font-family: $fontDefaultExtraBold;
 
     &.big {
       text-transform: uppercase;

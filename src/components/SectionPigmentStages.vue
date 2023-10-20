@@ -145,6 +145,8 @@ const currentCard = computed(() => cards.value.find((card) => +card.step === +pr
 <style lang="scss" scoped>
 $white: $WHITE;
 $blue: $BLUE;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
 
 @keyframes translate {
   from {
@@ -307,7 +309,7 @@ $blue: $BLUE;
         justify-content: center;
         background-color: $blue;
         color: $white;
-        font-family: GillSans;
+        font-family: $fontDefault;
         @include adaptive-font(3, 1.9);
         line-height: 100%;
         text-align: center;
@@ -361,7 +363,7 @@ $blue: $BLUE;
 
       &__title {
         color: $blue;
-        font-family: 'GillSans Bold';
+        font-family: $fontDefaultBold;
         //@include adaptive-font(5, 3.1);
         font-size: 5rem;
         line-height: 130%;
@@ -429,7 +431,7 @@ $blue: $BLUE;
 
       &__text {
         &-main {
-          font-family: GillSans;
+          font-family: $fontDefault;
           @include adaptive-font(4, 1.9);
           line-height: 130%;
           text-transform: uppercase;
@@ -452,7 +454,7 @@ $blue: $BLUE;
           }
 
           :deep(span) {
-            font-family: 'GillSans Bold';
+            font-family: $fontDefaultBold;
           }
 
           :deep(p.description) {
@@ -470,7 +472,7 @@ $blue: $BLUE;
         background-color: $blue;
         color: $white;
         column-gap: 0.6rem;
-        font-family: GillSans;
+        font-family: $fontDefault;
         @include adaptive-font(9, 3.6);
         line-height: 100%;
 
@@ -479,7 +481,7 @@ $blue: $BLUE;
         }
 
         :deep(span.small) {
-          font-family: 'GillSans Bold';
+          font-family: $fontDefaultBold;
           @include adaptive-font(4, 2.5);
           line-height: 130%;
         }
@@ -489,12 +491,12 @@ $blue: $BLUE;
         display: flex;
         flex-direction: column;
         margin-top: 5.5rem;
-        font-family: GillSans;
+        font-family: $fontDefault;
         @include adaptive-font(3, 1.9);
         line-height: 130%;
 
         :deep(span) {
-          font-family: 'GillSans Bold';
+          font-family: $fontDefaultBold;
           @include adaptive-font(4, 2.5);
           text-transform: uppercase;
         }

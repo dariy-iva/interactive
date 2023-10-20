@@ -31,6 +31,8 @@ defineProps({
 <style scoped lang="scss">
 $white: $WHITE;
 $blue: $BLUE;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
 
 .card-image {
   position: relative;
@@ -84,7 +86,7 @@ $blue: $BLUE;
     padding: 2.2rem 0;
     background-color: $blue;
     color: $white;
-    font-family: GillSans;
+    font-family: $fontDefault;
     font-size: 3.2rem;
     line-height: 110%;
     text-align: center;
@@ -92,7 +94,7 @@ $blue: $BLUE;
     @include adaptive-font(3.2, 2);
 
     &:deep(span) {
-      font-family: 'GillSans Bold';
+      font-family: $fontDefaultBold;
     }
   }
 }

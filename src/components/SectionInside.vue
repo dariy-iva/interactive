@@ -56,6 +56,10 @@ defineEmits(['toggleStep'])
 <style lang="scss" scoped>
 $white: $WHITE;
 $blue: $BLUE;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
+$fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
+$fontDefaultLight: $FONT_DEFAULT_LIGHT;
 
 @keyframes translateCard {
   from {
@@ -104,13 +108,13 @@ $blue: $BLUE;
 
 .title {
   color: $white;
-  font-family: 'GillSans Light';
+  font-family: $fontDefaultLight;
   @include adaptive-font(8, 5);
   line-height: 100%;
   text-transform: uppercase;
 
   span {
-    font-family: 'GillSans ExtraBold';
+    font-family: $fontDefaultExtraBold;
   }
 }
 
@@ -180,7 +184,7 @@ $blue: $BLUE;
 
     &__title {
       color: $white;
-      font-family: 'GillSans Bold';
+      font-family: $fontDefaultBold;
       @include adaptive-font(3, 1.9);
       line-height: 100%;
       text-transform: uppercase;
@@ -190,7 +194,7 @@ $blue: $BLUE;
       //height: 100%;
       margin-top: 3rem;
       color: $white;
-      font-family: GillSans;
+      font-family: $fontDefault;
       @include adaptive-font(3, 1.9);
       line-height: 100%;
       opacity: 0;
@@ -222,7 +226,7 @@ $blue: $BLUE;
 
     &-paragraph {
       color: $white;
-      font-family: GillSans;
+      font-family: $fontDefault;
       @include adaptive-font(3, 1.9);
       line-height: 110%;
 
@@ -235,7 +239,7 @@ $blue: $BLUE;
       }
 
       span {
-        font-family: 'GillSans Bold';
+        font-family: $fontDefaultBold;
       }
 
       &-list {

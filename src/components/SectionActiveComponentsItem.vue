@@ -182,6 +182,9 @@ $white: $WHITE;
 $blue: $BLUE;
 $black: $BLACK;
 $gray: $GRAY;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultSemiBold: $FONT_DEFAULT_SEMI_BOLD;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
 
 @keyframes translateCard {
   from {
@@ -210,7 +213,7 @@ $gray: $GRAY;
     background-color: $blue;
     color: $white;
     cursor: pointer;
-    font-family: GillSans;
+    font-family: $fontDefault;
     @include adaptive-font(5.2, 3.25);
     line-height: 100%;
     text-transform: uppercase;
@@ -334,7 +337,7 @@ $gray: $GRAY;
       justify-content: center;
       border-radius: 3rem;
       color: $white;
-      font-family: GillSans;
+      font-family: $fontDefault;
       @include adaptive-font(5.2, 3.3);
       line-height: 100%;
       text-transform: uppercase;
@@ -462,7 +465,7 @@ $gray: $GRAY;
         background-color: $blue;
         color: $white;
         content: 'I';
-        font-family: GillSans;
+        font-family: $fontDefault;
         @include adaptive-font(7.2, 4.5);
         line-height: 100%;
         text-transform: uppercase;
@@ -487,7 +490,7 @@ $gray: $GRAY;
         justify-content: center;
         background-color: $blue;
         color: $white;
-        font-family: GillSans;
+        font-family: $fontDefault;
         @include adaptive-font(3, 1.9);
         line-height: 100%;
         text-align: center;
@@ -550,7 +553,7 @@ $gray: $GRAY;
 
       &__title {
         color: $blue;
-        font-family: 'GillSans SemiBold';
+        font-family: $fontDefaultSemiBold;
         @include adaptive-font(6, 3.7);
         line-height: 100%;
         text-transform: uppercase;
@@ -578,19 +581,19 @@ $gray: $GRAY;
 
       &__text {
         &-main {
-          font-family: 'GillSans Bold';
+          font-family: $fontDefaultBold;
           @include adaptive-font(4, 2.5);
           line-height: 130%;
           text-transform: uppercase;
 
           &:deep(span) {
-            font-family: GillSans;
+            font-family: $fontDefault;
           }
         }
       }
 
       &__addition {
-        font-family: GillSans;
+        font-family: $fontDefault;
         @include adaptive-font(3, 1.9);
         line-height: 130%;
         text-transform: uppercase;
@@ -600,12 +603,12 @@ $gray: $GRAY;
         display: flex;
         flex-direction: column;
         margin-top: 4.6rem;
-        font-family: GillSans;
+        font-family: $fontDefault;
         @include adaptive-font(3, 1.9);
         line-height: 130%;
 
         span {
-          font-family: 'GillSans Bold';
+          font-family: $fontDefaultBold;
           @include adaptive-font(4, 2.5);
           text-transform: uppercase;
         }

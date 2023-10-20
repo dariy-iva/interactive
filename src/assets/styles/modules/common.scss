@@ -27,7 +27,6 @@ ul {
 
 html {
   min-height: 100vh;
-  //min-width: 900px;
   box-sizing: border-box;
   font-family: $FONT_DEFAULT;
   font-size: 10px;
@@ -61,26 +60,9 @@ html {
   border-radius: 20px;
 }
 
-// @media screen and (max-width: 359px) {
-//   html {
-//     font-size: 9px;
-//   }
-// }
-
-// @media screen and (min-width: 360px) and (max-width: 767px) {
-//   html {
-//     font-size: calc(10px + 10 * (100vw - 360px) / 407);
-//   }
-// }
-
-// @media screen and (min-width: 768px) and (max-width: 1023px) {
-//   html {
-//     font-size: calc(8px + 2.7 * (100vw - 768px) / 255);
-//   }
-// }
 @media screen and (max-width: 1023px) {
   html {
-    font-size: 9px;
+    font-size: 10px;
   }
 }
 

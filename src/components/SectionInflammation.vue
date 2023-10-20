@@ -67,10 +67,13 @@ defineEmits(['toggleStep'])
 <style lang="scss" scoped>
 $white: $WHITE;
 $blue: $BLUE;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
+$fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
 
 .title {
   color: $white;
-  font-family: 'GillSans ExtraBold';
+  font-family: $fontDefaultExtraBold;
   @include adaptive-font(7, 4);
   line-height: 100%;
   text-transform: uppercase;
@@ -133,7 +136,7 @@ $blue: $BLUE;
       border-radius: 2rem;
       background-color: $white;
       color: $blue;
-      font-family: GillSans;
+      font-family: $fontDefault;
       @include adaptive-font(3, 1.9);
       text-align: center;
       text-transform: uppercase;
@@ -166,7 +169,7 @@ $blue: $BLUE;
       }
 
       &__title {
-        font-family: 'GillSans Bold';
+        font-family: $fontDefaultBold;
       }
     }
   }
@@ -196,7 +199,7 @@ $blue: $BLUE;
         border-radius: 50%;
         background-color: $white;
         color: $blue;
-        font-family: GillSans;
+        font-family: $fontDefault;
         @include adaptive-font(8, 3);
         line-height: 100%;
 
@@ -219,7 +222,7 @@ $blue: $BLUE;
         display: flex;
         color: $white;
         column-gap: 3rem;
-        font-family: GillSans;
+        font-family: $fontDefault;
         @include adaptive-font(3, 1.9);
         line-height: 130%;
         text-transform: uppercase;

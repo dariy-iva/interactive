@@ -30,6 +30,8 @@
 <style lang="scss" scoped>
 $white: $WHITE;
 $blue: $BLUE;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
 
 .protection {
   &-section {
@@ -107,13 +109,13 @@ $blue: $BLUE;
   }
 
   &__text {
-    font-family: GillSans;
+    font-family: $fontDefault;
     @include adaptive-font(3, 1.9);
     line-height: 130%;
     text-transform: uppercase;
 
     span {
-      font-family: 'GillSans ExtraBold';
+      font-family: $fontDefaultExtraBold;
     }
   }
 }

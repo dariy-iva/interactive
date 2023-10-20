@@ -51,6 +51,8 @@ $white: $WHITE;
 $blue: $BLUE;
 $black: $BLACK;
 $gray: $GRAY;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
 
 @keyframes translateCard {
   from {
@@ -215,7 +217,7 @@ $gray: $GRAY;
       z-index: 2;
       display: inline-block;
       padding-top: 1rem;
-      font-family: 'GillSans Bold';
+      font-family: $fontDefaultBold;
       line-height: 130%;
       letter-spacing: 0.21rem;
       min-width: max-content;
@@ -250,7 +252,7 @@ $gray: $GRAY;
     &__description {
       display: inline-block;
       margin-top: 2rem;
-      font-family: GillSans;
+      font-family: $fontDefault;
       @include adaptive-font(3, 1.9);
       line-height: 130%;
 
@@ -264,12 +266,12 @@ $gray: $GRAY;
     }
 
     &__content {
-      font-family: 'GillSans Bold';
+      font-family: $fontDefaultBold;
       @include adaptive-font(4, 2.5);
       line-height: 130%;
 
       span {
-        font-family: GillSans;
+        font-family: $fontDefault;
       }
     }
   }
@@ -304,7 +306,7 @@ $gray: $GRAY;
       display: flex;
       align-items: center;
       column-gap: 2rem;
-      font-family: GillSans;
+      font-family: $fontDefault;
       @include adaptive-font(3, 1.9);
       line-height: 130%;
     }
@@ -313,7 +315,7 @@ $gray: $GRAY;
   &-addition {
     position: absolute;
     color: $gray;
-    font-family: GillSans;
+    font-family: $fontDefault;
     @include adaptive-font(2, 1.3);
     line-height: 130%;
     text-transform: none;

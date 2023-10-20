@@ -15,6 +15,8 @@ $white: $WHITE;
 $blue: $BLUE;
 $black: $BLACK;
 $gray: $GRAY;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
 
 .finish {
   &-section {
@@ -25,7 +27,7 @@ $gray: $GRAY;
     align-items: start;
     gap: 5rem;
     color: $white;
-    font-family: GillSans;
+    font-family: $fontDefault;
     text-transform: uppercase;
 
     @media (min-width: 1440px) {
@@ -101,9 +103,8 @@ $gray: $GRAY;
     }
 
     span {
-      font-family: 'GillSans Bold';
+      font-family: $fontDefaultBold;
       @include adaptive-font(6.4, 4);
-      letter-spacing: 0.128rem;
       line-height: 120%;
       letter-spacing: 0.41rem;
     }

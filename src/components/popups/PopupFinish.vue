@@ -42,6 +42,7 @@ watch(() => props.isOpen, (value) => {
 <style scoped lang="scss">
 $blue: $BLUE;
 $white: $WHITE;
+$fontDefault: $FONT_DEFAULT;
 
 .popup-overlay {
   position: fixed;
@@ -149,7 +150,7 @@ $white: $WHITE;
 
   &__text {
     color: $blue;
-    font-family: GillSans;
+    font-family: $fontDefault;
     font-weight: 700;
     line-height: 100%;
     transition: 0.3s;

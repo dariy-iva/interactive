@@ -1,17 +1,3 @@
-/* Толщины шрифтов */
-$FW_THIN: 100;
-$FW_EXTRA_LIGHT: 200;
-$FW_LIGHT: 300;
-$FW_NORMAL: 400;
-$FW_MEDIUM: 500;
-$FW_SEMI_BOLD: 600;
-$FW_BOLD: 700;
-$FW_EXTRA_BOLD: 800;
-$FW_HEAVY: 900;
-
-/* Стиль шрифта */
-$FW_ITALIC: italic;
-
 /* Настройки колоночной системы на десктопах */
 $COL_COUNT_DESKTOP: 12;
 $COL_GAP_DESKTOP: 2rem;
@@ -52,3 +38,7 @@ $zLayerTop: 100; /* Открытое меню (топовый/верхний с�
 
 /* Семейства шрифтов */
 $FONT_DEFAULT: 'Montserrat', arial, sans-serif;
+$FONT_DEFAULT_LIGHT: 'Montserrat Light', arial, sans-serif;
+$FONT_DEFAULT_SEMI_BOLD: 'Montserrat SemiBold', arial, sans-serif;
+$FONT_DEFAULT_BOLD: 'Montserrat Bold', arial, sans-serif;
+$FONT_DEFAULT_EXTRA_BOLD: 'Montserrat ExtraBold', arial, sans-serif;

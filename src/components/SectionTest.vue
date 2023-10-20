@@ -273,6 +273,8 @@ $white: $WHITE;
 $blue: $BLUE;
 $black: $BLACK;
 $gray: $GRAY;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
 
 .test {
   &-section {
@@ -336,7 +338,7 @@ $gray: $GRAY;
 
   &__title {
     color: $blue;
-    font-family: 'GillSans Bold';
+    font-family: $fontDefaultBold;
     @include adaptive-font(7, 4.4);
     line-height: 100%;
 
@@ -346,7 +348,7 @@ $gray: $GRAY;
   }
 
   &__page {
-    font-family: GillSans;
+    font-family: $fontDefault;
     @include adaptive-font(4, 2.5);
     line-height: 100%;
     letter-spacing: 0.59rem;
@@ -381,7 +383,7 @@ $gray: $GRAY;
 
   &-question {
     &__text {
-      font-family: 'GillSans Bold';
+      font-family: $fontDefaultBold;
       @include adaptive-font(2.1, 1.3);
       line-height: 130%;
     }
@@ -408,7 +410,7 @@ $gray: $GRAY;
     width: 100%;
     align-items: center;
     gap: 0.5rem;
-    font-family: GillSans;
+    font-family: $fontDefault;
 
     &:not(&--full),
     &-radio {

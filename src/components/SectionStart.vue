@@ -1,13 +1,13 @@
 <template>
-  <section class="start-section">
+  <section class="start">
     <img src="@/assets/icons/logo.svg" alt="Логотип LA ROCHE POSAY" class="start__logo" />
-    <div class="start-container">
-      <card-image class="start-card" is-product />
+    <div class="start__container">
+      <card-image class="start__card" is-product />
 
-      <div class="start-content">
+      <div class="start__content">
         <span class="start__title"> академия <br />красоты </span>
-        <p class="start-text"><span>представляет</span><span>игру</span></p>
-        <button-default text="Начать" class="start-button" @click="$emit('next')" />
+        <p class="start__text"><span>представляет</span><span>игру</span></p>
+        <button-default text="Начать" class="start__button" @click="$emit('next')" />
       </div>
     </div>
   </section>
@@ -24,87 +24,82 @@ defineEmits(['next'])
 $white: $WHITE;
 $violet: $VIOLET;
 $blue: $BLUE;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultLight: $FONT_DEFAULT_LIGHT;
+$fontDefaultSemiBold: $FONT_DEFAULT_SEMI_BOLD;
 
 .start {
-  &-section {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    height: max-content;
-    padding: 10rem 0;
-    background-position: top left;
-    background-size: cover;
-    background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
 
-    @include tablet-desktop {
-      background-image: url('@/assets/images/start/background.jpg');
-    }
-    @include mobile {
-      background-image: url('@/assets/images/background-purple.jpg');
-    }
+  @include desktop {
+    margin: auto 11.8rem auto auto;
   }
 
-  &-container {
+  @include tablet {
+    padding-top: 10rem;
+    margin: auto 0 auto auto;
+  }
+
+  @include mobile {
+    margin: auto;
+  }
+
+  @media (min-width: 1440px) {
+    margin: auto 11.8rem auto 20rem;
+  }
+
+  &__container {
     display: grid;
     width: 100%;
-    max-width: 72.86%;
-    grid-template-columns: max-content max-content;
     margin: auto;
     justify-content: space-between;
-    grid-gap: 6rem;
+    gap: 6rem;
 
     @include desktop {
-      padding-left: 3.5rem;
+      grid-template-columns: max-content max-content;
     }
 
-    @media (min-width: 1650px) {
-      flex-grow: 1;
-    }
-
-    @media (max-width: 950px) {
-      min-width: 100%;
-      max-width: 100%;
-      padding: 0 1.5rem;
+    @include mobile-tablet {
+      grid-template-columns: 1fr;
     }
 
     @include mobile {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      justify-items: center;
     }
   }
 
-  &-card {
+  &__card {
     @media (min-width: 1650px) {
-      min-height: 100%;
+      min-height: 81vh;
     }
 
     @include mobile {
       width: 100%;
       max-width: 40rem;
+      min-height: 37rem;
     }
 
     &:deep(.card-image__product) {
       width: 44.12%;
-      height: 96.1%;
+      height: 92.1%;
     }
   }
 
   &__logo {
     position: absolute;
     top: 0;
-
     background-size: contain;
 
+    @include tablet-desktop {
+      right: 12.5vw;
+    }
+
     @media (min-width: 1440px) {
-      right: 24rem;
       width: 53.2rem;
     }
 
     @media (max-width: 1439px) {
-      right: 24rem;
       width: 43rem;
     }
 
@@ -114,18 +109,19 @@ $blue: $BLUE;
     }
   }
 
-  &-content {
+  &__content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: calc(280px * 100vh / 1200px);
 
-    @media (min-width: 1650px) {
-      padding-left: 28rem;
-    }
     @media (max-width: 1650px) {
       justify-content: end;
     }
+
+    @include desktop {
+      padding-top: calc(280px * 100vh / 1200px);
+    }
+
     @include mobile {
       padding-top: 0;
     }
@@ -134,14 +130,14 @@ $blue: $BLUE;
   &__title {
     flex-grow: 0;
     color: $white;
-    font-family: 'GillSans Light';
-    line-height: 90%;
+    font-family: $fontDefaultLight;
+    line-height: 105%;
     text-align: center;
     text-transform: uppercase;
-    @include adaptive-font(9.45, 5);
+    @include adaptive-font(8.5, 3);
   }
 
-  &-text {
+  &__text {
     display: flex;
     flex-direction: column;
     flex-grow: 0;
@@ -149,24 +145,43 @@ $blue: $BLUE;
     padding-bottom: 4rem;
     margin-top: 3rem;
     color: $violet;
-    font-family: GillSans;
-    @include adaptive-font(7, 4.3);
-    line-height: 100%;
+    font-family: $fontDefaultSemiBold;
+    @include adaptive-font(6.5, 2.5);
+    line-height: 109%;
     text-align: center;
     text-transform: uppercase;
+    letter-spacing: -0.2rem;
 
     span {
       display: inline-block;
-      padding: 1.4rem 3rem;
       background-color: $white;
 
+      &:first-child {
+        z-index: 1;
+      }
+
       &:nth-child(2) {
-        margin-top: -2rem;
+        @include desktop {
+          margin-top: -2rem;
+        }
+
+        @include tablet {
+          margin-top: -1rem;
+        }
+      }
+
+      @include tablet-desktop {
+        padding: 1.4rem 3rem;
+      }
+
+
+      @include mobile {
+        padding: 1rem;
       }
     }
   }
 
-  &-button {
+  &__button {
     margin-top: auto;
   }
 }

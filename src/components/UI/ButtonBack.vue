@@ -3,7 +3,7 @@
     <span class="back-arrow">
       <img src="@/assets/icons/arrow.svg" alt="arrow" />
     </span>
-    <p class="text" v-html="text"></p>
+    <p class="text" v-html="text"/>
   </button>
 </template>
 
@@ -19,6 +19,8 @@ defineProps({
 <style scoped lang="scss">
 $white: $WHITE;
 $blue: $BLUE;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
 
 .back {
   position: absolute;
@@ -119,7 +121,7 @@ $blue: $BLUE;
   .text {
     padding-top: 0.5rem;
     color: $white;
-    font-family: GillSans;
+    font-family: $fontDefault;
     @include adaptive-font(4, 2.5);
     line-height: 100%;
     text-transform: uppercase;
@@ -130,7 +132,7 @@ $blue: $BLUE;
     }
 
     &:deep(span) {
-      font-family: 'GillSans Bold';
+      font-family: $fontDefaultBold;
     }
   }
 }

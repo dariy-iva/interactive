@@ -112,6 +112,8 @@ $white: $WHITE;
 $blue: $BLUE;
 $black: $BLACK;
 $gray: $GRAY;
+$fontDefault: $FONT_DEFAULT;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
 
 .button {
   &-navigation {
@@ -120,7 +122,7 @@ $gray: $GRAY;
     background-color: $blue;
     color: $white;
     cursor: pointer;
-    font-family: GillSans;
+    font-family: $fontDefault;
     @include adaptive-font(5.2, 3.25);
     line-height: 100%;
     text-transform: uppercase;
@@ -238,7 +240,7 @@ $gray: $GRAY;
 
     &__title {
       color: $white;
-      font-family: 'GillSans Bold';
+      font-family: $fontDefaultBold;
       @include adaptive-font(3, 1.4);
       line-height: 100%;
 
@@ -325,7 +327,7 @@ $gray: $GRAY;
 
       &__title {
         color: $blue;
-        font-family: 'GillSans Bold';
+        font-family: $fontDefaultBold;
         @include adaptive-font(3, 1.4);
         line-height: 100%;
         text-transform: uppercase;
@@ -336,7 +338,7 @@ $gray: $GRAY;
         flex-direction: column;
         margin-top: 2rem;
         color: $black;
-        font-family: GillSans;
+        font-family: $fontDefault;
         @include adaptive-font(2, 1.25);
         line-height: 100%;
         row-gap: 1rem;
@@ -389,7 +391,7 @@ $gray: $GRAY;
         border-radius: 50%;
         background-color: $white;
         color: $blue;
-        font-family: GillSans;
+        font-family: $fontDefault;
         @include adaptive-font(5, 3);
         line-height: 100%;
 
@@ -457,7 +459,7 @@ $gray: $GRAY;
       border-radius: 3rem;
       background: none;
       color: $white;
-      font-family: GillSans;
+      font-family: $fontDefault;
       @include adaptive-font(5.2, 3.2);
       line-height: 100%;
       text-transform: uppercase;

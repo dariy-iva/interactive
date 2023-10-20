@@ -143,6 +143,9 @@ watch(() => props.stepNum, (newValue, oldValue) => {
 <style scoped lang="scss">
 $gray: $GRAY;
 $white: $WHITE;
+$fontDefaultSemiBold: $FONT_DEFAULT_SEMI_BOLD;
+$fontDefaultBold: $FONT_DEFAULT_BOLD;
+$fontDefaultLight: $FONT_DEFAULT_LIGHT;
 
 @keyframes translateTitle {
   from {
@@ -345,7 +348,7 @@ $white: $WHITE;
 
   &__text {
     color: $gray;
-    font-family: 'GillSans Bold';
+    font-family: $fontDefaultBold;
     @include adaptive-font(2, 1.25);
     line-height: 100%;
     opacity: 0.7;
@@ -369,7 +372,7 @@ $white: $WHITE;
     width: max-content;
     margin-left: auto;
     color: $white;
-    font-family: 'GillSans SemiBold';
+    font-family: $fontDefaultSemiBold;
     @include adaptive-font(4, 2.5);
     line-height: 100%;
     text-align: right;
@@ -398,7 +401,7 @@ $white: $WHITE;
     }
 
     &:deep(.small) {
-      font-family: 'GillSans Light';
+      font-family: $fontDefaultLight;
     }
 
     &_large {
