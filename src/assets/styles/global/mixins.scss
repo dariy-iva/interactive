@@ -55,7 +55,7 @@ $max-width: 192;
   $add-mob-size: $add-size + $add-size * 0.7;
 
   @media (min-width: 1921px) {
-    font-size: #{$pc-size + rem}
+    font-size: #{$pc-size + rem};
   }
 
   @media (min-width: 1023px) and (max-width: 1920px) {
