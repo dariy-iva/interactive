@@ -31,7 +31,6 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
   align-items: center;
   width: 100%;
   min-width: 700px;
-  max-width: 1920px;
   min-height: 100vh;
   position: relative;
   padding-top: 22.4rem;

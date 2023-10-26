@@ -29,7 +29,7 @@ $fontDefault: $FONT_DEFAULT;
   line-height: 100%;
   text-transform: uppercase;
   transition: 0.3s;
-  @include adaptive-font(4.6, 3);
+  @include adaptive-font(4.6, 2);
   letter-spacing: -0.1rem;
 
   &:hover {
