@@ -1,5 +1,5 @@
 <template>
-  <div class="card-image" :class="{ 'card-image_with-product': isProduct }">
+  <article class="card-image" :class="{ 'card-image_with-product': isProduct }">
     <div class="card-image__wrapper">
       <img
         v-if="isProduct"
@@ -12,7 +12,7 @@
       <div v-if="text" class="card-image__text" v-html="text" />
       <slot />
     </div>
-  </div>
+  </article>
 </template>
 
 <script setup>

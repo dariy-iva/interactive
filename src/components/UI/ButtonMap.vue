@@ -22,12 +22,19 @@ defineEmits(['click'])
 }
 
 .map-container {
-  position: absolute;
   z-index: 5;
   top: 0;
   right: 0;
   display: flex;
   overflow: hidden;
+
+  @media (min-width: 1921px) {
+    position: fixed;
+  }
+
+  @media (max-width: 1920px) {
+    position: absolute;
+  }
 }
 
 .button-map {

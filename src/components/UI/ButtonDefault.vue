@@ -1,5 +1,5 @@
 <template>
-  <button type="button" class="default-button" @click="$emit('click')" v-text="text"/>
+  <button type="button" class="default-button" @click="$emit('click')" v-text="text" />
 </template>
 
 <script setup>
@@ -29,7 +29,7 @@ $fontDefault: $FONT_DEFAULT;
   line-height: 100%;
   text-transform: uppercase;
   transition: 0.3s;
-  @include adaptive-font(5, 3.1);
+  @include adaptive-font(4.6, 3);
   letter-spacing: -0.1rem;
 
   &:hover {
