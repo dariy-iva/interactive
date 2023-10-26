@@ -229,7 +229,7 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
   width: 100%;
   aspect-ratio: 10 / 4.15;
   flex-direction: column;
-  background: url('@/assets/images/map/way.png') center / cover no-repeat;
+  background: url('@/assets/images/map/way.webp') center / cover no-repeat;
 
   @media (min-width: 1920px) {
     height: 79.6rem;
@@ -394,7 +394,7 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
           position: absolute;
           min-width: 3rem;
           aspect-ratio: 10 / 13.25;
-          background-image: url('@/assets/images/map/crystal.png');
+          background-image: url('@/assets/images/map/crystal.webp');
           background-repeat: no-repeat;
           background-size: cover;
           content: '';

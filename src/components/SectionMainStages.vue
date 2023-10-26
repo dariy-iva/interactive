@@ -10,37 +10,24 @@
       :class="{ 'main-cards__card_closed': cardNum < 2 }"
       @click="$emit('toggleStep', 9)"
     >
-      <template v-if="cardNum < 2">
-        <span class="main-cards__number">II</span>
-        <img src="@/assets/icons/logo.svg" alt="Логотип LA ROCHE POSAY" class="main-cards__logo" />
-      </template>
-
-      <template v-else>
-        <div class="main-cards__circle"><span>II</span></div>
-      </template>
+      <span v-if="cardNum < 2" class="main-cards__number">II</span>
+      <div v-else class="main-cards__circle"><span>II</span></div>
     </card-image>
 
     <card-image
-      :text="cardNum < 3 ? '' : 'ИННОВАЦИЯ<br /><span>NIACINAMIDE 10</span>'"
+      :text="cardNum < 3 ? '' : 'инновация<br /><span>NIACINAMIDE 10</span>'"
       class="main-cards__card"
       :class="{ 'main-cards__card_closed': cardNum < 3 }"
       :is-product="cardNum === 3"
       @click="$emit('toggleStep', 12)"
     >
-      <template v-if="cardNum < 3">
-        <span class="main-cards__number">III</span>
-        <img src="@/assets/icons/logo.svg" alt="Логотип LA ROCHE POSAY" class="main-cards__logo" />
-      </template>
-
-      <template v-else>
-        <div class="main-cards__circle"><span>III</span></div>
-      </template>
+      <span v-if="cardNum < 3" class="main-cards__number">III</span>
+      <div v-else class="main-cards__circle"><span>III</span></div>
     </card-image>
   </section>
 </template>
 
 <script setup>
-import ButtonMap from '@/components/UI/ButtonMap.vue'
 import CardImage from '@/components/UI/CardImage.vue'
 
 defineProps({
@@ -66,12 +53,13 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
     min-width: 100%;
     min-height: 100%;
     grid-template-columns: repeat(3, 1fr);
+    place-items: center;
 
     @media (min-width: 1550px) {
       gap: 10rem;
     }
 
-    @media (max-width: 1549px) {
+    @media (min-width: 768px) and (max-width: 1549px) {
       gap: 5rem;
     }
 
@@ -86,13 +74,11 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
       max-width: 50.7rem;
       max-height: 100rem;
       border-radius: 7rem;
-      aspect-ratio: auto;
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
 
       &_closed {
-        background-image: url('@/assets/images/main-stages/card-background.jpg');
+        background:
+          url('@/assets/icons/logo.svg') bottom 8.9rem center / 57.4% auto no-repeat,
+          url('@/assets/images/main-stages/stage_closed.webp') center / cover no-repeat;
         pointer-events: none;
 
         &:deep(.card-image__wrapper) {
@@ -109,11 +95,11 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
         cursor: pointer;
 
         &:first-child {
-          background-image: url('@/assets/images/main-stages/background-card-1.jpg');
+          background: url('@/assets/images/main-stages/stage_1.webp') center / cover no-repeat;
         }
 
         &:nth-child(2) {
-          background-image: url('@/assets/images/main-stages/background-card-2.jpg');
+          background: url('@/assets/images/main-stages/stage_2.webp') center / cover no-repeat;
         }
 
         &:last-child:deep(.card-image__product) {
@@ -133,16 +119,6 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
       text-transform: uppercase;
     }
 
-    &__logo {
-      position: absolute;
-      bottom: 8.9rem;
-      width: 100%;
-      max-width: 29.1rem;
-      aspect-ratio: 10 / 2.58;
-      object-fit: cover;
-      margin: 0 1.5rem;
-    }
-
     &__circle {
       position: absolute;
       display: flex;
@@ -159,7 +135,7 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
         height: 14rem;
       }
 
-      @media (max-width: 1439px) {
+      @media (min-width: 1024px) and (max-width: 1439px) {
         top: 1.2rem;
         left: 1.2rem;
         width: 12rem;
@@ -180,10 +156,7 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
         letter-spacing: 0.144rem;
         line-height: 90%;
         text-transform: uppercase;
-
-        @include mobile-tablet {
-          font-size: 4rem;
-        }
+        @include adaptive-font(7.2, 4);
       }
     }
   }

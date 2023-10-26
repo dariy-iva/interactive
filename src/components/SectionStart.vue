@@ -5,7 +5,7 @@
       <card-image class="start__card" is-product />
 
       <div class="start__content">
-        <span class="start__title"> академия <br />красоты </span>
+        <span class="start__title">академия<br />красоты</span>
         <p class="start__text"><span>представляет</span><span>игру</span></p>
         <button-default text="Начать" class="start__button" @click="$emit('next')" />
       </div>
@@ -173,7 +173,6 @@ $fontDefaultSemiBold: $FONT_DEFAULT_SEMI_BOLD;
       @include tablet-desktop {
         padding: 1.4rem 3rem;
       }
-
 
       @include mobile {
         padding: 1rem;
