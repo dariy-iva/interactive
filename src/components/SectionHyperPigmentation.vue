@@ -75,6 +75,7 @@ $fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   flex-grow: 1;
   color: $white;
   text-transform: uppercase;
@@ -358,7 +359,7 @@ $fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
 
   @include mobile {
     position: initial;
-     margin-top: 3rem;
+    margin-top: 3rem;
   }
 }
 </style>

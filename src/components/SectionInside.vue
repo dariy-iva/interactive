@@ -1,40 +1,47 @@
 <template>
-  <section class="inside-section">
-    <h2 class="title">Что <span>внутри?</span></h2>
-    <div class="inside-content">
-      <div class="inside-cards">
-        <div class="inside-card inside-card-1">
-          <span class="inside-card__title">МЕЛАНОЦИТ</span>
-          <p class="inside-card__text">пигментная клетка <br />кожи функция: <br />защита</p>
-        </div>
-        <div class="inside-card inside-card-2">
-          <span class="inside-card__title">МЕЛАНОСОМА</span>
-          <p class="inside-card__text">гранула <br />с меланином <br />мигрирует <br />в кератиноцит</p>
-        </div>
-        <div class="inside-card inside-card-3">
-          <span class="inside-card__title">ОКРАШЕННЫЙ <br />КЕРАТИНОЦИТ</span>
-          <p class="inside-card__text">защищен <br />от агрессии <br />продвигается <br />к поверхности кожи</p>
-        </div>
-      </div>
-      <div class="inside-info">
-        <div class="inside-info-paragraph">
-          <p>
-            КОЛИЧЕСТВО<br />
-            МЕЛАНОЦИТОВ<br />
-            У ВСЕХ ЛЮДЕЙ<br />
-            <span>ОДИНАКОВОЕ</span>
+  <section class="inside">
+    <h1 class="inside__title">Что <strong>внутри?</strong></h1>
+    <div class="inside__content">
+      <div class="inside__cards">
+        <card-image class="inside__card inside__card_type_melanocit">
+          <span class="inside__card-title">меланоцит</span>
+          <p class="inside__card-text">
+            <span>пигментная клетка <br />кожи функция: <br />защита</span>
           </p>
+        </card-image>
+
+        <card-image class="inside__card inside__card_type_melanosoma">
+          <span class="inside__card-title">меланосома</span>
+          <p class="inside__card-text">
+            <span>гранула <br />с меланином <br />мигрирует <br />в кератиноцит</span>
+          </p>
+        </card-image>
+
+        <card-image class="inside__card inside__card_type_keratinocit">
+          <span class="inside__card-title">окрашенный <br />кератиноцит</span>
+          <p class="inside__card-text">
+            <span>защищен <br />от агрессии <br />продвигается <br />к поверхности кожи</span>
+          </p>
+        </card-image>
+      </div>
+
+      <div class="inside__info">
+        <div class="inside__paragraph inside__paragraph_large">
+          количество<br />
+          меланоцитов<br />
+          у всех людей<br />
+          <span>одинаковое</span>
         </div>
-        <div class="inside-info-paragraph">
-          <span>ПИГМЕНТАЦИЯ <br />ФИЗИОЛОГИЧЕСКАЯ</span>
-          <ul class="inside-info-paragraph-list">
+        <div class="inside__paragraph">
+          <span class="inside__paragraph_large">пигментация <br />физиологическая</span>
+          <ul class="inside__list">
             <li>фототип</li>
             <li>эфелиды</li>
           </ul>
         </div>
-        <div class="inside-info-paragraph">
-          <span>ПАТОЛОГИЧЕСКАЯ</span>
-          <ul class="inside-info-paragraph-list">
+        <div class="inside__paragraph">
+          <span class="inside__paragraph_large">патологическая</span>
+          <ul class="inside__list">
             <li>лентиго</li>
             <li>мелазма</li>
             <li>после воспаления</li>
@@ -49,6 +56,7 @@
 
 <script setup>
 import ButtonDefault from '@/components/UI/ButtonDefault.vue'
+import CardImage from '@/components/UI/CardImage.vue'
 
 defineEmits(['toggleStep'])
 </script>
@@ -56,6 +64,7 @@ defineEmits(['toggleStep'])
 <style lang="scss" scoped>
 $white: $WHITE;
 $blue: $BLUE;
+$violet: $VIOLET;
 $fontDefault: $FONT_DEFAULT;
 $fontDefaultBold: $FONT_DEFAULT_BOLD;
 $fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
@@ -81,134 +90,145 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
   }
 }
 
-.button {
-  &-next {
-    position: absolute;
-    @media (min-width: 1440px) {
-      right: 10rem;
-      bottom: 10rem;
-    }
-
-    @media (max-width: 1439px) {
-      right: 10rem;
-      bottom: 10rem;
-    }
-
-    @include tablet {
-      right: 5rem;
-      bottom: 7rem;
-    }
-
-    @include mobile {
-      position: initial;
-      margin-top: 3rem;
-    }
-  }
-}
-
-.title {
-  color: $white;
-  font-family: $fontDefaultLight;
-  @include adaptive-font(8, 5);
-  line-height: 100%;
-  text-transform: uppercase;
-
-  span {
-    font-family: $fontDefaultExtraBold;
-  }
-}
-
 .inside {
-  &-section {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-    @media (min-width: 1440px) {
-      justify-content: end;
+  &__title {
+    color: $white;
+    font-family: $fontDefaultLight;
+    line-height: 100%;
+    text-transform: uppercase;
+    @include adaptive-font(8, 5);
+
+    & > strong {
+      font-family: $fontDefaultExtraBold;
     }
   }
 
-  &-content {
+  &__content {
     display: flex;
     justify-content: space-between;
     margin-top: 6.7rem;
     gap: 4rem;
 
-    @media (max-width: 850px) {
+    @include mobile-tablet {
       flex-direction: column;
     }
   }
 
-  &-cards {
+  &__cards {
     flex-grow: 1;
-    display: flex;
-    max-width: 126.5rem;
+    display: grid;
     justify-content: space-between;
-    align-items: end;
-    gap: 3rem;
+    max-width: 126.5rem;
 
-    @include mobile {
-      flex-wrap: wrap;
+    @media (min-width: 1550px) {
+      gap: 10rem;
+    }
+
+    @media (max-width: 1549px) {
+      gap: 3rem;
+    }
+
+    @include tablet-desktop {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: 470px) and (max-width: 767px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 469px) {
+      grid-template-columns: 1fr;
     }
   }
 
-  &-card {
-    width: 100%;
+  &__card {
     max-width: 35.5rem;
+    height: initial;
+    max-height: initial;
+    min-height: initial;
     aspect-ratio: 10 / 21.1;
-    background-size: cover;
+    padding: 1.2rem;
+    border-radius: 2.5rem;
     animation: translateCard 0.5s 1;
 
-    @media (min-width: 1440px) {
-      padding: 5rem 0 0 5rem;
-      border-radius: 3.1rem;
+    &_type_melanocit {
+      background-image: url('@/assets/images/inside/melanocit.webp');
     }
 
-    @media (max-width: 1439px) {
-      padding: 3rem 0 0 3rem;
+    &_type_keratinocit {
+      background-image: url('@/assets/images/inside/keratinocit.webp');
+    }
+
+    &_type_melanosoma {
+      background-image: url('@/assets/images/inside/melanosoma.webp');
+    }
+
+    &:deep(.card-image__wrapper) {
+      align-items: start;
+      justify-content: start;
+      flex-direction: column;
       border-radius: 2.5rem;
-    }
+      border: 0.3rem solid #ffffff20;
 
-    &-1 {
-      background-image: url('@/assets/images/inside/card-background-1.jpg');
-    }
+      @include desktop {
+        padding: 2.5rem;
+      }
 
-    &-2 {
-      background-image: url('@/assets/images/inside/card-background-2.jpg');
-    }
-
-    &-3 {
-      background-image: url('@/assets/images/inside/card-background-3.jpg');
-    }
-
-    &__title {
-      color: $white;
-      font-family: $fontDefaultBold;
-      @include adaptive-font(3, 1.9);
-      line-height: 100%;
-      text-transform: uppercase;
-    }
-
-    &__text {
-      //height: 100%;
-      margin-top: 3rem;
-      color: $white;
-      font-family: $fontDefault;
-      @include adaptive-font(3, 1.9);
-      line-height: 100%;
-      opacity: 0;
-      transition: all 0.3s ease;
-    }
-
-    &:hover &__text {
-      opacity: 1;
+      @include mobile-tablet {
+        padding: 1.5rem;
+      }
     }
   }
 
-  &-info {
+  &__card-title {
+    color: $white;
+    font-family: $fontDefaultBold;
+    line-height: 100%;
+    text-transform: uppercase;
+    @include adaptive-font(3, 1.9);
+  }
+
+  &__card-text {
+    position: relative;
     display: flex;
-    width: 20.64%;
+    margin-top: 3rem;
+    color: $white;
+    font-family: $fontDefault;
+    line-height: 100%;
+    transition: all 0.3s ease;
+    @include adaptive-font(3, 1.9);
+
+    @include desktop {
+      opacity: 0;
+    }
+
+    & > span {
+      z-index: 1;
+    }
+
+    &::after {
+      position: absolute;
+      top: -5%;
+      left: -5%;
+      content: '';
+      width: 110%;
+      height: 110%;
+      filter: blur(6rem);
+      background: $violet;
+    }
+  }
+
+  &__card:hover &__card-text {
+    opacity: 1;
+  }
+
+  &__info {
+    display: flex;
     flex-direction: column;
     gap: 8rem;
     animation: translateText 0.5s 1;
@@ -220,33 +240,62 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
       gap: 3rem;
     }
 
+    @include desktop {
+      width: 20.64%;
+      padding-bottom: 9rem;
+    }
+
+    @include tablet {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
     @include mobile {
       gap: 2rem;
     }
+  }
 
-    &-paragraph {
-      color: $white;
-      font-family: $fontDefault;
-      @include adaptive-font(3, 1.9);
-      line-height: 110%;
+  &__paragraph {
+    color: $white;
+    font-family: $fontDefault;
+    line-height: 110%;
+    @include adaptive-font(3, 1.4);
 
-      @include mobile {
-        font-size: 1.4rem;
-      }
-
-      p {
-        text-transform: uppercase;
-      }
-
-      span {
-        font-family: $fontDefaultBold;
-      }
-
-      &-list {
-        display: flex;
-        flex-direction: column;
-      }
+    &_large {
+      text-transform: uppercase;
     }
+
+    span {
+      font-family: $fontDefaultBold;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.button-next {
+  @media (min-width: 1440px) {
+    right: 10rem;
+    bottom: 10rem;
+  }
+
+  @media (max-width: 1439px) {
+    right: 10rem;
+    bottom: 10rem;
+  }
+
+  @include desktop {
+    position: absolute;
+    right: 10rem;
+    bottom: 10rem;
+  }
+
+  @include mobile-tablet {
+    position: initial;
+    margin-top: 3rem;
   }
 }
 </style>
