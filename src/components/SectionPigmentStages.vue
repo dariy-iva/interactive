@@ -20,7 +20,10 @@
               class="pigmentation-stage__descriptions-item"
               :class="{ 'pigmentation-stage__descriptions-item_with-num': currentCard.hasNum }"
             >
-              <div v-if="item.iconName" :class="`pigmentation-stage__icon pigmentation-stage__icon_type_${item.iconName}`" />
+              <div
+                v-if="item.iconName"
+                :class="`pigmentation-stage__icon pigmentation-stage__icon_type_${item.iconName}`"
+              />
               <div v-if="item.numText" class="pigmentation-stage__icon-text" v-html="item.numText" />
               <div
                 v-if="item.mainText"
@@ -31,18 +34,12 @@
             </li>
           </ul>
 
-          <div
-            v-if="currentCard.description"
-            class="pigmentation-stage__text"
-            v-html="currentCard.description"
-          />
+          <div v-if="currentCard.description" class="pigmentation-stage__text" v-html="currentCard.description" />
         </div>
       </div>
     </div>
 
-    <popup-lentigo v-if="stepNum === 4" :is-open="popupLentigoIsOpen" @close="togglePopup" />
-    <popup-melasma v-if="stepNum === 5" :is-open="popupMelasmaIsOpen" @close="togglePopup" />
-    <popup-hyperpigmentation v-if="stepNum === 6" :is-open="popupPigmentationIsOpen" @close="togglePopup" />
+    <popup-pigmentation :is-open="popupIsOpen" :paragraphs="currentCard.popupParagraphs" @close="togglePopup" />
   </section>
 </template>
 
@@ -50,9 +47,7 @@
 import { computed, ref } from 'vue'
 import CardImage from '@/components/UI/CardImage.vue'
 import ButtonDefault from '@/components/UI/ButtonDefault.vue'
-import PopupHyperpigmentation from '@/components/popups/PopupHyperpigmentation.vue'
-import PopupLentigo from '@/components/popups/PopupLentigo.vue'
-import PopupMelasma from '@/components/popups/PopupMelasma.vue'
+import PopupPigmentation from '@/components/popups/PopupPigmentation.vue'
 
 const props = defineProps({
   stepNum: {
@@ -61,21 +56,10 @@ const props = defineProps({
   }
 })
 
-const popupPigmentationIsOpen = ref(false)
-const popupLentigoIsOpen = ref(false)
-const popupMelasmaIsOpen = ref(false)
+const popupIsOpen = ref(false)
 
 function togglePopup() {
-  switch (+props.stepNum) {
-    case 4:
-      popupLentigoIsOpen.value = !popupLentigoIsOpen.value
-      break
-    case 5:
-      popupMelasmaIsOpen.value = !popupMelasmaIsOpen.value
-      break
-    case 6:
-      popupPigmentationIsOpen.value = !popupPigmentationIsOpen.value
-  }
+  popupIsOpen.value = !popupIsOpen.value
 }
 
 const cards = ref([
@@ -101,6 +85,15 @@ const cards = ref([
         class: '',
         mainText: 'ЛЮДИ СТАРШЕ 40 ЛЕТ'
       }
+    ],
+    popupParagraphs: [
+      '<strong>СОЛНЕЧНОЕ ЛЕНТИГО</strong> — это плоское, четко очерченное пятно.',
+      'Оно может быть круглой, овальной или неправильной формы, а цвет может варьироваться от тона кожи, загара до\n' +
+        'темно-коричневого или черного. Размер — от нескольких миллиметров до нескольких сантиметров в диаметре. Пятна\n' +
+        'могут слегка шелушиться.',
+      'Наиболее эффективной профилактикой является\n' +
+        '<strong>ограничение солнечного воздействия и использование солнцезащитных средств.</strong>',
+      'В качестве лечения можно использовать <strong>криотерапию, лазер или третиноиновый крем.</strong>'
     ]
   },
   {
@@ -123,6 +116,21 @@ const cards = ref([
         numText: '<span class="small">X</span><span>9</span>',
         mainText: 'риск у женщин<br />с фототипом III и выше'
       }
+    ],
+    popupParagraphs: [
+      '<strong>МЕЛАЗМА ИЛИ ХЛОАЗМА</strong> — это приобретенная светло- или темно-коричневая гиперпигментация,\n' +
+        'возникающая на участках, подвергающихся воздействию солнца, чаще всего на лице.',
+      '<p>ПРИЧИНЫ:</p>\n' +
+        '<ul>\n' +
+        ' <li>солнечный свет (обострение при солнечном воздействии);</li>\n' +
+        ' <li>\n' +
+        '  генетические факторы беременность (именно поэтому мелазму иногда называют «маской беременности»);\n' +
+        ' </li>\n' +
+        ' <li>эстрогены и оральные контрацептивы;</li>\n' +
+        ' <li>дисфункция щитовидной железы;</li>\n' +
+        ' <li>препараты, повышающие фоточувствительность.</li>\n' +
+        '</ul>',
+      'Более подвержены женщины темных фототипов (IV–VI).'
     ]
   },
   {
@@ -148,6 +156,12 @@ const cards = ref([
         class: 'pigmentation-stage__descriptions-text_small',
         mainText: 'появляется<br /><span>в любом возрасте</span>'
       }
+    ],
+    popupParagraphs: [
+      'Она особенно часто встречается у людей с высоким фототипом и вызвана повреждением дермо-эпидермального соединения.',
+      'Сообщается, что ПВГ является вторым по значимости дерматологическим диагнозом среди представителей\n' +
+        'афроамериканского населения — до 20% диагнозов (Alexis, Sergay, & Taylor, 2007).',
+      'Распространенность ПВГ также высока среди латиноамериканского населения и составляет от 6 до 7,5% (Sanchez, 2003).'
     ]
   }
 ])
@@ -249,21 +263,21 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
   }
 
   &__card-content {
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 
-      @include desktop {
-        width: 59.8%;
-        margin-left: auto;
-        gap: 5rem;
-      }
+    @include desktop {
+      width: 59.8%;
+      margin-left: auto;
+      gap: 5rem;
+    }
 
-      @include tablet {
-        width: 43.8%;
-        margin-left: auto;
-        gap: 3rem;
-      }
+    @include tablet {
+      width: 43.8%;
+      margin-left: auto;
+      gap: 3rem;
+    }
 
     @include mobile {
       gap: 2rem;
@@ -386,39 +400,39 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
   }
 
   &__descriptions-text {
-      font-family: $fontDefault;
+    font-family: $fontDefault;
+    line-height: 120%;
+    text-transform: uppercase;
+
+    @media (min-width: 1720px) {
+      font-size: 3.6rem;
+    }
+
+    @media (min-width: 1024px) and (max-width: 1719px) {
+      font-size: 2.2rem;
+    }
+
+    @include mobile-tablet {
+      font-size: 1.6rem;
+    }
+
+    &_small {
+      @include adaptive-font(3, 1.9);
       line-height: 120%;
-      text-transform: uppercase;
 
-      @media (min-width: 1720px) {
-        font-size: 3.6rem;
+      @media (max-width: 1440px) {
+        font-size: 1.5rem;
       }
+    }
 
-      @media (min-width: 1024px) and (max-width: 1719px) {
-        font-size: 2.2rem;
-      }
+    &:deep(span) {
+      font-family: $fontDefaultBold;
+    }
 
-      @include mobile-tablet {
-        font-size: 1.6rem;
-      }
-
-      &_small {
-        @include adaptive-font(3, 1.9);
-        line-height: 120%;
-
-        @media (max-width: 1440px) {
-          font-size: 1.5rem;
-        }
-      }
-
-      &:deep(span) {
-        font-family: $fontDefaultBold;
-      }
-
-      &:deep(p.description) {
-        line-height: 100%;
-        text-transform: lowercase;
-      }
+    &:deep(p.description) {
+      line-height: 100%;
+      text-transform: lowercase;
+    }
   }
 
   &__text {

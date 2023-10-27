@@ -1,10 +1,11 @@
 <template>
-  <div class="popup" :class="{ popup_opened: isOpen }">
-    <button type="button" class="close" @click="$emit('close')">
-      <img src="@/assets/icons/popups/cross.svg" alt="cross" />
-    </button>
-    <div class="popup-content">
-      <slot />
+  <div class="popup-overlay" :class="{ 'popup-overlay_opened': isOpen }" @click.self="$emit('close')">
+    <div class="popup" :class="{ popup_opened: isOpen }">
+      <button type="button" class="popup__close" @click="$emit('close')" />
+
+      <div class="popup__content">
+        <slot />
+      </div>
     </div>
   </div>
 </template>
@@ -32,71 +33,71 @@ watch(
 <style scoped lang="scss">
 $white: $WHITE;
 
-.close {
-  width: 4.3rem;
-  height: 4.3rem;
-  margin-left: auto;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 0.2s ease;
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  translate: -100%;
+  transition: 0.4s;
+  backdrop-filter: blur(5px);
 
-  @include mobile {
-    width: 3rem;
-    height: 3rem;
-  }
-
-  &:hover {
-    @include desktop {
-      opacity: 1;
-    }
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    object-fit: cover;
+  &_opened {
+    translate: 0;
+    visibility: visible;
+    opacity: 1;
   }
 }
 
 .popup {
-  position: fixed;
-  z-index: 20;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   justify-content: center;
   max-width: 95.4rem;
   height: 100%;
   max-height: 100%;
-  padding: 10rem;
   backdrop-filter: blur(50px);
-  background: linear-gradient(90deg, rgba(39, 8, 63, 90%) 0%, rgba(5, 15, 52, 70%) 100%);
+  background: linear-gradient(90deg, rgba(39, 8, 63, 90%) 0%, rgba(5, 15, 52, 90%) 100%);
   gap: 4rem;
-  transition: 0.4s ease;
   overflow-y: auto;
 
-  &:not(&_opened) {
-    width: 0;
-    opacity: 0;
-    visibility: hidden;
+  @include tablet-desktop {
+    width: 49.69%;
+    min-width: 55rem;
+    padding: 10rem;
+  }
+  @include mobile {
+    width: 100%;
+    padding: 2rem;
   }
 
-  &_opened {
-    min-width: 55rem;
+  &__close {
+    margin-left: auto;
+    margin-top: auto;
+    border: none;
+    background: url('@/assets/icons/cross.svg') center / cover no-repeat;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
 
     @include tablet-desktop {
-      width: 49.69%;
+      width: 4.3rem;
+      height: 4.3rem;
     }
+
     @include mobile {
-      width: 100%;
+      width: 3rem;
+      height: 3rem;
+    }
+
+    &:hover {
+      @include desktop {
+        opacity: 1;
+      }
     }
   }
 
-  &-content {
+  &__content {
     display: flex;
     flex-direction: column;
     row-gap: 4rem;

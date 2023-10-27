@@ -285,10 +285,10 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
     transition: 0.3s;
 
     &_centered {
-      @media (min-width: 1920px){
+      @media (min-width: 1920px) {
         top: -3rem;
       }
-      @media (max-width: 1919px){
+      @media (max-width: 1919px) {
         top: -1.5vw;
       }
     }
@@ -382,7 +382,7 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
           width: 17.19vw;
         }
 
-        @media (min-width: 701px) and (max-width: 1919px){
+        @media (min-width: 701px) and (max-width: 1919px) {
           top: -5.2vw;
         }
 

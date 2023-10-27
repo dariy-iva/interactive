@@ -1,58 +1,56 @@
 <template>
   <section class="pigmentation">
-      <div class="pigmentation__info">
-        <p class="pigmentation__info-text">
-          все мы выглядим по&#8209;разному,<br />но различаемся только количеством<br /><span>меланина</span>
+    <div class="pigmentation__info">
+      <p class="pigmentation__info-text">
+        все мы выглядим по&#8209;разному,<br />но различаемся только количеством<br /><span>меланина</span>
+      </p>
+
+      <div class="pigmentation__statistics">
+        <p class="pigmentation__statistics-text">распространенная проблема <span>среди&nbsp;российских женщин</span></p>
+        <div class="pigmentation__statistics-search">248&nbsp;323</div>
+        <p class="pigmentation__statistics-text pigmentation__statistics-text_large">поисковых запросов в месяц</p>
+      </div>
+    </div>
+
+    <div class="pigmentation__content">
+      <div class="pigmentation__main">
+        <div class="pigmentation__main-top">
+          <h1 class="pigmentation__main-title"><span>гипер</span>пигментация</h1>
+          <button-default text="ЧТО ВНУТРИ?" @click="$emit('toggleStep', 7)" />
+        </div>
+
+        <div class="pigmentation__cards">
+          <card-image
+            text="актиническое<br />лентиго"
+            class="pigmentation__card pigmentation__card_type_lentigo"
+            @click="$emit('toggleStep', 4)"
+          />
+
+          <card-image
+            text="мелазма/хлоазма"
+            class="pigmentation__card pigmentation__card_type_melasma"
+            @click="$emit('toggleStep', 5)"
+          />
+
+          <card-image
+            text="поствоспалительная<br />гиперпигментация"
+            class="pigmentation__card pigmentation__card_type_postacne"
+            @click="$emit('toggleStep', 6)"
+          />
+        </div>
+      </div>
+
+      <div class="pigmentation__addition">
+        <div class="pigmentation__circle">
+          <span class="pigmentation__circle-symbol">№</span>
+          <span class="pigmentation__circle-number">3</span>
+        </div>
+        <p class="pigmentation__addition-text">
+          причина <br />психологического<br />
+          дискомфорта <br />женщин <br />во всём мире
         </p>
-
-        <div class="pigmentation__statistics">
-          <p class="pigmentation__statistics-text">
-            распространенная проблема <span>среди&nbsp;российских женщин</span>
-          </p>
-          <div class="pigmentation__statistics-search">248&nbsp;323</div>
-          <p class="pigmentation__statistics-text pigmentation__statistics-text_large">поисковых запросов в месяц</p>
-        </div>
       </div>
-
-      <div class="pigmentation__content">
-        <div class="pigmentation__main">
-          <div class="pigmentation__main-top">
-            <h1 class="pigmentation__main-title"><span>гипер</span>пигментация</h1>
-            <button-default text="ЧТО ВНУТРИ?" @click="$emit('toggleStep', 7)" />
-          </div>
-
-          <div class="pigmentation__cards">
-            <card-image
-              text="актиническое<br />лентиго"
-              class="pigmentation__card pigmentation__card_type_lentigo"
-              @click="$emit('toggleStep', 4)"
-            />
-
-            <card-image
-              text="мелазма/хлоазма"
-              class="pigmentation__card pigmentation__card_type_melasma"
-              @click="$emit('toggleStep', 5)"
-            />
-
-            <card-image
-              text="поствоспалительная<br />гиперпигментация"
-              class="pigmentation__card pigmentation__card_type_postacne"
-              @click="$emit('toggleStep', 6)"
-            />
-          </div>
-        </div>
-
-        <div class="pigmentation-addition">
-          <div class="pigmentation__circle">
-            <span class="pigmentation__circle-symbol">№</span>
-            <span class="pigmentation__circle-number">3</span>
-          </div>
-          <p class="pigmentation__addition-text">
-            причина <br />психологического<br />
-            дискомфорта <br />женщин <br />во всём мире
-          </p>
-        </div>
-      </div>
+    </div>
 
     <button-default text="Далее" class="button-next" @click="$emit('toggleStep')" />
   </section>
@@ -249,6 +247,7 @@ $fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
   &__card {
     width: 100%;
     aspect-ratio: 10 / 12.68;
+    cursor: pointer;
 
     @include tablet-desktop {
       min-height: 45rem;
@@ -318,34 +317,7 @@ $fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
     @include adaptive-font(17.7, 6);
   }
 
-  &__addition-text {
-    line-height: 130%;
-    @include adaptive-font(2.5, 2);
-
-    @include mobile {
-      text-align: center;
-    }
-  }
-}
-
-.button {
-  &-next {
-    position: absolute;
-    @include tablet-desktop {
-      right: 0;
-      bottom: 0;
-    }
-
-    @include mobile {
-      position: initial;
-      margin-top: 3rem;
-    }
-  }
-}
-
-.pigmentation {
-
-  &-addition {
+  &__addition {
     display: flex;
 
     @include desktop {
@@ -364,6 +336,29 @@ $fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
     @include mobile {
       flex-direction: column;
     }
+  }
+
+  &__addition-text {
+    line-height: 130%;
+    @include adaptive-font(2.5, 2);
+
+    @include mobile {
+      text-align: center;
+    }
+  }
+}
+
+.button-next {
+  position: absolute;
+
+  @include tablet-desktop {
+    right: 0;
+    bottom: 0;
+  }
+
+  @include mobile {
+    position: initial;
+     margin-top: 3rem;
   }
 }
 </style>
