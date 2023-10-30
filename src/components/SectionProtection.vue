@@ -1,29 +1,26 @@
 <template>
-  <section class="protection-section">
-    <div class="protection-content">
-      <ul class="protection-list">
-        <li class="protection__item">
-          <img src="@/assets/icons/protection/stars.svg" alt="bandage" />
-          <p class="protection__text">
-            для <span>коррекции</span> ПИГМЕНТАЦИИ НЕОБХОДИМО ВОЗДЕЙСТВОВАТЬ <br />НЕ ТОЛЬКО НА
-            <span>ПЕРЕНОС МЕЛАНИНА И ОКАЗАТЬ ОТШЕЛУШИВАЮЩИЙ ЭФФЕКТ</span>
-          </p>
-        </li>
-        <li class="protection__item">
-          <img src="@/assets/icons/protection/umbrella.svg" alt="hourglass" />
-          <p class="protection__text">
-            <span>для предотвращения пигментации</span> недостаточно только<br />
-            <span>фотозащиты</span>
-          </p>
-        </li>
-        <li class="protection__item">
-          <img src="@/assets/icons/protection/fire.svg" alt="human" />
-          <p class="protection__text">
-            ЧТОБЫ <span>РАЗОРВАТЬ ЗАМКНУТЫЙ ЦИКЛ,</span> СЛЕДУЕТ ВОЗДЕЙСТВОВАТЬ <br />НА ВОСПАЛЕНИЕ
-          </p>
-        </li>
-      </ul>
-    </div>
+  <section class="protection">
+    <ul class="protection__list">
+      <li class="protection__item">
+        <span class="protection__icon protection__icon_type_stars" />
+        <p class="protection__text">
+          для <strong>коррекции </strong>пигментации необходимо воздействовать<br />
+          не только на <strong>перенос меланина и оказать отшелушивающий эффект</strong>
+        </p>
+      </li>
+      <li class="protection__item">
+        <span class="protection__icon protection__icon_type_umbrella" />
+        <p class="protection__text">
+          <strong>для предотвращения пигментации </strong>недостаточно только<br /><strong>фотозащиты</strong>
+        </p>
+      </li>
+      <li class="protection__item">
+        <span class="protection__icon protection__icon_type_fire" />
+        <p class="protection__text">
+          чтобы <strong>разорвать замкнутый цикл, </strong>следует воздействовать<br />на воспаление
+        </p>
+      </li>
+    </ul>
   </section>
 </template>
 
@@ -34,45 +31,31 @@ $fontDefault: $FONT_DEFAULT;
 $fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
 
 .protection {
-  &-section {
-    flex-grow: 1;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__list {
     display: flex;
     flex-direction: column;
-
-    @media (min-width: 1440px) {
-      justify-content: end;
-    }
-  }
-
-  &-content {
+    justify-content: space-between;
     border-radius: 8rem;
     background-color: $white;
 
     @media (min-width: 1440px) {
-      padding: 7rem 0 7rem 6rem;
+      padding: 7rem 6rem;
+      gap: 4.7rem;
     }
 
-    @media (max-width: 1439px) {
-      padding: 6rem 0 6rem 4rem;
+    @media (min-width: 768px) and (max-width: 1439px) {
+      padding: 6rem 4rem;
+      gap: 2rem;
     }
 
     @include mobile {
       padding: 3rem 2rem;
-    }
-  }
-
-  &-list {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    justify-content: space-between;
-
-    @media (min-width: 1440px) {
-      row-gap: 4.7rem;
-    }
-
-    @media (max-width: 1439px) {
-      row-gap: 2rem;
+      gap: 2rem;
     }
   }
 
@@ -81,40 +64,66 @@ $fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
     align-items: center;
 
     @media (min-width: 1440px) {
-      column-gap: 5.2rem;
+      gap: 5.2rem;
     }
 
-    @media (max-width: 1439px) {
-      column-gap: 3.2rem;
+    @media (min-width: 768px) and (max-width: 1439px) {
+      gap: 3.2rem;
     }
 
-    img {
-      object-fit: cover;
+    @include mobile {
+      gap: 2rem;
+    }
+  }
 
-      @media (min-width: 1440px) {
-        width: 17rem;
-        height: 17rem;
-      }
+  &__icon {
+    display: block;
+    border-radius: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: $blue;
 
-      @media (max-width: 1439px) {
-        width: 12rem;
-        height: 12rem;
-      }
+    @media (min-width: 1440px) {
+      width: 17rem;
+      min-width: 17rem;
+      height: 17rem;
+      background-size: 9rem 9rem;
+    }
 
-      @include mobile {
-        width: 5rem;
-        height: 5rem;
-      }
+    @media (min-width: 768px) and (max-width: 1439px) {
+      width: 12rem;
+      min-width: 12rem;
+      height: 12rem;
+      background-size: 9rem 9rem;
+    }
+
+    @include mobile {
+      width: 7rem;
+      min-width: 7rem;
+      height: 7rem;
+      background-size: 3.5rem 3.5rem;
+    }
+
+    &_type_stars {
+      background-image: url('@/assets/icons/protection/stars.svg');
+    }
+
+    &_type_umbrella {
+      background-image: url('@/assets/icons/protection/umbrella.svg');
+    }
+
+    &_type_fire {
+      background-image: url('@/assets/icons/protection/fire.svg');
     }
   }
 
   &__text {
     font-family: $fontDefault;
-    @include adaptive-font(3, 1.9);
     line-height: 130%;
     text-transform: uppercase;
+    @include adaptive-font(3, 1.3);
 
-    span {
+    & > strong {
       font-family: $fontDefaultExtraBold;
     }
   }

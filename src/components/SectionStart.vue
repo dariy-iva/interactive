@@ -71,7 +71,7 @@ $fontDefaultSemiBold: $FONT_DEFAULT_SEMI_BOLD;
 
   &__card {
     @media (min-width: 1650px) {
-      min-height: 81vh;
+      min-height: 100rem;
     }
 
     @include mobile {
