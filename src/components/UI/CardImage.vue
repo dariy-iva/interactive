@@ -3,8 +3,7 @@
     <div class="card-image__wrapper">
       <img
         v-if="isProduct"
-        src="@/assets/images/product/product.png"
-        srcset="@/assets/images/product/product.png"
+        src="@/assets/images/product/product.webp"
         class="card-image__product"
         alt="Фотография продукта LA ROCHE-POSAY Pure Niacinamide 10"
       />
@@ -51,7 +50,7 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
   overflow: hidden;
 
   &_with-product {
-    background-image: url('@/assets/images/product/product-bcg.png');
+    background-image: url('@/assets/images/backgrounds/splash.webp');
     background-position: bottom;
   }
 
