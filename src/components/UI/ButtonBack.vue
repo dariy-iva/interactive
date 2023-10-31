@@ -1,9 +1,7 @@
 <template>
   <button class="back">
-    <span class="back-arrow">
-      <img src="@/assets/icons/arrow.svg" alt="arrow" />
-    </span>
-    <p class="text" v-html="text" />
+    <span class="back__arrow" />
+    <span class="back__text" v-html="text" />
   </button>
 </template>
 
@@ -41,8 +39,12 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
   transition: all 0.3s ease;
   cursor: pointer;
 
-  @include tablet-desktop {
+  @include desktop {
     min-height: 10rem;
+  }
+
+  @include tablet {
+    min-height: 8rem;
   }
 
   @include mobile-tablet {
@@ -50,7 +52,6 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
     border-radius: 0 0 2rem 0;
     border-left: none;
     border-top: none;
-    border-width: 0.3rem;
   }
 
   @include mobile {
@@ -85,21 +86,18 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
         opacity: 1;
       }
 
-      .back-arrow {
+      .back__arrow {
         left: 3rem;
       }
     }
   }
 
-  &-arrow {
-    position: absolute;
-    left: 4rem;
-    width: 5.9rem;
-    height: 7rem;
-    object-fit: cover;
+  &__arrow {
+    background: url('@/assets/icons/arrow.svg') center / cover no-repeat;
     transition: left 0.3s ease;
 
-    @media (min-width: 1440px) {
+    @include tablet-desktop {
+      position: absolute;
       left: 4rem;
       width: 5.9rem;
       height: 7rem;
@@ -108,24 +106,17 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
     @include mobile {
       position: initial;
       width: 100%;
-      height: auto;
-    }
-
-    img {
-      width: 100%;
       height: 100%;
-      object-fit: cover;
     }
   }
 
-  .text {
+  &__text {
     padding-top: 0.5rem;
     color: $white;
     font-family: $fontDefault;
-    @include adaptive-font(4, 2.5);
     line-height: 100%;
     text-transform: uppercase;
-    @include adaptive-font(4, 2.5);
+    @include adaptive-font(4, 2);
 
     @include mobile {
       display: none;

@@ -1,8 +1,7 @@
 <template>
-  <div class="map-container">
+  <div class="container">
     <button type="button" class="button-map" @click.prevent="$emit('click')">
-      <img src="@/assets/icons/map.svg" alt="" class="button-map__image" />
-      <img src="@/assets/icons/map-hover.svg" alt="" class="button-map__image-hover" />
+      <span class="button-map__icon" />
     </button>
   </div>
 </template>
@@ -12,6 +11,8 @@ defineEmits(['click'])
 </script>
 
 <style scoped lang="scss">
+$white: $WHITE;
+
 @keyframes translate {
   from {
     translate: 100%;
@@ -21,36 +22,44 @@ defineEmits(['click'])
   }
 }
 
-.map-container {
+.container {
+  position: absolute;
   z-index: 5;
   top: 0;
   right: 0;
   display: flex;
   overflow: hidden;
-
-  @media (min-width: 1921px) {
-    position: fixed;
-  }
-
-  @media (max-width: 1920px) {
-    position: absolute;
-  }
 }
 
 .button-map {
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  border: none;
+  border-radius: 0 0 0 3rem;
+  border-top: none;
+  border-right: none;
+  border-left: 0.2rem solid $white;
+  border-bottom: 0.2rem solid $white;
   background: none;
-  transition: all 0.5s ease;
   cursor: pointer;
   animation: translate 0.5s 1;
+  transition: all 0.5s ease;
 
-  @include tablet-desktop {
-    width: 10.1rem;
+  @media (min-width: 1921px) {
+    border-bottom-right-radius: 3rem;
+    border-right: 0.2rem solid $white;
+  }
+
+  @include desktop {
+    width: 10rem;
     height: 10rem;
-    border-radius: 0 0 0 3rem;
+  }
+
+  @include tablet {
+    width: 8rem;
+    height: 8rem;
   }
 
   @include mobile {
@@ -66,10 +75,8 @@ defineEmits(['click'])
     left: -2.9rem;
     width: 16.2rem;
     height: 23rem;
-    background-image: url('@/assets/icons/map-ellipse.svg');
-    background-size: cover;
+    background: url('@/assets/icons/map/map_hovered.svg') center / cover no-repeat;
     content: '';
-    object-fit: cover;
     opacity: 0;
     transform: scale(0);
     transition: all 0.5s ease;
@@ -81,28 +88,14 @@ defineEmits(['click'])
         opacity: 1;
         transform: scale(1);
       }
-
-      .map__image {
-        display: none;
-      }
-
-      .map__image-hover {
-        display: inline-block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
     }
   }
 
-  &__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-
-    &-hover {
-      display: none;
-    }
+  &__icon {
+    display: block;
+    width: 5rem;
+    height: 5rem;
+    background: url('@/assets/icons/map/map.svg') center / contain no-repeat;
   }
 }
 </style>

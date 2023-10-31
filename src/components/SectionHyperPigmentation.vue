@@ -130,7 +130,7 @@ $fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
 
   &__statistics-text {
     font-family: $fontDefault;
-    line-height: 130%;
+    line-height: 100%;
 
     &:not(&_large) {
       @include adaptive-font(2, 1.25);
@@ -150,7 +150,7 @@ $fontDefaultExtraBold: $FONT_DEFAULT_EXTRA_BOLD;
     max-width: 81rem;
     background: url('@/assets/icons/search.svg') bottom right / 20.74% auto no-repeat $blue;
     font-family: $fontDefaultSemiBold;
-    line-height: 100%;
+    line-height: 96%;
     @include adaptive-font(14.6, 4);
 
     @media (min-width: 1440px) {
