@@ -1,36 +1,33 @@
 <template>
   <div class="navigation">
-    <h2
-      ref="titleRef"
-      class="other-page-title"
-      :class="{ 'other-page-title_large': stepNum > 12 && stepNum < 17 }"
-      v-html="currentStep.title"
-    />
+    <h2 ref="titleRef" class="navigation__title" v-html="currentStep.title" />
 
     <div class="navigation__buttons">
-      <span
+      <button
         v-show="currentStep.prevBlockNum"
-        class="other-page other-page--last"
+        type="button"
+        class="navigation__button navigation__button_type_prev"
         @click="$emit('toggleStep', currentStep.prevBlockNum)"
       >
-        <img src="@/assets/icons/other-page-arrow.svg" alt="arrow" class="other-page__arrow other-page__arrow_prev" />
-        <p ref="prevRef" class="other-page__text" v-html="currentStep.prevBlockText" />
-      </span>
+        <span class="navigation__arrow navigation__arrow_prev" />
+        <span ref="prevRef" class="navigation__text" v-html="currentStep.prevBlockText" />
+      </button>
 
-      <span
+      <button
         v-show="currentStep.nextBlockNum"
-        class="other-page other-page--next"
+        type="button"
+        class="navigation__button navigation__button_type_next"
         @click="$emit('toggleStep', currentStep.nextBlockNum || 1)"
       >
-        <p ref="nextRef" class="other-page__text" v-html="currentStep.nextBlockText" />
-        <img src="@/assets/icons/other-page-arrow.svg" alt="arrow" class="other-page__arrow other-page__arrow_next" />
-      </span>
+        <span ref="nextRef" class="navigation__text" v-html="currentStep.nextBlockText" />
+        <span class="navigation__arrow" />
+      </button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch } from 'vue'
 
 const props = defineProps({
   stepNum: {
@@ -43,7 +40,7 @@ defineEmits(['toggleStep'])
 
 const steps = ref([
   {
-    title: 'АКТИВНЫЕ КОМПОНЕНТЫ',
+    title: 'Активные компоненты',
     steps: [12, 13, 14, 15, 16],
     nextBlockNum: 17,
     nextBlockText: 'Роскошная<br /> формула',
@@ -51,47 +48,47 @@ const steps = ref([
     prevBlockText: ''
   },
   {
-    title: 'РОСКОШНАЯ ФОРМУЛА',
+    title: 'Роскошная формула',
     steps: [17],
     nextBlockNum: 18,
-    nextBlockText: 'действие продукта',
+    nextBlockText: 'Действие продукта',
     prevBlockNum: 12,
-    prevBlockText: 'АКТИВНЫЕ<br /> КОМПОНЕНТЫ'
+    prevBlockText: 'Активные<br /> компоненты'
   },
   {
-    title: 'действие продукта',
+    title: 'Действие продукта',
     steps: [18],
     nextBlockNum: 19,
-    nextBlockText: 'РЕЗУЛЬТАТЫ,<br />ПОДТВЕРЖДЕННЫЕ ПОТРЕБИТЕЛЯМИ',
+    nextBlockText: 'Результаты,<br />подтвержденные потребителями',
     prevBlockNum: 17,
-    prevBlockText: 'РОСКОШНАЯ<br /> ФОРМУЛА'
+    prevBlockText: 'Роскошная<br /> формула'
   },
   {
-    title: '<span class="top">РЕЗУЛЬТАТЫ, <span class="small">ПОДТВЕРЖДЕННЫЕ<br /> ПОТРЕБИТЕЛЯМИ</span></span>',
+    title: '<span class="top">Результаты, <span class="small">подтвержденные<br /> потребителями</span></span>',
     steps: [19],
     nextBlockNum: 20,
-    nextBlockText: 'КЛИНИЧЕСКИ ДОКАЗАННАЯ<br /> ЭФФЕКТИВНОСТЬ',
+    nextBlockText: 'Клинически доказанная<br />эффективность',
     prevBlockNum: 18,
-    prevBlockText: 'ПРОТИВ ВСЕХ ВИДОВ<br /> ПИГМЕНТАЦИИ'
+    prevBlockText: 'Против всех видов<br />пигментации'
   },
   {
-    title: '<span class="top">клинически <span class="small">доказанная<br /> эффективность</span></span>',
+    title: '<span class="top">Клинически <span class="small">доказанная<br />эффективность</span></span>',
     steps: [20],
     nextBlockNum: 21,
     nextBlockText: 'Для кого<br /> и применение',
     prevBlockNum: 19,
-    prevBlockText: 'РЕЗУЛЬТАТЫ, ПОДТВЕРЖДЕННЫЕ<br /> ПОТРЕБИТЕЛЯМИ'
+    prevBlockText: 'Результаты, подтвержденные<br />потребителями'
   },
   {
     title: 'Для кого и применение',
     steps: [21],
     nextBlockNum: 22,
-    nextBlockText: 'КОМПЛЕКСНАЯ<br /> РЕКОМЕНДАЦИЯ',
+    nextBlockText: 'Комплексная<br />рекомендация',
     prevBlockNum: 20,
-    prevBlockText: 'КЛИНИЧЕСКИ ДОКАЗАННАЯ<br /> ЭФФЕКТИВНОСТЬ'
+    prevBlockText: 'Клинически доказанная<br />эффективность'
   },
   {
-    title: 'КОМПЛЕКСНАЯ РЕКОМЕНДАЦИЯ',
+    title: 'Комплексная рекомендация',
     steps: [22],
     nextBlockNum: 23,
     nextBlockText: 'уф-лучи',
@@ -102,12 +99,12 @@ const steps = ref([
     title: 'уф-лучи',
     steps: [23],
     nextBlockNum: 24,
-    nextBlockText: 'ПРОТИВ ВСЕХ ВИДОВ ПИГМЕНТАЦИИ',
+    nextBlockText: 'Против всех видов пигментации',
     prevBlockNum: 22,
-    prevBlockText: 'КОМПЛЕКСНАЯ<br /> РЕКОМЕНДАЦИЯ'
+    prevBlockText: 'Комплексная<br />рекомендация'
   },
   {
-    title: 'ПРОТИВ ВСЕХ ВИДОВ ПИГМЕНТАЦИИ',
+    title: 'Против всех видов пигментации',
     steps: [24],
     nextBlockNum: null,
     nextBlockText: '',
@@ -122,22 +119,26 @@ const titleRef = ref(null)
 const prevRef = ref(null)
 const nextRef = ref(null)
 
-watch(() => props.stepNum, (newValue, oldValue) => {
-  console.log(prevRef.value);
-  const titleClass = newValue > oldValue ? 'title-translate' : 'title-translate-reverse'
-  const prevClass = newValue > oldValue ? 'prev-translate' : 'prev-translate-reverse'
-  const nextClass = newValue > oldValue ? 'next-translate' : 'next-translate-reverse'
-  titleRef.value.classList.add(titleClass)
-  prevRef.value?.classList?.add(prevClass)
-  nextRef.value?.classList?.add(nextClass)
+watch(
+  () => props.stepNum,
+  (newValue, oldValue) => {
+    if (newValue >= 12 && newValue <= 16 && oldValue !== 17) return
 
-  setTimeout(() => {
-    titleRef.value.classList.remove(titleClass)
-    prevRef.value?.classList?.remove(prevClass)
-    nextRef.value?.classList?.remove(nextClass)
-    currentStep.value = steps.value.find((step) => step.steps.includes(+props.stepNum)) || {}
-  }, 500)
-})
+    const titleClass = newValue > oldValue ? 'title-translate' : 'title-translate-reverse'
+    const prevClass = newValue > oldValue ? 'prev-translate' : 'prev-translate-reverse'
+    const nextClass = newValue > oldValue ? 'next-translate' : 'next-translate-reverse'
+    titleRef.value.classList.add(titleClass)
+    prevRef.value?.classList?.add(prevClass)
+    nextRef.value?.classList?.add(nextClass)
+
+    setTimeout(() => {
+      titleRef.value.classList.remove(titleClass)
+      prevRef.value?.classList?.remove(prevClass)
+      nextRef.value?.classList?.remove(nextClass)
+      currentStep.value = steps.value.find((step) => step.steps.includes(+props.stepNum)) || {}
+    }, 500)
+  }
+)
 </script>
 
 <style scoped lang="scss">
@@ -186,7 +187,7 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
   }
 }
 
-@keyframes translateReversePrev{
+@keyframes translateReversePrev {
   from {
     translate: 0;
     scale: 1;
@@ -212,7 +213,7 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
   }
 }
 
-@keyframes translateReverseNext{
+@keyframes translateReverseNext {
   from {
     translate: 0;
     scale: 1;
@@ -252,17 +253,13 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
 .navigation {
   display: flex;
   flex-direction: column;
-  overflow-y: hidden;
 
   @include desktop {
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 6.8rem 4.6rem 5rem;
+    padding: 5.8rem 0 5rem;
+    margin-top: -13rem;
     gap: 4.2rem;
   }
+
   @include mobile-tablet {
     gap: 2.5rem;
   }
@@ -271,112 +268,15 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
     display: none;
   }
 
-  &__buttons {
-    display: flex;
-    justify-content: space-between;
-  }
-}
-
-.other-page {
-  position: relative;
-  display: flex;
-  width: max-content;
-  height: 4.6rem;
-  align-items: center;
-  justify-content: end;
-  cursor: pointer;
-  gap: 3.9rem;
-
-  &--last {
-    margin-right: auto;
-
-    .other-page__text {
-      text-align: start;
-    }
-  }
-
-  &--next {
-    margin-left: auto;
-
-    .other-page__text {
-      text-align: end;
-    }
-  }
-
-  &:hover {
-    @include desktop {
-      &::before {
-        opacity: 1;
-      }
-
-      .other-page__arrow_next {
-        transform: translateX(1rem);
-        opacity: 1;
-      }
-
-      .other-page__arrow_prev {
-        transform: translateX(1rem);
-        opacity: 1;
-      }
-    }
-  }
-
-  @include tablet-desktop {
-    &::before {
-      position: absolute;
-      top: 50%;
-      width: 9rem;
-      height: 7.83rem;
-      background: linear-gradient(90deg, #009fe3 0%, rgba(0, 159, 227, 0%) 100%);
-      content: '';
-      filter: blur(1.87rem);
-      opacity: 0;
-
-      transition: all 0.2s ease;
-    }
-
-    &--last::before {
-      left: -4.5rem;
-      transform: translateY(-50%);
-    }
-
-    &--next::before {
-      right: -4.5rem;
-      transform: translateY(-50%) rotate(180deg);
-    }
-  }
-
-  &__text {
-    color: $gray;
-    font-family: $fontDefaultBold;
-    @include adaptive-font(2, 1.25);
-    line-height: 100%;
-    opacity: 0.7;
-    text-align: right;
-    text-transform: uppercase;
-    margin-bottom: -0.5rem;
-  }
-
-  &__arrow {
-    width: 1.7rem;
-    height: 3rem;
-    opacity: 0.7;
-    transition: all 0.2s ease;
-
-    &_prev {
-      rotate: 180deg;
-    }
-  }
-
-  &-title {
+  &__title {
     width: max-content;
     margin-left: auto;
     color: $white;
     font-family: $fontDefaultSemiBold;
-    @include adaptive-font(4, 2.5);
     line-height: 100%;
     text-align: right;
     text-transform: uppercase;
+    @include adaptive-font(4, 2.5);
 
     @media (min-width: 1023px) and (max-width: 1440px) {
       width: min-content;
@@ -384,7 +284,6 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
 
     @include desktop {
       padding-right: 12.4rem;
-      letter-spacing: 0.31rem;
     }
 
     @include mobile-tablet {
@@ -397,20 +296,105 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
 
     &:deep(.top) {
       display: block;
-      margin-top: -4.8rem;
+      margin-top: -3.8rem;
     }
 
     &:deep(.small) {
       font-family: $fontDefaultLight;
     }
+  }
 
-    &_large {
-      @media (min-width: 1800px) {
-        margin-top: -3.2rem;
-        margin-bottom: 1rem;
-        font-size: 6rem;
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button {
+    position: relative;
+    display: flex;
+    width: max-content;
+    align-items: center;
+    justify-content: end;
+    background: none;
+    border: none;
+    cursor: pointer;
+    gap: 3.9rem;
+
+    &_type_next {
+      margin-left: auto;
+
+      .other-page__text {
+        text-align: end;
       }
     }
+
+    &_type_prev {
+      margin-right: auto;
+
+      .other-page__text {
+        text-align: start;
+      }
+    }
+
+    @include tablet-desktop {
+      &::before {
+        position: absolute;
+        top: 50%;
+        width: 9rem;
+        height: 7.83rem;
+        background: linear-gradient(90deg, #009fe3 0%, rgba(0, 159, 227, 0%) 100%);
+        content: '';
+        filter: blur(1.87rem);
+        opacity: 0;
+        transition: all 0.2s ease;
+      }
+
+      &_type_prev::before {
+        left: -4.5rem;
+        transform: translateY(-50%);
+      }
+
+      &_type_next::before {
+        right: -4.5rem;
+        transform: translateY(-50%) rotate(180deg);
+      }
+    }
+
+    &:hover::before {
+      @include desktop {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__arrow {
+    display: block;
+    width: 1.7rem;
+    height: 3rem;
+    opacity: 0.7;
+    background: url('@/assets/icons/arrow_navigation.svg') center / cover no-repeat;
+    transition: all 0.2s ease;
+
+    &_prev {
+      rotate: 180deg;
+    }
+  }
+
+  &__button:hover > &__arrow {
+    @include desktop {
+      transform: translateX(1rem);
+      opacity: 1;
+    }
+  }
+
+  &__text {
+    color: $gray;
+    font-family: $fontDefaultBold;
+    line-height: 100%;
+    opacity: 0.7;
+    text-align: right;
+    text-transform: uppercase;
+    @include adaptive-font(2, 1.25);
   }
 }
 </style>

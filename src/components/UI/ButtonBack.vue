@@ -3,7 +3,7 @@
     <span class="back-arrow">
       <img src="@/assets/icons/arrow.svg" alt="arrow" />
     </span>
-    <p class="text" v-html="text"/>
+    <p class="text" v-html="text" />
   </button>
 </template>
 

@@ -1,73 +1,69 @@
 <template>
-  <section class="component-section">
-    <div v-if="currentCard" class="component-card">
-      <div class="component-card-preview" :class="`${currentCard.previewClass}`" />
-      <div class="component-card-description">
-        <span class="component-card-description__title">{{ currentCard.title }}</span>
+  <section class="component">
+    <article v-if="currentCard" class="component__card">
+      <card-image :class="`component__preview component__preview_type_${currentCard.type}`">
+        <span class="component__number" v-text="currentCard.number" />
+      </card-image>
 
-        <ul class="component-card-description-list">
+      <div class="component__info">
+        <span class="component__title" v-text="currentCard.title" />
+
+        <ul class="component__paragraphs">
           <li
             v-for="(item, index) in currentCard.items"
             :key="`${currentCard.title}-${index}`"
-            class="component-card-description__item"
+            class="component__paragraph"
           >
-            <div :class="`component-card-icon component-card-icon_${item.iconName}`" />
-            <div class="component-card-description-text">
-              <span v-if="item.mainText" v-html="item.mainText" class="component-card-description__text-main" />
-              <span v-if="item.description" v-html="item.description" class="component-card-description__addition" />
+            <div :class="`component__paragraph-icon component__paragraph-icon_${item.iconName}`" />
+
+            <div class="component__text">
+              <span v-if="item.mainText" v-html="item.mainText" />
+              <span v-if="item.description" v-html="item.description" class="component__text_small" />
             </div>
           </li>
         </ul>
       </div>
-    </div>
+    </article>
 
-    <block-pagination class="pagination-block" @toggle-step="(value) => $emit('toggleStep', value)">
-      <div class="pagination-block__list">
-        <span class="component-navigation__line"></span>
-        <div
-          class="component-navigation__button"
-          :class="{
-            'component-navigation__button--active': stepNum === 13,
-            'component-navigation__button--last': stepNum > 13
-          }"
+    <block-pagination class="pagination" @toggle-step="(value) => $emit('toggleStep', value)">
+      <div class="pagination__buttons">
+        <span class="pagination__line"></span>
+        <button
+          type="button"
+          class="pagination__button"
+          :class="{ pagination__button_active: stepNum === 13, pagination__button_last: stepNum > 13 }"
           @click="$emit('toggleStep', 13)"
         >
-          <span>I</span>
-        </div>
-        <span class="component-navigation__line"></span>
-        <div
-          class="component-navigation__button"
-          :class="{
-            'component-navigation__button--active': stepNum === 14,
-            'component-navigation__button--last': stepNum > 14
-          }"
+          I
+        </button>
+        <span class="pagination__line"></span>
+        <button
+          type="button"
+          class="pagination__button"
+          :class="{ pagination__button_active: stepNum === 14, pagination__button_last: stepNum > 14 }"
           @click="$emit('toggleStep', 14)"
         >
-          <span>2</span>
-        </div>
-        <span class="component-navigation__line"></span>
-        <div
-          class="component-navigation__button"
-          :class="{
-            'component-navigation__button--active': stepNum === 15,
-            'component-navigation__button--last': stepNum > 15
-          }"
+          2
+        </button>
+        <span class="pagination__line"></span>
+        <button
+          type="button"
+          class="pagination__button"
+          :class="{ pagination__button_active: stepNum === 15, pagination__button_last: stepNum > 15 }"
           @click="$emit('toggleStep', 15)"
         >
-          <span>3</span>
-        </div>
-        <span class="component-navigation__line"></span>
-        <div
-          class="component-navigation__button"
-          :class="{
-            'component-navigation__button--active': stepNum === 16,
-            'component-navigation__button--last': stepNum > 16
-          }"
+          3
+        </button>
+        <span class="pagination__line"></span>
+        <button
+          type="button"
+          class="pagination__button"
+          :class="{ pagination__button_active: stepNum === 16, pagination__button_last: stepNum > 16 }"
           @click="$emit('toggleStep', 16)"
         >
-          <span>4</span>
-        </div>
-        <span class="component-navigation__line"></span>
+          4
+        </button>
+        <span class="pagination__line"></span>
       </div>
     </block-pagination>
   </section>
@@ -76,6 +72,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import BlockPagination from '@/components/UI/BlockPagination.vue'
+import CardImage from '@/components/UI/CardImage.vue'
 
 const props = defineProps({
   stepNum: {
@@ -89,85 +86,89 @@ defineEmits(['toggleStep'])
 const cards = ref([
   {
     step: 13,
-    title: 'НИАЦИНАМИД 10%',
-    previewClass: 'component-card-preview-1',
+    title: 'Ниацинамид 10%',
+    type: 'niacinamide',
+    number: 'I',
     items: [
       {
         iconName: 'arrows',
-        mainText: 'БЛОКИРУЕТ ПЕРЕНОС МЕЛАНИНА',
-        description: 'КОРРЕКЦИЯ ПИГМЕНТАЦИИ'
+        mainText: '<strong>Блокирует перенос меланина</strong>',
+        description: 'Коррекция пигментации'
       },
       {
         iconName: 'gauge',
-        mainText: 'ИНГИБИРУЕТ МЕДИАТОРЫ <br />ВОСПАЛЕНИЯ',
-        description: 'СНИЖЕНИЕ ВОСПАЛЕНИЯ'
+        mainText: '<strong>Ингибирует медиаторы<br />воспаления</strong>',
+        description: 'Снижение воспаления'
       },
       {
         iconName: 'shield',
-        mainText: 'УКРЕПЛЯЕТ КОЖНЫЙ БАРЬЕР',
-        description: 'ЗАЩИТА ОТ РАЗДРАЖЕНИЯ'
+        mainText: '<strong>Укрепляет кожный барьер</strong>',
+        description: 'Защита от раздражения'
       }
     ]
   },
   {
     step: 14,
     title: 'ФЕ-РЕЗОРЦИНОЛ 0,5%',
-    previewClass: 'component-card-preview-2',
+    type: 'resorcinol',
+    number: '2',
     items: [
       {
         iconName: 'pine',
         mainText:
-          'ПРОИЗВОДНОЕ <span>ПИНОСИЛЬВИНА <br />СОДЕРЖИТСЯ</span> В ДРЕВЕСИНЕ\n' +
-          '                <span>СОСНЫ <br />ОБЫКНОВЕННОЙ</span>',
+          '<strong>Производное</strong> пиносильвина<br />содержится <strong>в древесине</strong>\n' +
+          'сосны <br />обыкновенной',
         description: ''
       },
       {
         iconName: 'gauge',
-        mainText: 'ИНГИБИРУЕТ СЕКРЕЦИЮ МЕЛАНИНА',
-        description: 'ПРОФИЛАКТИКА ПИГМЕНТАЦИИ'
+        mainText: '<strong>Ингибирует секрецию меланина</strong>',
+        description: 'Профилактика пигментации'
       },
       {
         iconName: 'roller',
-        mainText: 'ДЕПИГМЕНТИРУЮЩИЙ ЭФФЕКТ',
-        description: 'КОРРЕКЦИЯ ПИГМЕНТАЦИИ'
+        mainText: '<strong>Депигментирующий эффект</strong>',
+        description: 'Коррекция пигментации'
       }
     ]
   },
   {
     step: 15,
     title: '5% ХЕПЕС',
-    previewClass: 'component-card-preview-3',
+    type: 'hepes',
+    number: '3',
     items: [
       {
         iconName: 'circle',
-        mainText: 'УДАЛЯЕТ КЕРАТИНОЦИТЫ, <br />НАПОЛНЕННЫЕ МЕЛАНИНОМ',
-        description: 'КОРРЕКЦИЯ ПИГМЕНТАЦИИ'
+        mainText: '<strong>Удаляет кератиноциты,<br />наполненные меланином</strong>',
+        description: 'Коррекция пигментации'
       },
       {
         iconName: 'feather',
-        mainText: 'МЯГКОЕ ОТШЕЛУШИВАНИЕ',
-        description: 'ВЫРАВНИВАНИЕ ТОНА КОЖИ'
+        mainText: '<strong>Мягкое отшелушивание</strong>',
+        description: 'Выравнивание тона кожи'
       },
       {
         iconName: 'pipette',
-        mainText: 'УВЛАЖНЯЮЩИЙ <span>ЭФФЕКТ</span>',
+        mainText: '<strong>Увлажняющий </strong>эффект',
         description: ''
       }
     ]
   },
   {
     step: 16,
-    title: 'ГИАЛУРОНОВАЯ КИСЛОТА',
-    previewClass: 'component-card-preview-4',
+    title: 'Гиалуроновая кислота',
+    type: 'hyaluronic',
+    number: '4',
     items: [
       {
         iconName: 'shield',
-        mainText: 'ПОДДЕРЖИВАЕТ <span>КОЖНЫЙ БАРЬЕР</span>',
+        mainText: '<strong>Поддерживает</strong> кожный барьер',
         description: ''
       },
       {
         iconName: 'leaf',
-        mainText: '<span>ПОВЫШАЕТ</span> УПРУГОСТЬ<br/>\n' + '                И ЭЛАСТИЧНОСТЬ КОЖИ',
+        mainText: 'Повышает <strong>упругость<br/>и эластичность кожи</strong>',
         description: ''
       }
     ]
@@ -197,70 +198,251 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
   }
 }
 
-@keyframes translatePreview {
-  from {
-    background-size: 120%;
-  }
-  to {
-    background-size: 100%;
-  }
-}
+.component {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-.button {
-  &-navigation {
-    border: none;
-    border-radius: 3rem;
+  @media (min-width: 1801px) {
+    gap: 9.3rem;
+  }
+
+  @media (max-width: 1800px) {
+    gap: 20rem;
+  }
+
+  &__card {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin: auto;
+    border-radius: 5rem;
+    background-color: $white;
+    box-shadow: -0.5rem 2rem 5rem 0 rgba(0, 0, 0, 15%);
+    animation: translateCard 0.6s 1;
+
+    @media (min-width: 1440px) {
+      min-height: 60.8rem;
+    }
+
+    @media (max-width: 1439px) {
+      min-height: 47rem;
+    }
+
+    @include desktop {
+      padding: 3rem;
+    }
+
+    @include mobile-tablet {
+      padding: 2rem;
+    }
+
+    @include mobile {
+      border-radius: 5rem;
+    }
+  }
+
+  &__preview {
+    position: absolute;
+    left: 0;
+    width: 29.4%;
+    min-width: 30rem;
+    max-width: 50.6rem;
+    max-height: 96.6rem;
+    min-height: calc(100% + 5rem);
+    aspect-ratio: 10 / 19.1;
+    border-radius: 7rem;
+
+    @include mobile {
+      display: none;
+    }
+
+    &_type_niacinamide {
+      background-image: url('@/assets/images/ingredients/niacinamide.webp');
+    }
+
+    &_type_resorcinol {
+      background-image: url('@/assets/images/ingredients/resorcinol.webp');
+    }
+
+    &_type_hepes {
+      background-image: url('@/assets/images/ingredients/hepes.webp');
+    }
+
+    &_type_hyaluronic {
+      background-image: url('@/assets/images/ingredients/hyaluronic.webp');
+    }
+
+    &:deep(.card-image__wrapper) {
+      border-radius: 7rem;
+    }
+  }
+
+  &__number {
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -0.4rem auto auto -0.4rem;
+    border-radius: 50%;
+    border: 0.4rem solid $white;
     background-color: $blue;
     color: $white;
-    cursor: pointer;
     font-family: $fontDefault;
-    @include adaptive-font(5.2, 3.25);
+    line-height: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    @include adaptive-font(7, 5);
+
+    @include desktop {
+      width: 14rem;
+      height: 14rem;
+    }
+
+    @include tablet {
+      width: 10rem;
+      height: 10rem;
+    }
+  }
+
+  &__info {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+
+    @include tablet-desktop {
+      margin-left: auto;
+    }
+
+    @include desktop {
+      width: 64.6%;
+    }
+
+    @include tablet {
+      width: calc(100% - 30rem);
+    }
+  }
+
+  &__title {
+    color: $blue;
+    font-family: $fontDefaultSemiBold;
     line-height: 100%;
     text-transform: uppercase;
-    transition: all 0.2s ease;
+    @include adaptive-font(6, 2.7);
+  }
 
-    @media (min-width: 1440px) {
-      padding: 1.9rem 3.2rem;
+  &__paragraphs {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  &__paragraph {
+    display: flex;
+    align-items: center;
+
+    @include tablet-desktop {
+      gap: 3rem;
     }
 
-    @media (max-width: 1439px) {
-      padding: 1.5rem 2.5rem;
-    }
-
-    &:hover {
-      @include desktop {
-        background: rgba(0, 159, 227, 50%);
-      }
+    @include mobile {
+      gap: 2rem;
     }
   }
 
-  &-next {
+  &__paragraph-icon {
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: 0.3s ease;
+
     @media (min-width: 1440px) {
-      right: 10rem;
+      width: 10.7rem;
+      min-width: 10.7rem;
+      height: 10.7rem;
     }
 
-    @media (max-width: 1439px) {
-      right: 6rem;
+    @media (min-width: 1024px) and (max-width: 1439px) {
+      width: 9rem;
+      min-width: 9rem;
+      height: 9rem;
+    }
+
+    @include tablet {
+      width: 5rem;
+      min-width: 5rem;
+      height: 5rem;
+    }
+
+    @include mobile {
+      width: 4rem;
+      min-width: 4rem;
+      height: 4rem;
+    }
+
+    &_arrows {
+      background-image: url('@/assets/icons/active-components/arrows.svg');
+    }
+    &_gauge {
+      background-image: url('@/assets/icons/active-components/gauge.svg');
+    }
+    &_shield {
+      background-image: url('@/assets/icons/active-components/shield.svg');
+    }
+    &_pine {
+      background-image: url('@/assets/icons/active-components/pine.svg');
+    }
+    &_roller {
+      background-image: url('@/assets/icons/active-components/roller.svg');
+    }
+    &_circle {
+      background-image: url('@/assets/icons/active-components/circle.svg');
+    }
+    &_feather {
+      background-image: url('@/assets/icons/active-components/feather.svg');
+    }
+    &_pipette {
+      background-image: url('@/assets/icons/active-components/pipette.svg');
+    }
+    &_leaf {
+      background-image: url('@/assets/icons/active-components/leaf.svg');
     }
   }
 
-  &-back {
-    @media (min-width: 1440px) {
-      left: 10rem;
+  &__text {
+    display: flex;
+    flex-direction: column;
+    font-family: $fontDefault;
+    line-height: 130%;
+    text-transform: uppercase;
+    word-break: break-word;
+
+    &:not(&_small) {
+      @include adaptive-font(4, 1.8);
     }
 
-    @media (max-width: 1439px) {
-      left: 6rem;
+    &_small {
+      @include adaptive-font(3, 1.5);
+    }
+
+    &:deep(strong) {
+      font-family: $fontDefaultBold;
     }
   }
 }
 
-.pagination-block {
+.pagination {
   max-width: 114.6rem;
   margin-left: auto;
 
   @include desktop {
-    //margin-top: initial;
     gap: 3rem;
   }
 
@@ -268,7 +450,7 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
     width: 100%;
   }
 
-  &__list {
+  &__buttons {
     display: flex;
     align-items: center;
 
@@ -283,335 +465,57 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
       display: none;
     }
   }
-}
 
-.component {
-  &-section {
-    position: relative;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+  &__line {
+    display: inline-block;
+    width: 0.64rem;
+    height: 0.4rem;
+    background-color: $white;
 
-    @media (min-width: 1801px) {
-      gap: 9.3rem;
-    }
-
-    @media (max-width: 1800px) {
-      gap: 20rem;
+    @include tablet {
+      display: none;
     }
   }
 
-  &-navigation {
-    position: absolute;
-    right: 10rem;
+  &__button {
     display: flex;
+
     align-items: center;
-    justify-content: space-between;
-    column-gap: 3rem;
+    justify-content: center;
+    border-radius: 3rem;
+    border: none;
+    background: none;
+    color: $white;
+    font-family: $fontDefault;
+    line-height: 100%;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    @include adaptive-font(5.2, 3.3);
 
-    @media (min-width: 1440px) {
-      bottom: 10rem;
-    }
-
-    @media (max-width: 1439px) {
-      bottom: 3rem;
-    }
-
-    &__line {
-      display: inline-block;
-      width: 0.64rem;
-      height: 0.4rem;
-      background-color: $white;
-
-      @include tablet {
-        display: none;
-      }
-    }
-
-    &__button {
-      display: flex;
+    @include desktop {
       width: 9rem;
       height: 9rem;
-      align-items: center;
-      justify-content: center;
-      border-radius: 3rem;
+    }
+
+    @include tablet {
+      width: 7rem;
+      height: 7rem;
+    }
+
+    &_last {
+      background-color: $blue;
       color: $white;
-      font-family: $fontDefault;
-      @include adaptive-font(5.2, 3.3);
-      line-height: 100%;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
-      cursor: pointer;
-
-      &--last {
-        background-color: $blue;
-        color: $white;
-      }
-
-      &--active {
-        background-color: $white;
-        color: $blue;
-      }
-
-      &:hover {
-        @include desktop {
-          background: rgba(0, 159, 227, 50%);
-        }
-      }
-
-      & > span {
-        @include desktop {
-          margin-bottom: -1rem;
-        }
-      }
-    }
-  }
-
-  &-card {
-    position: relative;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    border-radius: 0 5rem 5rem 0;
-    background-color: $white;
-    box-shadow: -0.5rem 2rem 5rem 0 rgba(0, 0, 0, 15%);
-    animation: translateCard 0.6s 1;
-
-    @media (min-width: 1440px) {
-      min-height: 60.8rem;
-      padding: 3rem 3rem 3rem 57.7rem;
-      margin-top: calc((96.6rem - 60.8rem) / 2);
     }
 
-    @media (max-width: 1439px) {
-      min-height: 47rem;
-      padding: 4rem 3rem 4rem 43.7rem;
-      margin-top: calc((75.6rem - 47rem) / 2);
+    &_active {
+      background-color: $white;
+      color: $blue;
     }
 
-    @include mobile {
-      padding: 4rem 3rem;
-      margin-top: 0;
-      border-radius: 5rem;
-    }
-
-    &-preview {
-      position: absolute;
-      top: 50%;
-      display: flex;
-      width: 100%;
-      //background-size: cover;
-      box-shadow: -0.5rem 2rem 3rem 0 rgba(0, 0, 0, 60%);
-      transform: translateY(-50%);
-      transition: 0.3s ease;
-      animation: translatePreview 0.5s 0.4s 1;
-
-      &-1 {
-        background-image: url('@/assets/images/active-components/niacinamide-card.jpg');
-      }
-
-      &-2 {
-        background-image: url('@/assets/images/active-components/fe-resorcinol-card.jpg');
-      }
-
-      &-3 {
-        background-image: url('@/assets/images/active-components/hepes-card.jpg');
-      }
-
-      &-4 {
-        background-image: url('@/assets/images/active-components/hyaluronic-acid-card.jpg');
-      }
-
-      @media (min-width: 1440px) {
-        left: 0;
-        max-width: 50.6rem;
-        height: 96.6rem;
-        border-radius: 8rem;
-      }
-
-      @media (max-width: 1439px) {
-        left: -1rem;
-        max-width: 40.6rem;
-        height: 75.6rem;
-        border-radius: 6rem;
-      }
-
-      @include mobile {
-        display: none;
-      }
-
-      &::before {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 93%;
-        height: 96%;
-        border: 0.3rem solid $white;
-        border-radius: 7rem;
-        content: '';
-        transform: translate(-50%, -50%);
-      }
-
-      &::after {
-        position: absolute;
-        top: 1.5rem;
-        left: 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 0.4rem solid $white;
-        border-radius: 50%;
-        background-color: $blue;
-        color: $white;
-        content: 'I';
-        font-family: $fontDefault;
-        @include adaptive-font(7.2, 4.5);
-        line-height: 100%;
-        text-transform: uppercase;
-
-        @media (min-width: 1440px) {
-          width: 14rem;
-          height: 14rem;
-        }
-
-        @media (max-width: 1439px) {
-          width: 11rem;
-          height: 11rem;
-        }
-      }
-
-      &__text {
-        z-index: 3;
-        display: flex;
-        width: 100%;
-        height: 9rem;
-        align-items: center;
-        justify-content: center;
-        background-color: $blue;
-        color: $white;
-        font-family: $fontDefault;
-        @include adaptive-font(3, 1.9);
-        line-height: 100%;
-        text-align: center;
-        text-transform: uppercase;
-      }
-    }
-
-    &-icon {
-      border-radius: 50%;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      transition: 0.3s ease;
-
-      @media (min-width: 1440px) {
-        width: 10.7rem;
-        height: 10.7rem;
-      }
-
-      @media (max-width: 1439px) {
-        width: 9rem;
-        height: 9rem;
-      }
-
-      &_arrows {
-        background-image: url('@/assets/icons/active-components/arrows.svg');
-      }
-      &_gauge {
-        background-image: url('@/assets/icons/active-components/gauge.svg');
-      }
-      &_shield {
-        background-image: url('@/assets/icons/active-components/shield.svg');
-      }
-      &_pine {
-        background-image: url('@/assets/icons/active-components/pine.svg');
-      }
-      &_roller {
-        background-image: url('@/assets/icons/active-components/roller.svg');
-      }
-      &_circle {
-        background-image: url('@/assets/icons/active-components/circle.svg');
-      }
-      &_feather {
-        background-image: url('@/assets/icons/active-components/feather.svg');
-      }
-      &_pipette {
-        background-image: url('@/assets/icons/active-components/pipette.svg');
-      }
-      &_leaf {
-        background-image: url('@/assets/icons/active-components/leaf.svg');
-      }
-    }
-
-    &-description {
-      display: flex;
-      width: 100%;
-      flex-direction: column;
-      justify-content: center;
-      //visibility: hidden;
-
-      &__title {
-        color: $blue;
-        font-family: $fontDefaultSemiBold;
-        @include adaptive-font(6, 3.7);
-        line-height: 100%;
-        text-transform: uppercase;
-      }
-
-      &-list {
-        display: flex;
-        height: 100%;
-        flex-direction: column;
-        margin-top: 2rem;
-        row-gap: 2.5rem;
-      }
-
-      &__item {
-        display: flex;
-        align-items: center;
-        column-gap: 3rem;
-      }
-
-      &-text {
-        display: flex;
-        flex-direction: column;
-        letter-spacing: 0.08rem;
-      }
-
-      &__text {
-        &-main {
-          font-family: $fontDefaultBold;
-          @include adaptive-font(4, 2.5);
-          line-height: 130%;
-          text-transform: uppercase;
-
-          &:deep(span) {
-            font-family: $fontDefault;
-          }
-        }
-      }
-
-      &__addition {
-        font-family: $fontDefault;
-        @include adaptive-font(3, 1.9);
-        line-height: 130%;
-        text-transform: uppercase;
-      }
-
-      &-addition {
-        display: flex;
-        flex-direction: column;
-        margin-top: 4.6rem;
-        font-family: $fontDefault;
-        @include adaptive-font(3, 1.9);
-        line-height: 130%;
-
-        span {
-          font-family: $fontDefaultBold;
-          @include adaptive-font(4, 2.5);
-          text-transform: uppercase;
-        }
+    &:hover {
+      @include desktop {
+        background: rgba(0, 159, 227, 50%);
       }
     }
   }

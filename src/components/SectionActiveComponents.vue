@@ -108,7 +108,7 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
   justify-content: center;
 
   @include desktop {
-    margin-top: 13rem;
+    margin-top: -13rem;
     gap: 8.7rem;
   }
 
@@ -117,7 +117,7 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
   }
 
   &__product {
-    max-height: 85%;
+    max-height: 75%;
     object-position: center;
     object-fit: contain;
 

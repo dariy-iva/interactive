@@ -1,10 +1,11 @@
 <template>
-  <div class="navigation">
+  <div class="pagination">
     <button-default v-if="stepNum !== 25" text="Назад" class="button-next" @click="$emit('toggleStep', '-1')" />
     <slot />
     <button-default
       :text="stepNum === 25 ? 'Пройти тест' : stepNum === 27 ? 'Завершить' : 'Далее'"
-      class="button-next" @click="$emit('toggleStep')"
+      class="button-next"
+      @click="$emit('toggleStep')"
     />
   </div>
 </template>
@@ -23,10 +24,9 @@ defineEmits(['toggleStep'])
 </script>
 
 <style scoped lang="scss">
-.navigation {
+.pagination {
   display: flex;
   justify-content: space-between;
   gap: 2rem;
-  margin-top: auto;
 }
 </style>
