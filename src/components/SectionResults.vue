@@ -139,6 +139,7 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
     }
 
     @include tablet {
+      min-height: 46rem;
       padding: 6rem 31rem 6rem 6rem;
     }
 

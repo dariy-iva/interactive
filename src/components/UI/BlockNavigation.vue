@@ -72,7 +72,7 @@ const steps = ref([
     prevBlockText: 'Против всех видов<br />пигментации'
   },
   {
-    title: 'Клинически<br /><span class="small">доказанная эффективность</span>',
+    title: 'Клинически <span class="small">доказанная эффективность</span>',
     steps: [20],
     nextBlockNum: 21,
     nextBlockText: 'Для кого<br /> и применение',
