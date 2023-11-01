@@ -64,15 +64,15 @@ const steps = ref([
     prevBlockText: 'Роскошная<br /> формула'
   },
   {
-    title: '<span class="top">Результаты, <span class="small">подтвержденные<br /> потребителями</span></span>',
+    title: 'Результаты, <span class="small">подтвержденные потребителями</span>',
     steps: [19],
     nextBlockNum: 20,
-    nextBlockText: 'Клинически доказанная<br />эффективность',
+    nextBlockText: 'Клинически<br />доказанная эффективность',
     prevBlockNum: 18,
     prevBlockText: 'Против всех видов<br />пигментации'
   },
   {
-    title: '<span class="top">Клинически <span class="small">доказанная<br />эффективность</span></span>',
+    title: 'Клинически<br /><span class="small">доказанная эффективность</span>',
     steps: [20],
     nextBlockNum: 21,
     nextBlockText: 'Для кого<br /> и применение',
@@ -85,7 +85,7 @@ const steps = ref([
     nextBlockNum: 22,
     nextBlockText: 'Комплексная<br />рекомендация',
     prevBlockNum: 20,
-    prevBlockText: 'Клинически доказанная<br />эффективность'
+    prevBlockText: 'Клинически<br />доказанная эффективность'
   },
   {
     title: 'Комплексная рекомендация',
@@ -301,13 +301,18 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
       padding-right: 5rem;
     }
 
-    &:deep(.top) {
-      display: block;
-      margin-top: -3.8rem;
-    }
-
     &:deep(.small) {
+      display: inline-block;
       font-family: $fontDefaultLight;
+      @include adaptive-font(3, 1.8);
+
+      @include desktop {
+        width: max-content;
+      }
+
+      @include mobile-tablet {
+        width: auto;
+      }
     }
   }
 

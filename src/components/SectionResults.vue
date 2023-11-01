@@ -1,43 +1,44 @@
 <template>
-  <section class="results-section">
-    <div class="results-card">
-      <div class="results-card-picture-product">
+  <section class="results">
+    <div class="results__card">
+      <div class="results__product">
         <card-image is-product />
       </div>
 
-      <div class="results-card-info">
-        <div class="results-card-action">
-          <div class="results-card-period">
-            <span class="results-card-period__title">2 НЕДЕЛИ ПРИМЕНЕНИЯ</span>
-            <p class="results-card-period__text">
-              Область пигментации МЕНЕЕ ЗАМЕТНА <br />Кожа выглядит более ГЛАДКОЙ, СВЕЖЕЙ И СИЯЮЩЕЙ
-            </p>
-          </div>
-          <div class="results-card-period">
-            <span class="results-card-period__title">4 НЕДЕЛИ ПРИМЕНЕНИЯ</span>
-            <p class="results-card-period__text">
-              Область пигментации МЕНЕЕ ЗАМЕТНА <br />Кожа выглядит более ГЛАДКОЙ, СВЕЖЕЙ И СИЯЮЩЕЙ
-            </p>
-          </div>
+      <div class="results__info">
+        <div class="results__period">
+          <span class="results__period-title">2 недели применения</span>
+          <p class="results__period-text">
+            Область пигментации <span class="results__upper">менее заметна</span><br />
+            Кожа выглядит более <span class="results__upper">гладкой, свежей и сияющей</span>
+          </p>
         </div>
-        <div class="results-card-statistics">
-          <div class="results-card-statistics-item">
-            <div class="results-card-statistics-quantity">
-              <div class="results-card-statistics-quantity__number"><span>91</span><span class="small">%</span></div>
-              <span class="results-card-statistics-quantity__text">опрошенных <br />подтверждают</span>
-            </div>
-            <p class="results-card-statistics__text">
-              количество пигментных пятен<br />
-              ЗНАЧИТЕЛЬНО УМЕНЬШИЛОСЬ
-            </p>
+
+        <div class="results__period">
+          <span class="results__period-title">4 недели применения</span>
+          <p class="results__period-text">
+            Область пигментации <span class="results__upper">менее заметна</span><br />
+            Кожа выглядит более <span class="results__upper">гладкой, свежей и сияющей</span>
+          </p>
+        </div>
+
+        <div class="results__statistics">
+          <div class="results__quantity">
+            <p class="results__quantity-number">91<span class="results__quantity-number_small">%</span></p>
+            опрошенных подтверждают
           </div>
-          <div class="results-card-statistics-item">
-            <div class="results-card-statistics-quantity">
-              <div class="results-card-statistics-quantity__number"><span>90</span><span class="small">%</span></div>
-              <span class="results-card-statistics-quantity__text">опрошенных <br />подтверждают</span>
-            </div>
-            <p class="results-card-statistics__text">тон кожи БОЛЕЕ РОВНЫЙ</p>
+
+          <p class="results__statistics-text">
+            количество пигментных пятен <span class="results__upper">значительно уменьшилось</span>
+          </p>
+        </div>
+
+        <div class="results__statistics">
+          <div class="results__quantity">
+            <p class="results__quantity-number">90<span class="results__quantity-number_small">%</span></p>
+            опрошенных подтверждают
           </div>
+          <p class="results__statistics-text">тон кожи <span class="results__upper">более ровный</span></p>
         </div>
       </div>
     </div>
@@ -66,165 +67,143 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
 }
 
 .results {
-  &-section {
-    position: relative;
-    flex-grow: 1;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-    @media (min-width: 1440px) {
-      padding-right: 28rem;
-      margin-top: 22rem;
-      margin-bottom: -2rem;
-    }
-
-    @media (max-width: 1439px) and (min-width: 1024px) {
-      margin-top: 20rem;
-    }
-
-    @media (min-width: 850px) and (max-width: 1023px) {
-      margin-top: 10rem;
-    }
+  @include desktop {
+    margin-top: 4rem;
   }
 
-  &-title {
+  @media (min-width: 1200px) {
+    padding-right: 27rem;
+  }
+
+  &__card {
+    position: relative;
+    display: flex;
+    align-items: center;
     width: 100%;
-    padding-right: 7rem;
-    color: $white;
+  }
 
-    @include adaptive-font(4, 1.5);
-    line-height: 100%;
-    text-align: right;
-    text-transform: uppercase;
+  &__product {
+    position: absolute;
+    z-index: 5;
+    right: -1rem;
+    width: 32%;
+    min-width: 30rem;
+    min-height: 110%;
+    aspect-ratio: 10 / 19.08;
+    animation: translateCard 0.5s 1;
 
-    span {
-      font-family: $fontDefaultBold;
+    @include tablet {
+      max-height: 110%;
+    }
+
+    @include mobile {
+      display: none;
+    }
+
+    &:deep(.card-image) {
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      border-radius: 7.5rem;
+    }
+
+    &:deep(.card-image__wrapper) {
+      border-radius: 7.5rem;
+    }
+
+    &:deep(.card-image__product) {
+      width: 57.5%;
     }
   }
 
-  &-card {
-    position: relative;
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    border-radius: 5rem;
+    background-color: $white;
 
-    @media (min-width: 1440px) {
-      max-width: 144rem;
+    @include desktop {
+      min-height: 60.8rem;
+      padding: 6rem 35% 6rem 6rem;
     }
 
-    @media (max-width: 1439px) {
-      max-width: 103rem;
+    @include tablet-desktop {
+      gap: 3rem;
     }
 
-    &-info {
-      width: 100%;
-      padding: 8rem 6rem;
-      border-radius: 5rem;
-      background-color: $white;
+    @include tablet {
+      padding: 6rem 31rem 6rem 6rem;
     }
 
-    &-picture-product {
-      aspect-ratio: 10 / 19.08;
-      animation: translateCard 0.5s 1;
+    @include mobile {
+      padding: 3rem;
+      gap: 2rem;
+    }
+  }
 
-      @media (min-width: 1440px) {
-        width: 46.6rem;
-      }
+  &__period {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-      @media (max-width: 1439px) {
-        width: 37.7rem;
-      }
+  &__period-title {
+    font-family: $fontDefaultBold;
+    line-height: 80%;
+    text-transform: uppercase;
+    @include adaptive-font(4, 2.5);
+  }
 
-      @media (min-width: 851px) {
-        position: absolute;
-        z-index: 5;
-        top: 50%;
-        right: -0.9rem;
-        transform: translateY(-50%);
-      }
+  &__period-text {
+    font-family: $fontDefault;
+    line-height: 100%;
+    @include adaptive-font(2, 1.25);
+  }
 
-      @media (max-width: 850px) {
-        width: 100%;
-        max-width: 40rem;
-        margin: 0 auto 3rem;
-      }
+  &__statistics {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
 
-      :deep(.card-image) {
-        width: 100%;
-        height: 100%;
-        border-radius: 7.5rem;
-      }
+  &__statistics-text {
+    font-family: $fontDefault;
+    line-height: 130%;
+    @include adaptive-font(3, 1.6);
+  }
 
-      &:deep(.card-image__wrapper) {
-        border-radius: 7.5rem;
-      }
+  &__quantity {
+    display: flex;
+    flex-direction: column;
+    width: min-content;
+    font-family: $fontDefault;
+    line-height: 100%;
+    @include adaptive-font(1.7, 1);
+  }
 
-      &:deep(.card-image__product) {
-        width: 57.5%;
-        top: 4.5%;
-      }
+  &__quantity-number {
+    color: $blue;
+    font-family: $fontDefaultBold;
+    line-height: 85%;
+
+    &_small {
+      @include adaptive-font(4, 2.5);
     }
 
-    &-action {
-      display: flex;
-      flex-direction: column;
-      row-gap: 1.5rem;
+    &:not(&_small) {
+      @include adaptive-font(8, 5);
     }
+  }
 
-    &-period {
-      &__title {
-        font-family: $fontDefaultBold;
-        @include adaptive-font(4, 2.5);
-        line-height: 115%;
-      }
-
-      &__text {
-        font-family: $fontDefault;
-        @include adaptive-font(2, 1.25);
-        line-height: 130%;
-      }
-    }
-
-    &-statistics {
-      display: flex;
-      flex-direction: column;
-      margin-top: 0.5rem;
-      row-gap: 1.5rem;
-
-      &-item {
-        display: flex;
-        align-items: center;
-        column-gap: 2rem;
-      }
-
-      &-quantity {
-        display: flex;
-        flex-direction: column;
-
-        &__number {
-          color: $blue;
-          font-family: $fontDefaultBold;
-          @include adaptive-font(8, 5);
-
-          span {
-            line-height: 100%;
-          }
-
-          span.small {
-            @include adaptive-font(4, 2.5);
-          }
-        }
-
-        &__text {
-          margin-top: -1.5rem;
-          font-family: $fontDefault;
-          @include adaptive-font(1.7, 1);
-          line-height: 100%;
-        }
-      }
-
-      &__text {
-        padding-top: 1rem;
-        font-family: $fontDefault;
-        @include adaptive-font(3, 1.9);
-        line-height: 130%;
-      }
-    }
+  &__upper {
+    text-transform: uppercase;
   }
 }
 </style>
