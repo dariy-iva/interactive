@@ -256,8 +256,19 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
 
   @include desktop {
     padding: 5.8rem 0 5rem;
-    margin-top: -13rem;
     gap: 4.2rem;
+  }
+
+  @media (min-width: 1441px) {
+    margin-top: -13rem;
+  }
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    margin-top: -16rem;
+  }
+
+  @include tablet {
+    margin-top: -8rem;
   }
 
   @include mobile-tablet {
@@ -269,7 +280,6 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
   }
 
   &__title {
-    width: max-content;
     margin-left: auto;
     color: $white;
     font-family: $fontDefaultSemiBold;
@@ -278,20 +288,17 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
     text-transform: uppercase;
     @include adaptive-font(4, 2.5);
 
-    @media (min-width: 1023px) and (max-width: 1440px) {
+    @media (min-width: 1441px) {
+      padding-right: 4.5rem;
+    }
+
+    @media (min-width: 1024px) and (max-width: 1440px) {
       width: min-content;
+      padding-right: 2.5rem;
     }
 
-    @include desktop {
-      padding-right: 12.4rem;
-    }
-
-    @include mobile-tablet {
+    @include tablet {
       padding-right: 5rem;
-    }
-
-    @include mobile {
-      width: min-content;
     }
 
     &:deep(.top) {
@@ -307,6 +314,7 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
   &__buttons {
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
   }
 
   &__button {
@@ -318,7 +326,14 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
     background: none;
     border: none;
     cursor: pointer;
-    gap: 3.9rem;
+
+    @include tablet-desktop {
+      gap: 3.9rem;
+    }
+
+    @include mobile {
+      gap: 1rem;
+    }
 
     &_type_next {
       margin-left: auto;
@@ -336,7 +351,7 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
       }
     }
 
-    @include tablet-desktop {
+    @include desktop {
       &::before {
         position: absolute;
         top: 50%;
@@ -358,10 +373,8 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
         right: -4.5rem;
         transform: translateY(-50%) rotate(180deg);
       }
-    }
 
-    &:hover::before {
-      @include desktop {
+      &:hover::before {
         opacity: 1;
       }
     }
@@ -369,14 +382,22 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
 
   &__arrow {
     display: block;
-    width: 1.7rem;
-    height: 3rem;
     opacity: 0.7;
     background: url('@/assets/icons/arrow_navigation.svg') center / cover no-repeat;
     transition: all 0.2s ease;
 
     &_prev {
       rotate: 180deg;
+    }
+
+    @include tablet-desktop {
+      width: 1.7rem;
+      height: 3rem;
+    }
+
+    @include mobile {
+      width: 1.3rem;
+      height: 2rem;
     }
   }
 
@@ -392,9 +413,16 @@ $fontDefaultLight: $FONT_DEFAULT_LIGHT;
     font-family: $fontDefaultBold;
     line-height: 100%;
     opacity: 0.7;
-    text-align: right;
     text-transform: uppercase;
     @include adaptive-font(2, 1.25);
+  }
+
+  &__button_type_next > &__text {
+    text-align: right;
+  }
+
+  &__button_type_prev > &__text {
+    text-align: left;
   }
 }
 </style>

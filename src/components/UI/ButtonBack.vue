@@ -28,7 +28,6 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
   display: flex;
   overflow: hidden;
   align-items: center;
-  padding: 2.6rem 4rem 2.6rem 12.4rem;
   border-radius: 0 0 3rem 3rem;
   border-right: 0.2rem solid $white;
   border-bottom: 0.2rem solid $white;
@@ -41,10 +40,13 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
 
   @include desktop {
     min-height: 10rem;
+    padding: 2.6rem 4rem 2.6rem 12.4rem;
   }
 
   @include tablet {
-    min-height: 8rem;
+    height: 8rem;
+    width: 8rem;
+    padding: 1rem;
   }
 
   @include mobile-tablet {
@@ -73,7 +75,7 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
     opacity: 0;
     transition: all 0.3s ease;
 
-    @include mobile {
+    @include mobile-tablet {
       display: none;
     }
   }
@@ -96,14 +98,14 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
     background: url('@/assets/icons/arrow.svg') center / cover no-repeat;
     transition: left 0.3s ease;
 
-    @include tablet-desktop {
+    @include desktop {
       position: absolute;
       left: 4rem;
       width: 5.9rem;
       height: 7rem;
     }
 
-    @include mobile {
+    @include mobile-tablet {
       position: initial;
       width: 100%;
       height: 100%;
@@ -118,7 +120,7 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
     text-transform: uppercase;
     @include adaptive-font(4, 2);
 
-    @include mobile {
+    @include mobile-tablet {
       display: none;
     }
 

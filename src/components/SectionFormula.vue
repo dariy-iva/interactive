@@ -1,52 +1,49 @@
 <template>
-  <section class="formula-section">
-    <h3 class="formula__subtitle">НЕЖНЫЙ <span>АРОМАТ</span></h3>
-    <div class="formula-content">
-      <div class="formula-ingredients">
-        <div class="formula-cards">
-          <div class="formula-card formula-card-1">
-            <div class="formula-card-text">
-              <span class="formula-card__title">Зелень и фрезия</span>
-              <span class="formula-card__text">Верхняя нота</span>
-            </div>
-          </div>
-          <div class="formula-card formula-card-2">
-            <div class="formula-card-text">
-              <span class="formula-card__title">Слива</span>
-              <span class="formula-card__text">Нота сердца</span>
-            </div>
-          </div>
-          <div class="formula-card formula-card-3">
-            <div class="formula-card-text">
-              <span class="formula-card__title">Гелиотроп</span>
-              <span class="formula-card__text">Нижняя нота</span>
-            </div>
-          </div>
+  <section class="formula">
+    <h2 class="formula__title">Нежный <strong>аромат</strong></h2>
+
+    <div class="formula__content">
+      <div class="formula__ingredients">
+        <div class="formula__cards">
+          <card-image class="formula__card formula__card_nota_top">
+            <p class="formula__card-text"><strong>Зелень и фрезия</strong>Верхняя нота</p>
+          </card-image>
+
+          <card-image class="formula__card formula__card_nota_middle">
+            <p class="formula__card-text"><strong>Слива</strong>Нота сердца</p>
+          </card-image>
+
+          <card-image class="formula__card formula__card_nota_bottom">
+            <p class="formula__card-text"><strong>Гелиотроп</strong>Нижняя нота</p>
+          </card-image>
         </div>
-        <p class="formula__addition">
-          ЦВЕТОЧНО-ФРУКТОВЫЙ<br />
-          С ЗЕЛЕНЫМИ НОТАМИ
-        </p>
+
+        <p class="formula__addition">Цветочно-фруктовый<br />с зелеными нотами</p>
       </div>
-      <div class="formula-description" :class="{ 'formula-description_visible': descriptionIsOpen }">
-        <div class="formula-description-percent">
-          <span class="formula-description-percent__number">78</span
-          ><span class="formula-description-percent__symbol">%</span>
+
+      <div class="formula__description-container">
+        <div class="formula__description" :class="{ formula__description_visible: descriptionIsOpen }">
+          <div class="formula__percent">
+            <span class="formula__prefix">на</span>
+            <span class="formula__number">78</span>
+            <span class="formula__symbol">%</span>
+          </div>
+
+          <p class="formula__text">
+            <strong>Биоразлагаемая<br />формула</strong>
+          </p>
+          <p class="formula__text">Бережное отношение<br />к коже и природе</p>
         </div>
-        <p class="bold">БИОРАЗЛАГАЕМАЯ <br />ФОРМУЛА</p>
-        <p>
-          БЕРЕЖНОЕ ОТНОШЕНИЕ<br />
-          К КОЖЕ И ПРИРОДЕ
-        </p>
       </div>
     </div>
-
-    <block-pagination class="formula-pagination" @toggle-step="toggleStep" />
   </section>
+
+  <block-pagination class="formula-pagination" @toggle-step="toggleStep" />
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import CardImage from '@/components/UI/CardImage.vue'
 import BlockPagination from '@/components/UI/BlockPagination.vue'
 
 const emits = defineEmits(['toggleStep'])
@@ -72,147 +69,164 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
 $fontDefaultSemiBold: $FONT_DEFAULT_SEMI_BOLD;
 
 .formula {
-  &-section {
-    position: relative;
-    flex-grow: 1;
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4.5rem;
+
+  @include desktop {
+    margin-top: -7rem;
   }
 
-  &-pagination {
-    width: 100%;
-
-    @include tablet-desktop {
-      position: absolute;
-      bottom: 0;
-    }
-  }
-
-  &-content {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2.6rem;
-    column-gap: 3rem;
-    overflow-x: hidden;
-  }
-
-  &-ingredients {
-    flex-grow: 1;
-    max-width: 118rem;
-  }
-
-  &__subtitle {
-    margin-top: 10.4rem;
+  &__title {
     color: $white;
     font-family: $fontDefaultLight;
-    @include adaptive-font(8, 4);
-    line-height: 100%;
+    line-height: 75%;
     text-transform: uppercase;
+    @include adaptive-font(8, 4);
 
-    @include mobile-tablet {
-      margin-top: 0;
-    }
-
-    span {
+    & > strong {
       font-family: $fontDefaultSemiBold;
     }
   }
 
-  &__addition {
-    margin-top: 4rem;
-    color: $white;
-    font-family: $fontDefault;
-    @include adaptive-font(4, 2);
-    line-height: 130%;
-    text-align: right;
-    text-transform: uppercase;
-    padding-right: 1rem;
+  &__content {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+
+    @include mobile-tablet {
+      flex-direction: column;
+    }
   }
 
-  &-cards {
-    display: flex;
+  &__ingredients {
+    position: relative;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 117.7rem;
+  }
 
-    @media (min-width: 1440px) {
-      gap: 5.8rem;
+  &__cards {
+    display: grid;
+    justify-content: space-between;
+    gap: 2rem;
+
+    @include desktop {
+      grid-template-columns: repeat(3, 1fr);
     }
 
-    @media (max-width: 1439px) {
-      gap: 3rem;
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
     }
 
     @include mobile {
-      flex-direction: column;
+      justify-content: center;
     }
   }
 
-  &-card {
-    display: flex;
-    overflow: hidden;
-    align-items: end;
-    background-size: cover;
-    aspect-ratio: 10 / 17.16;
+  &__card {
+    width: 100%;
+    aspect-ratio: 10 / 17.13;
 
-    @media (min-width: 1440px) {
-      width: calc((100% - 5.8rem - 5.8rem) / 3);
-      border-radius: 5rem;
+    @include tablet-desktop {
+      max-width: 35.5rem;
     }
 
-    @media (max-width: 1439px) {
-      width: calc((100% - 6rem) / 3);
-      border-radius: 3rem;
+    &_nota_top {
+      background-image: url('@/assets/images/formula/top.webp');
+    }
+
+    &_nota_middle {
+      background-image: url('@/assets/images/formula/middle.webp');
+    }
+
+    &_nota_bottom {
+      background-image: url('@/assets/images/formula/bottom.webp');
+    }
+
+    &:deep(.card-image__wrapper) {
+      border-color: #ffffff60;
+      border-width: 0.3rem;
+    }
+  }
+
+  &__card-text {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    background-color: $white;
+    font-family: $fontDefault;
+    line-height: 100%;
+    text-align: center;
+    @include adaptive-font(3, 1.9);
+
+    @include tablet-desktop {
+      height: 17.1rem;
     }
 
     @include mobile {
-      width: 100%;
-      aspect-ratio: 10 / 7;
+      height: 9rem;
     }
 
-    &-1 {
-      background-image: url('@/assets/images/formula/card-1.jpg');
-    }
-
-    &-2 {
-      background-image: url('@/assets/images/formula/card-2.jpg');
-    }
-
-    &-3 {
-      background-image: url('@/assets/images/formula/card-3.jpg');
-    }
-
-    &-text {
-      display: flex;
-      width: 100%;
-      height: 17.1rem;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background-color: $white;
-      @include adaptive-font(3, 1.9);
-      line-height: 100%;
-      object-fit: cover;
-      row-gap: 2rem;
-      text-align: center;
-
-      @include mobile {
-        height: 9rem;
-      }
-    }
-
-    &__title {
+    & > strong {
       font-family: $fontDefaultBold;
       text-transform: uppercase;
     }
+  }
 
-    &__text {
-      font-family: $fontDefault;
+  &__addition {
+    color: $white;
+    font-family: $fontDefault;
+    line-height: 100%;
+    text-transform: uppercase;
+
+    @include adaptive-font(4, 2);
+
+    @include desktop {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 5rem);
+      padding-right: 1rem;
+      text-align: right;
+    }
+
+    @include mobile-tablet {
+      order: -1;
+      margin-bottom: 2rem;
     }
   }
 
-  &-description {
+  &__description-container {
+    overflow: hidden;
+
+    @include desktop {
+      max-width: 46.8rem;
+    }
+
+    @include tablet {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      min-width: 50%;
+    }
+  }
+
+  &__description {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     height: max-content;
     max-height: 63rem;
+    min-height: 100%;
     gap: 1.5rem;
     color: $white;
     transform: translateX(calc(100% + 10rem));
@@ -220,65 +234,74 @@ $fontDefaultSemiBold: $FONT_DEFAULT_SEMI_BOLD;
     opacity: 0;
     transition: 0.4s ease;
 
-    &_visible {
-      transform: translateX(0);
-      visibility: visible;
-      opacity: 1;
+    @include desktop {
+      justify-content: space-between;
     }
 
     @include mobile-tablet {
       gap: 3rem;
+      justify-content: flex-end;
     }
 
     @include mobile {
-      margin: auto;
+      align-items: center;
+      text-align: center;
+      height: 0;
     }
 
-    &-percent {
-      position: relative;
-      margin-top: 4.3rem;
+    &_visible {
+      transform: translateX(0);
+      visibility: visible;
+      opacity: 1;
 
-      @include mobile-tablet {
-        padding-left: 4rem;
-      }
-
-      &::before {
-        position: absolute;
-        top: 0;
-        left: 2rem;
-        content: 'на';
-        font-family: $fontDefaultBold;
-        @include adaptive-font(5, 3.1);
-        line-height: 130%;
-
-        @include mobile-tablet {
-          left: 0;
-        }
-      }
-
-      &__number {
-        font-family: $fontDefault;
-        @include adaptive-font(37, 10);
-        line-height: 70%;
-      }
-
-      &__symbol {
-        font-family: $fontDefaultBold;
-        @include adaptive-font(5, 3.1);
-        line-height: 130%;
+      @include mobile {
+        align-items: center;
+        text-align: center;
+        height: 36rem;
       }
     }
+  }
 
-    p {
-      font-family: $fontDefault;
-      @include adaptive-font(4, 1.5);
-      line-height: 130%;
-      text-transform: uppercase;
+  &__percent {
+    position: relative;
+    font-family: $fontDefaultBold;
+  }
 
-      &.bold {
-        margin-top: -3rem;
-        font-family: $fontDefaultBold;
-      }
+  &__prefix {
+    position: absolute;
+    line-height: 100%;
+    @include adaptive-font(3.7, 3.1);
+
+    @include desktop {
+      left: 0.6rem;
+      top: 7rem;
+    }
+
+    @include mobile-tablet {
+      top: 6rem;
+    }
+  }
+
+  &__number {
+    font-family: $fontDefaultSemiBold;
+    line-height: 70%;
+    letter-spacing: -1rem;
+    @include adaptive-font(24, 20);
+  }
+
+  &__symbol {
+    line-height: 130%;
+    @include adaptive-font(4.1, 3.1);
+  }
+
+  &__text {
+    font-family: $fontDefault;
+    line-height: 130%;
+    text-transform: uppercase;
+    @include adaptive-font(3.1, 2.3);
+
+    & > strong {
+      font-family: $fontDefaultBold;
     }
   }
 }

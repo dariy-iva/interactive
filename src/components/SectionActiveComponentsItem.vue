@@ -204,14 +204,7 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  @media (min-width: 1801px) {
-    gap: 9.3rem;
-  }
-
-  @media (max-width: 1800px) {
-    gap: 20rem;
-  }
+  gap: 9.3rem;
 
   &__card {
     position: relative;
