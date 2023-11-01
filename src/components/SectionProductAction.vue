@@ -1,44 +1,39 @@
 <template>
-  <section class="action-section">
-    <div class="action-left">
-      <div class="action-main-info-left">
-        <span class="action-main-info__title">NIACINAMIDE 10</span>
-        <span class="action-main-info__description">КОНЦЕНТРИРОВАННАЯ сыворотка</span>
-        <p class="action-main-info__content">Против всех видов <br />пигментации</p>
+  <section class="action">
+    <div class="action__column action__column_left">
+      <div class="action__main-info action__main-info_left">
+        <h2 class="action__title">NIACINAMIDE I0</h2>
+        <span class="action__description">Концентрированная сыворотка</span>
+        <span class="action__main-text"
+          ><strong>Против всех видов <br />пигментации</strong></span
+        >
       </div>
-      <div class="action-list-left">
-        <div class="action-list__item">
-          <p>ЗАМЕТНО УМЕНЬШАЕТ ПИГМЕНТНЫЕ <br />ПЯТНА УЖЕ ЧЕРЕЗ 2 НЕДЕЛИ <br />ПРИМЕНЕНИЯ*</p>
-        </div>
-        <div class="action-list__item">
-          <p>ВЫРАВНИВАЕТ ТОН КОЖИ</p>
-        </div>
-      </div>
-    </div>
-    <div class="action-product">
-      <card-image is-product class="action-product" />
-    </div>
-    <div class="action-right">
-      <div class="action-main-info-right">
-        <p class="action-main-info__content">
-          БЛОКИРУЕТ<br />
-          <span>ПИГМЕНТАЦИЮ</span>
+
+      <div class="action__paragraphs">
+        <p class="action__paragraph action__paragraph_left">
+          Заметно уменьшает пигментные<br />пятна уже через 2 недели<br />применения*
         </p>
-        <p class="action-main-info__content">ВЫРАВНИВАЕТ <br /><span>ТОН КОЖИ</span></p>
-      </div>
-      <div class="action-list-right">
-        <div class="action-list__item">
-          <p>
-            ДЕЙСТВУЕТ ДАЖЕ НА СТАРЫЕ<br />
-            ПЯТНА*
-          </p>
-        </div>
-        <div class="action-list__item">
-          <p>ПРЕПЯТСТВУЕТ ИХ ПОВТОРНОМУ <br />ПОЯВЛЕНИЮ</p>
-        </div>
+        <p class="action__paragraph action__paragraph_left">Выравнивает тон кожи</p>
       </div>
     </div>
-    <p class="action-addition">* Потребительский тест, 101 женщина, применение 2 раза в день.</p>
+
+    <div class="action__product">
+      <card-image is-product class="action__product-card" />
+    </div>
+
+    <div class="action__column">
+      <div class="action__main-info">
+        <p class="action__main-text"><strong>Блокирует</strong><br />пигментацию</p>
+        <p class="action__main-text"><strong>Выравнивает</strong><br />тон кожи</p>
+      </div>
+
+      <div class="action__paragraphs">
+        <p class="action__paragraph">Действует даже на старые<br />пятна*</p>
+        <p class="action__paragraph">Препятствует их повторному<br />появлению</p>
+      </div>
+    </div>
+
+    <span class="action__addition">* Потребительский тест, 101 женщина, применение 2 раза в день.</span>
   </section>
 </template>
 
@@ -74,40 +69,34 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
 }
 
 .action {
-  &-section {
-    position: relative;
-    flex-grow: 1;
-    color: $white;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 29.48%;
+  position: relative;
+  flex-grow: 1;
+  color: $white;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 29.48%;
 
-    @include desktop {
-      margin-top: 11rem;
-    }
-    @include mobile {
-      flex-direction: column;
-      gap: 3rem;
-    }
+  @include desktop {
+    margin-top: -7rem;
   }
 
-  &-product {
+  @include mobile {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  &__product {
     margin: auto;
     animation: overflowCard 0.4s 1;
-
-    @media (min-width: 1800px) {
-      bottom: -7.8rem;
-    }
 
     @include tablet-desktop {
       position: absolute;
       z-index: 2;
-      left: 0;
-      right: 0;
       width: 29.48%;
       aspect-ratio: 10 / 19.07;
+      max-height: 134%;
     }
 
     @include tablet {
@@ -118,6 +107,7 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
     @include mobile {
       order: -1;
       width: 100%;
+      max-width: 50rem;
       aspect-ratio: 10 / 10;
     }
 
@@ -128,6 +118,7 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
     &:deep(.card-image) {
       width: 100%;
       height: 100%;
+      min-height: auto;
       aspect-ratio: initial;
       border-radius: 7.5rem;
       animation: translateCard 0.6s 1;
@@ -142,183 +133,126 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
     }
   }
 
-  &-left,
-  &-right {
-    width: calc((100% - 29.48%) / 2);
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+    @include tablet-desktop {
+      width: calc((100% - 29.48%) / 2);
+      min-height: 100%;
+      justify-content: space-between;
+    }
+
     @include mobile {
       width: 100%;
     }
-  }
-
-  &-left {
-    display: flex;
-    flex-direction: column;
 
     @media (min-width: 1440px) {
-      padding-right: 3.7rem;
-      row-gap: 18.5rem;
+      &_left {
+        padding-right: 3.7rem;
+      }
+
+      &:not(&_left) {
+        padding-left: 3.7rem;
+      }
     }
 
     @media (max-width: 1439px) {
-      padding-right: 1rem;
-      row-gap: 7rem;
+      &_left {
+        padding-right: 1rem;
+      }
+
+      &:not(&_left) {
+        padding-left: 1rem;
+      }
     }
   }
 
-  &-right {
+  &__main-info {
     display: flex;
     flex-direction: column;
 
-    @media (min-width: 1440px) {
-      padding-left: 3.7rem;
-      row-gap: 21.5rem;
+    &_left {
+      text-align: right;
     }
 
-    @media (max-width: 1439px) {
-      padding-left: 1rem;
-      row-gap: 11rem;
+    &:not(&_left) {
+      gap: 3rem;
     }
   }
 
-  &-picture-product {
+  &__title {
     position: relative;
-    z-index: 5;
-    box-shadow: -0.5rem 2rem 3rem 0 rgba(0, 0, 0, 60%);
+    z-index: 2;
+    min-width: calc(100% + 1rem);
+    padding: 1rem 2rem 1rem 1rem;
+    background-color: $blue;
+    font-family: $fontDefaultBold;
+    line-height: 100%;
+    @include adaptive-font(4, 2.2);
+
+    @media (min-width: 1800px) {
+      font-size: 6rem;
+    }
+  }
+
+  &__description {
+    margin-top: 2rem;
+    font-family: $fontDefault;
+    line-height: 130%;
+    @include adaptive-font(3, 1.8);
 
     @media (min-width: 1440px) {
-      width: 50.7rem;
-      border-radius: 8.3rem;
-      margin-top: -13rem;
+      margin-bottom: 4rem;
     }
 
     @media (max-width: 1439px) {
-      width: 37.7rem;
-      border-radius: 6.3rem;
-      margin-top: -7rem;
+      margin-bottom: 2rem;
     }
   }
 
-  &-main-info {
-    &-left {
-      display: flex;
-      flex-direction: column;
+  &__main-text {
+    font-family: $fontDefault;
+    line-height: 130%;
+    @include adaptive-font(4, 2);
+
+    & > strong {
+      font-family: $fontDefaultBold;
+    }
+  }
+
+  &__paragraphs {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  &__paragraph {
+    font-family: $fontDefault;
+    line-height: 130%;
+    @include adaptive-font(2.6, 1.6);
+
+    &_left {
+      padding-right: 2rem;
+      border-right: 1rem solid $blue;
       text-align: right;
     }
 
-    &-right {
-      display: flex;
-      flex-direction: column;
-      padding-top: 1rem;
-      row-gap: 3.4rem;
-    }
-
-    &__title {
-      position: relative;
-      z-index: 2;
-      display: inline-block;
-      padding-top: 1rem;
-      font-family: $fontDefaultBold;
-      line-height: 130%;
-      letter-spacing: 0.21rem;
-      min-width: max-content;
-      @include adaptive-font(4, 2.7);
-      @media (min-width: 1800px) {
-        font-size: 6rem;
-      }
-
-      &::before {
-        position: absolute;
-        z-index: -1;
-        top: 50%;
-        left: 0;
-        width: 61.8rem;
-        height: 8.1rem;
-        background-color: $blue;
-        content: '';
-        transform: translateY(-50%);
-
-        @include tablet {
-          width: 120%;
-          height: 6.1rem;
-        }
-
-        @include mobile {
-          width: calc(100% + 2rem);
-          left: -1rem;
-        }
-      }
-    }
-
-    &__description {
-      display: inline-block;
-      margin-top: 2rem;
-      font-family: $fontDefault;
-      @include adaptive-font(3, 1.9);
-      line-height: 130%;
-
-      @media (min-width: 1440px) {
-        margin-bottom: 4rem;
-      }
-
-      @media (max-width: 1439px) {
-        margin-bottom: 2rem;
-      }
-    }
-
-    &__content {
-      font-family: $fontDefaultBold;
-      @include adaptive-font(4, 2.5);
-      line-height: 130%;
-
-      span {
-        font-family: $fontDefault;
-      }
+    &:not(&_left) {
+      padding-left: 2rem;
+      border-left: 1rem solid $blue;
     }
   }
 
-  &-list {
-    &-left {
-      display: flex;
-      flex-direction: column;
-      align-items: end;
-      row-gap: 3.5rem;
-      text-align: right;
-
-      & p {
-        padding-right: 2rem;
-        border-right: 1rem solid $blue;
-      }
-    }
-
-    &-right {
-      display: flex;
-      flex-direction: column;
-      row-gap: 3.5rem;
-
-      & p {
-        padding-left: 2rem;
-        border-left: 1rem solid $blue;
-      }
-    }
-
-    &__item {
-      position: relative;
-      display: flex;
-      align-items: center;
-      column-gap: 2rem;
-      font-family: $fontDefault;
-      @include adaptive-font(3, 1.9);
-      line-height: 130%;
-    }
-  }
-
-  &-addition {
+  &__addition {
     position: absolute;
+    left: 0;
     color: $gray;
     font-family: $fontDefault;
-    @include adaptive-font(2, 1.3);
     line-height: 130%;
     text-transform: none;
+    @include adaptive-font(2, 1.3);
 
     @include desktop {
       top: calc(100% + 18.7rem);
@@ -328,7 +262,6 @@ $fontDefaultBold: $FONT_DEFAULT_BOLD;
     }
     @include mobile {
       top: calc(100% + 10.7rem);
-      left: 0;
     }
   }
 }
